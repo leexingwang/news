@@ -60,10 +60,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.qianlong.android.ui.newscenter.TopicListActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.qianlong.android.ui.newscenter.NewsDetailActivity"
             android:screenOrientation="portrait" >
         </activity>

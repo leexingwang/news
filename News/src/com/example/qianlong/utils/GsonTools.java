@@ -3,7 +3,6 @@ package com.example.qianlong.utils;
 import java.util.List;
 import java.util.Map;
 
-import com.example.qianlong.bean.FunctionList.FunctionItem;
 import com.example.qianlong.bean.NewsCenterCategories.ChildNewsCate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,14 +31,6 @@ public class GsonTools {
 		return list;
 	}
 
-	public static List<FunctionItem> changeGsonToFunList(String gsonString,
-			Class<FunctionItem> cls) {
-		Gson gson = new Gson();
-		List<FunctionItem> list = gson.fromJson(gsonString,
-				new TypeToken<List<FunctionItem>>() {
-				}.getType());
-		return list;
-	}
 	
 	public static List<ChildNewsCate> changeGsonToCateList(String gsonString,
 			Class<ChildNewsCate> cls) {

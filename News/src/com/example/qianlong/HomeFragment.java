@@ -2,14 +2,10 @@ package com.example.qianlong;
 
 import java.util.ArrayList;
 
-import com.example.qianlong.activity.MainActivity;
 import com.example.qianlong.base.BaseFragment;
 import com.example.qianlong.base.BasePage;
-import com.example.qianlong.page.FunctionPage;
-import com.example.qianlong.page.GovAffairsPage;
 import com.example.qianlong.page.NewsCenterPage;
 import com.example.qianlong.page.SettingPage;
-import com.example.qianlong.page.SmartServicePage;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -24,7 +20,7 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class HomeFragment2 extends BaseFragment {
+public class HomeFragment extends BaseFragment {
 
 	@Override
 	protected View initView(LayoutInflater inflater) {
