@@ -4,7 +4,6 @@ import com.example.qianlong.R;
 import com.example.qianlong.activity.MainActivity;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomToast;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -21,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public abstract class BasePage implements OnClickListener {
 	protected Context ct;
@@ -31,7 +29,6 @@ public abstract class BasePage implements OnClickListener {
 	protected ImageButton leftImgBtn;
 	protected ImageButton rightImgBtn;
 	protected TextView titleTv;
-	protected SlidingMenu sm;
 	protected LinearLayout loadfailView;
 	public boolean isLoadSuccess = false;
 
@@ -42,9 +39,6 @@ public abstract class BasePage implements OnClickListener {
 		loadingView = contentView.findViewById(R.id.loading_view);
 		loadfailView = (LinearLayout) contentView
 				.findViewById(R.id.ll_load_fail);
-		if (ct instanceof MainActivity) {
-			sm = ((MainActivity) ct).getSlidingMenu();
-		}
 	}
 
 	protected void initTitleBar(View view) {

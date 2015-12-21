@@ -1,25 +1,18 @@
 package com.example.qianlong;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.qianlong.base.BasePage;
-import com.example.qianlong.bean.NewsCenterCategories;
 import com.example.qianlong.bean.NewsCenterCategories.ChildNewsCate;
 import com.example.qianlong.bean.NewsCenterCategories.NewsCategory;
 import com.example.qianlong.page.NewsCenterPage;
-import com.example.qianlong.utils.GsonTools;
-import com.example.qianlong.utils.SharePrefUtil;
-import com.example.qianlong.utils.SharePrefUtil.KEY;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.qianlong.android.view.pagerindicator.TabPageIndicator;
@@ -69,11 +62,6 @@ public class NewsPage extends BasePage {
 
 			@Override
 			public void onPageSelected(int arg0) {
-				if (arg0 == 0) {
-					sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-				} else {
-					sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-				}
 				ItemNewsPage page = pages.get(arg0);
 				if (!page.isLoadSuccess) {
 					page.initData();

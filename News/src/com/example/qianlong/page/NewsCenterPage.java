@@ -8,14 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.example.qianlong.MenuFragment;
 import com.example.qianlong.NewsPage;
-import com.example.qianlong.PicPage;
 import com.example.qianlong.R;
-import com.example.qianlong.TopicPage;
-import com.example.qianlong.R.id;
-import com.example.qianlong.R.layout;
-import com.example.qianlong.activity.MainActivity;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.NewsCenterCategories;
 import com.example.qianlong.bean.NewsCenterCategories.NewsCategory;
@@ -36,7 +30,6 @@ public class NewsCenterPage extends BasePage {
 
 	public NewsCenterPage(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void onResume() {
@@ -81,8 +74,6 @@ public class NewsCenterPage extends BasePage {
 		for (NewsCategory cate : categories.data) {
 			newsCenterMenuList.add(cate.title);
 		}
-		((MainActivity) ct).getMenuFragment().initNewsCenterMenu(
-				newsCenterMenuList);
 		
 		
 		NewsCategory newsCategory = categorieList.get(0);
@@ -92,12 +83,8 @@ public class NewsCenterPage extends BasePage {
 				GsonTools.createGsonString(categories.extend));
 		pageList.clear();
 		BasePage newsPage = new NewsPage(ct, newsCategory);
-		BasePage topicPage = new TopicPage(ct, categorieList.get(1));
-		BasePage picPage = new PicPage(ct, categorieList.get(2));
 		pageList.add(newsPage);
-		pageList.add(topicPage);
-		pageList.add(picPage);
-		switchFragment(MenuFragment.newsCenterPosition);
+		switchFragment(0);
 	}
 
 	@ViewInject(R.id.news_center_fl)

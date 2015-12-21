@@ -1,7 +1,6 @@
 package com.example.qianlong.base;
 
 import com.example.qianlong.activity.MainActivity;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,13 +12,11 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment implements OnClickListener  {
 	protected Context ct;     
-	protected SlidingMenu sm;
 	public View rootView;
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		
 		super.onActivityCreated(savedInstanceState);
-	    sm = ((MainActivity)getActivity()).getSlidingMenu();
 		initData(savedInstanceState);
 	}
 

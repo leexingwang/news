@@ -10,7 +10,6 @@ import com.example.qianlong.page.GovAffairsPage;
 import com.example.qianlong.page.NewsCenterPage;
 import com.example.qianlong.page.SettingPage;
 import com.example.qianlong.page.SmartServicePage;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -40,17 +39,12 @@ public class HomeFragment2 extends BaseFragment {
 	private CustomViewPager viewPager;
 	@ViewInject(R.id.main_radio)
 	public RadioGroup mainRg;
-	private int curCheckId = R.id.rb_function;
+	private int curCheckId = R.id.rb_news_center;
+	@SuppressWarnings("unused")
 	private int curIndex;
-	private MenuFragment menuFragment;
 	@Override
 	protected void initData(Bundle savedInstanceState) {
-		menuFragment = (MenuFragment) ((MainActivity) getActivity())
-				.getSupportFragmentManager().findFragmentByTag("Menu");
-		pages.add(new FunctionPage(ct));
 		pages.add(new NewsCenterPage(ct));
-		pages.add(new SmartServicePage(ct));
-		pages.add(new GovAffairsPage(ct));
 		pages.add(new SettingPage(ct));
 		adapter = new HomePagerAdapter(ct, pages);
 		viewPager.setAdapter(adapter);
@@ -72,13 +66,11 @@ public class HomeFragment2 extends BaseFragment {
 			@Override
 			public void onPageScrolled(int position, float positionOffset,
 					int positionOffsetPixels) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int state) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -91,36 +83,15 @@ public class HomeFragment2 extends BaseFragment {
 				LogUtils.d(checkedId + "");
 
 				switch (checkedId) {
-				case R.id.rb_function:
-					sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+				case R.id.rb_news_center:
+					NewsCenterPage page = (NewsCenterPage) pages.get(0);
+					page.onResume();
 					curIndex=0;
 					viewPager.setCurrentItem(0, false);
 					break;
-				case R.id.rb_news_center:
-					//全屏可以滑动出来菜单
-					sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-					NewsCenterPage page = (NewsCenterPage) pages.get(1);
-//					page.refreshSmMode();
-					pages.get(1).onResume();
+				case R.id.rb_setting:
 					curIndex=1;
 					viewPager.setCurrentItem(1, false);
-					if (menuFragment != null) {
-						menuFragment.setMenuType(MenuFragment.NEWS_CENTER);
-						// sm.showMenu();
-					}
-					break;
-				case R.id.rb_smart_service:
-					curIndex=2;
-					viewPager.setCurrentItem(2, false);
-					break;
-				case R.id.rb_gov_affairs:
-					curIndex=3;
-					viewPager.setCurrentItem(3, false);
-					break;
-				case R.id.rb_setting:
-					sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-					curIndex=4;
-					viewPager.setCurrentItem(4, false);
 					break;
 				default:
 					break;

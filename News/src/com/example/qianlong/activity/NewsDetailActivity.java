@@ -1,13 +1,9 @@
 package com.example.qianlong.activity;
 import com.example.qianlong.R;
-import com.example.qianlong.R.drawable;
-import com.example.qianlong.R.id;
-import com.example.qianlong.R.layout;
 import com.example.qianlong.base.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import android.graphics.Bitmap;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;

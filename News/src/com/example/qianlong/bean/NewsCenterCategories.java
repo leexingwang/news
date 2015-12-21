@@ -2,8 +2,6 @@
 
 import java.util.ArrayList;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class NewsCenterCategories extends BaseBean {
 	public ArrayList<NewsCategory> data;
