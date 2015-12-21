@@ -30,6 +30,12 @@
             android:text="@string/tab_news_center" />
 
         <RadioButton
+            android:id="@+id/rb_popupwindow"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/tabbar_compose_background_icon_add" 
+            android:text="@string/tab_popup_live"/>
+
+        <RadioButton
             android:id="@+id/rb_setting"
             style="@style/main_tab_bottom"
             android:drawableTop="@drawable/icon_setting"

@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
@@ -36,8 +38,11 @@ public class HomeFragment extends BaseFragment {
 	@ViewInject(R.id.main_radio)
 	public RadioGroup mainRg;
 	private int curCheckId = R.id.rb_news_center;
-	@SuppressWarnings("unused")
 	private int curIndex;
+	private MoreWindow mMoreWindow;
+	@ViewInject(R.id.rb_popupwindow)
+	public RadioButton radioButton;
+
 	@Override
 	protected void initData(Bundle savedInstanceState) {
 		pages.add(new NewsCenterPage(ct));
@@ -45,14 +50,15 @@ public class HomeFragment extends BaseFragment {
 		adapter = new HomePagerAdapter(ct, pages);
 		viewPager.setAdapter(adapter);
 		viewPager.setScrollable(false);
-		//不进行预加载
+		// 不进行预加载
 		viewPager.setOffscreenPageLimit(0);
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int position) {
 				BasePage page = pages.get(position);
- 				LogUtils.i(page+"---------------------------------"+position);
+				LogUtils.i(page + "---------------------------------"
+						+ position);
 				if (!page.isLoadSuccess) {
 					page.initData();
 				}
@@ -72,6 +78,14 @@ public class HomeFragment extends BaseFragment {
 		});
 		pages.get(0).initData();
 		viewPager.setCurrentItem(0);
+		radioButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				showMoreWindow(viewPager);
+			}
+		});
 		mainRg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -82,11 +96,11 @@ public class HomeFragment extends BaseFragment {
 				case R.id.rb_news_center:
 					NewsCenterPage page = (NewsCenterPage) pages.get(0);
 					page.onResume();
-					curIndex=0;
+					curIndex = 0;
 					viewPager.setCurrentItem(0, false);
 					break;
 				case R.id.rb_setting:
-					curIndex=1;
+					curIndex = 1;
 					viewPager.setCurrentItem(1, false);
 					break;
 				default:
@@ -98,14 +112,17 @@ public class HomeFragment extends BaseFragment {
 		});
 		mainRg.check(curCheckId);
 	}
+
 	public NewsCenterPage getNewsCenterPage() {
-		NewsCenterPage page =(NewsCenterPage) pages.get(1);
+		NewsCenterPage page = (NewsCenterPage) pages.get(1);
 		return page;
 
 	}
+
 	class HomePagerAdapter extends PagerAdapter {
 		private Context mContext;
 		private ArrayList<BasePage> pages;
+
 		public HomePagerAdapter(Context ct, ArrayList<BasePage> pages) {
 			this.mContext = ct;
 			this.pages = pages;
@@ -122,6 +139,7 @@ public class HomeFragment extends BaseFragment {
 			// TODO Auto-generated method stub
 			return arg1 == arg0;
 		}
+
 		@Override
 		public void destroyItem(View container, int position, Object object) {
 			// TODO Auto-generated method stub
@@ -132,7 +150,8 @@ public class HomeFragment extends BaseFragment {
 		@Override
 		public Object instantiateItem(View arg0, int arg1) {
 			// TODO Auto-generated method stub
-			((CustomViewPager) arg0).addView(pages.get(arg1).getContentView(), 0);
+			((CustomViewPager) arg0).addView(pages.get(arg1).getContentView(),
+					0);
 			return pages.get(arg1).getContentView();
 		}
 
@@ -144,4 +163,12 @@ public class HomeFragment extends BaseFragment {
 
 	}
 
+	private void showMoreWindow(View view) {
+		if (null == mMoreWindow) {
+			mMoreWindow = new MoreWindow(getActivity());
+			mMoreWindow.init();
+		}
+
+		mMoreWindow.showMoreWindow(view, 100);
+	}
 }
