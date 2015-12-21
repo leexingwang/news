@@ -1,4 +1,4 @@
-package com.example.qianlong.page;
+package com.example.qianlong.ui.page;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.qianlong;
+package com.example.qianlong.ui.page;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,12 +16,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.qianlong.activity.NewsDetailActivity;
+import com.example.qianlong.R;
+import com.example.qianlong.R.drawable;
+import com.example.qianlong.R.id;
+import com.example.qianlong.R.layout;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.CountList;
 import com.example.qianlong.bean.NewsListBean;
 import com.example.qianlong.bean.NewsListBean.News;
 import com.example.qianlong.bean.NewsListBean.TopNews;
+import com.example.qianlong.ui.activity.NewsDetailActivity;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.Constants;
 import com.example.qianlong.utils.QLApi;

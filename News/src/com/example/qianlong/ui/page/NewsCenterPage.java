@@ -1,4 +1,4 @@
-package com.example.qianlong.page;
+package com.example.qianlong.ui.page;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.example.qianlong.NewsPage;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.NewsCenterCategories;

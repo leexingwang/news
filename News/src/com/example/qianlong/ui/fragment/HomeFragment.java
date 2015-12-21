@@ -1,11 +1,15 @@
-package com.example.qianlong;
+package com.example.qianlong.ui.fragment;
 
 import java.util.ArrayList;
 
+import com.example.qianlong.R;
+import com.example.qianlong.R.id;
+import com.example.qianlong.R.layout;
 import com.example.qianlong.base.BaseFragment;
 import com.example.qianlong.base.BasePage;
-import com.example.qianlong.page.NewsCenterPage;
-import com.example.qianlong.page.SettingPage;
+import com.example.qianlong.ui.page.NewsCenterPage;
+import com.example.qianlong.ui.page.SettingPage;
+import com.example.qianlong.ui.popupwindow.LivePopupWindow;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -39,7 +43,7 @@ public class HomeFragment extends BaseFragment {
 	public RadioGroup mainRg;
 	private int curCheckId = R.id.rb_news_center;
 	private int curIndex;
-	private MoreWindow mMoreWindow;
+	private LivePopupWindow mMoreWindow;
 	@ViewInject(R.id.rb_popupwindow)
 	public RadioButton radioButton;
 
@@ -165,7 +169,7 @@ public class HomeFragment extends BaseFragment {
 
 	private void showMoreWindow(View view) {
 		if (null == mMoreWindow) {
-			mMoreWindow = new MoreWindow(getActivity());
+			mMoreWindow = new LivePopupWindow(getActivity());
 			mMoreWindow.init();
 		}
 

@@ -1,4 +1,4 @@
-package com.example.qianlong;
+package com.example.qianlong.ui.page;
 
 import java.util.ArrayList;
 
@@ -9,10 +9,12 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.example.qianlong.R;
+import com.example.qianlong.R.id;
+import com.example.qianlong.R.layout;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.NewsCenterCategories.ChildNewsCate;
 import com.example.qianlong.bean.NewsCenterCategories.NewsCategory;
-import com.example.qianlong.page.NewsCenterPage;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.qianlong.android.view.pagerindicator.TabPageIndicator;

@@ -1,5 +1,8 @@
-package com.example.qianlong;
+package com.example.qianlong.ui.popupwindow;
 
+import com.example.qianlong.R;
+import com.example.qianlong.R.id;
+import com.example.qianlong.R.layout;
 import com.example.qianlong.utils.uiutils.FastBlur;
 
 import android.animation.Animator;
@@ -32,9 +35,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-public class MoreWindow extends PopupWindow implements OnClickListener{
+public class LivePopupWindow extends PopupWindow implements OnClickListener{
 
-	private String TAG = MoreWindow.class.getSimpleName();
+	private String TAG = LivePopupWindow.class.getSimpleName();
 	Activity mContext;
 	private int mWidth;
 	private int mHeight;
@@ -44,7 +47,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 	
 	private Handler mHandler = new Handler();
 
-	public MoreWindow(Activity context) {
+	public LivePopupWindow(Activity context) {
 		mContext = context;
 	}
 
@@ -169,7 +172,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 					child.setVisibility(View.VISIBLE);
 					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 600, 0);
 					fadeAnim.setDuration(300);
-					KickBackAnimator kickAnimator = new KickBackAnimator();
+					PopupWindowAnimator kickAnimator = new PopupWindowAnimator();
 					kickAnimator.setDuration(150);
 					fadeAnim.setEvaluator(kickAnimator);
 					fadeAnim.start();
@@ -196,7 +199,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 					child.setVisibility(View.VISIBLE);
 					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 600);
 					fadeAnim.setDuration(200);
-					KickBackAnimator kickAnimator = new KickBackAnimator();
+					PopupWindowAnimator kickAnimator = new PopupWindowAnimator();
 					kickAnimator.setDuration(100);
 					fadeAnim.setEvaluator(kickAnimator);
 					fadeAnim.start();

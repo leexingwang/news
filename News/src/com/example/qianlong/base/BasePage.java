@@ -1,7 +1,7 @@
 package com.example.qianlong.base;
 
 import com.example.qianlong.R;
-import com.example.qianlong.activity.MainActivity;
+import com.example.qianlong.ui.activity.MainActivity;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomToast;
 import com.lidroid.xutils.HttpUtils;

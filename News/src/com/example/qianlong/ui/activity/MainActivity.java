@@ -1,7 +1,7 @@
-package com.example.qianlong.activity;
+package com.example.qianlong.ui.activity;
 
-import com.example.qianlong.HomeFragment;
 import com.example.qianlong.R;
+import com.example.qianlong.ui.fragment.HomeFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

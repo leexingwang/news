@@ -27,7 +27,7 @@
         android:drawableTop="@drawable/tabbar_compose_photo"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="相册"/>
+        android:text="相册" />
 
     <TextView
         android:id="@+id/more_window_delete"
@@ -38,7 +38,7 @@
         android:drawableTop="@drawable/tabbar_compose_camera"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="拍摄"/>
+        android:text="拍摄" />
 
     <TextView
         android:id="@+id/more_window_collect"
@@ -50,7 +50,7 @@
         android:drawableTop="@drawable/tabbar_compose_lbs"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="签到"/>
+        android:text="签到" />
 
     <TextView
         android:id="@+id/more_window_auto"
@@ -63,7 +63,7 @@
         android:drawableTop="@drawable/tabbar_compose_review"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="点评"/>
+        android:text="点评" />
 
     <TextView
         android:id="@+id/more_window_external"
@@ -75,7 +75,7 @@
         android:drawableTop="@drawable/tabbar_compose_more"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="更多"/>
+        android:text="更多" />
 
     <ImageView
         android:id="@+id/center_music_window_close"

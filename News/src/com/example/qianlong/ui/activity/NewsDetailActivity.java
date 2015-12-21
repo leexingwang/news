@@ -1,4 +1,4 @@
-package com.example.qianlong.activity;
+package com.example.qianlong.ui.activity;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BaseActivity;
 import com.lidroid.xutils.ViewUtils;

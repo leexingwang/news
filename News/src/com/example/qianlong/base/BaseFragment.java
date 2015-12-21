@@ -1,6 +1,6 @@
 package com.example.qianlong.base;
 
-import com.example.qianlong.activity.MainActivity;
+import com.example.qianlong.ui.activity.MainActivity;
 
 import android.content.Context;
 import android.os.Bundle;

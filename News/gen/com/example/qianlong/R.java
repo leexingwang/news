@@ -380,57 +380,58 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class drawable {
         public static final int back=0x7f020000;
-        public static final int black=0x7f020033;
+        public static final int black=0x7f020034;
         public static final int bottom_tab_bg=0x7f020001;
         public static final int cbn_home_title=0x7f020002;
-        public static final int default_video_poster=0x7f020003;
-        public static final int dot_focus=0x7f020004;
-        public static final int dot_normal=0x7f020005;
-        public static final int green=0x7f020032;
-        public static final int home2=0x7f020006;
-        public static final int home_press2=0x7f020007;
-        public static final int home_scroll_default=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int icon_favorite=0x7f02000a;
-        public static final int icon_news_comment_num=0x7f02000b;
-        public static final int icon_newscenter=0x7f02000c;
-        public static final int icon_setting=0x7f02000d;
-        public static final int icon_share=0x7f02000e;
-        public static final int icon_textsize=0x7f02000f;
-        public static final int img_menu=0x7f020010;
-        public static final int menu_arr_normal=0x7f020011;
-        public static final int menu_arr_select=0x7f020012;
-        public static final int menu_item_bg_select=0x7f020013;
-        public static final int news__tab_indicator=0x7f020014;
-        public static final int news_cate_arr=0x7f020015;
-        public static final int news_list_line=0x7f020016;
-        public static final int news_pic_default=0x7f020017;
-        public static final int news_tab_bg=0x7f020018;
-        public static final int news_tab_item_bg_select=0x7f020019;
-        public static final int newscenter2=0x7f02001a;
-        public static final int newscenter_press2=0x7f02001b;
-        public static final int pic_item_list_default=0x7f02001c;
-        public static final int progress_dialog_bg=0x7f02001d;
-        public static final int red=0x7f02002f;
-        public static final int setting2=0x7f02001e;
-        public static final int setting_press2=0x7f02001f;
-        public static final int shadow=0x7f020020;
-        public static final int tabbar_compose_background_icon_add=0x7f020021;
-        public static final int tabbar_compose_background_icon_close=0x7f020022;
-        public static final int tabbar_compose_camera=0x7f020023;
-        public static final int tabbar_compose_idea=0x7f020024;
-        public static final int tabbar_compose_lbs=0x7f020025;
-        public static final int tabbar_compose_more=0x7f020026;
-        public static final int tabbar_compose_photo=0x7f020027;
-        public static final int tabbar_compose_review=0x7f020028;
-        public static final int title_red_bg2=0x7f020029;
-        public static final int toast_bg=0x7f02002a;
-        public static final int topic_title_arr=0x7f02002b;
-        public static final int transparent=0x7f02002e;
-        public static final int white=0x7f020030;
-        public static final int xsearch_loading=0x7f02002c;
-        public static final int xsearch_msg_pull_arrow_down=0x7f02002d;
-        public static final int yellow=0x7f020031;
+        public static final int cbn_ic_launcher=0x7f020003;
+        public static final int default_video_poster=0x7f020004;
+        public static final int dot_focus=0x7f020005;
+        public static final int dot_normal=0x7f020006;
+        public static final int green=0x7f020033;
+        public static final int home2=0x7f020007;
+        public static final int home_press2=0x7f020008;
+        public static final int home_scroll_default=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int icon_favorite=0x7f02000b;
+        public static final int icon_news_comment_num=0x7f02000c;
+        public static final int icon_newscenter=0x7f02000d;
+        public static final int icon_setting=0x7f02000e;
+        public static final int icon_share=0x7f02000f;
+        public static final int icon_textsize=0x7f020010;
+        public static final int img_menu=0x7f020011;
+        public static final int menu_arr_normal=0x7f020012;
+        public static final int menu_arr_select=0x7f020013;
+        public static final int menu_item_bg_select=0x7f020014;
+        public static final int news__tab_indicator=0x7f020015;
+        public static final int news_cate_arr=0x7f020016;
+        public static final int news_list_line=0x7f020017;
+        public static final int news_pic_default=0x7f020018;
+        public static final int news_tab_bg=0x7f020019;
+        public static final int news_tab_item_bg_select=0x7f02001a;
+        public static final int newscenter2=0x7f02001b;
+        public static final int newscenter_press2=0x7f02001c;
+        public static final int pic_item_list_default=0x7f02001d;
+        public static final int progress_dialog_bg=0x7f02001e;
+        public static final int red=0x7f020030;
+        public static final int setting2=0x7f02001f;
+        public static final int setting_press2=0x7f020020;
+        public static final int shadow=0x7f020021;
+        public static final int tabbar_compose_background_icon_add=0x7f020022;
+        public static final int tabbar_compose_background_icon_close=0x7f020023;
+        public static final int tabbar_compose_camera=0x7f020024;
+        public static final int tabbar_compose_idea=0x7f020025;
+        public static final int tabbar_compose_lbs=0x7f020026;
+        public static final int tabbar_compose_more=0x7f020027;
+        public static final int tabbar_compose_photo=0x7f020028;
+        public static final int tabbar_compose_review=0x7f020029;
+        public static final int title_red_bg2=0x7f02002a;
+        public static final int toast_bg=0x7f02002b;
+        public static final int topic_title_arr=0x7f02002c;
+        public static final int transparent=0x7f02002f;
+        public static final int white=0x7f020031;
+        public static final int xsearch_loading=0x7f02002d;
+        public static final int xsearch_msg_pull_arrow_down=0x7f02002e;
+        public static final int yellow=0x7f020032;
     }
     public static final class id {
         public static final int bottom=0x7f0a0003;
@@ -518,8 +519,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class string {
         public static final int app_name=0x7f070016;
-        public static final int dummy_button=0x7f070017;
-        public static final int dummy_content=0x7f070018;
         /**  加载中提示 
          */
         public static final int picture_image_loading=0x7f070008;
@@ -549,12 +548,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pushmsg_center_pull_down_update_time=0x7f070004;
         public static final int pushmsg_center_pull_release_text=0x7f070003;
         public static final int pushmsg_center_pull_up_text=0x7f070001;
-        public static final int removeItem=0x7f07001e;
-        public static final int share_content=0x7f07001d;
-        public static final int tab_function=0x7f070019;
-        public static final int tab_news_center=0x7f07001a;
-        public static final int tab_popup_live=0x7f07001b;
-        public static final int tab_setting=0x7f07001c;
+        public static final int removeItem=0x7f07001c;
+        public static final int share_content=0x7f07001b;
+        public static final int tab_function=0x7f070017;
+        public static final int tab_news_center=0x7f070018;
+        public static final int tab_popup_live=0x7f070019;
+        public static final int tab_setting=0x7f07001a;
         public static final int xsearch_loading=0x7f070006;
     }
     public static final class style {

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">新闻客户端</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">dummy_content</string>
+    <string name="app_name">CBN News</string>
     <string name="tab_function">首页</string>
     <string name="tab_news_center">新闻中心</string>
     <string name="tab_popup_live">直播</string>

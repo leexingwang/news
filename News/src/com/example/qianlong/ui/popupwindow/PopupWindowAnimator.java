@@ -1,8 +1,8 @@
-package com.example.qianlong;
+package com.example.qianlong.ui.popupwindow;
 
 import android.animation.TypeEvaluator;
 
-public class KickBackAnimator implements TypeEvaluator<Float> {
+public class PopupWindowAnimator implements TypeEvaluator<Float> {
 	private final float s = 1.70158f;
 	float mDuration = 0f;
 
