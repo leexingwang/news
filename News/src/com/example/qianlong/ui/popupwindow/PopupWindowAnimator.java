@@ -1,6 +1,7 @@
 package com.example.qianlong.ui.popupwindow;
 
-import android.animation.TypeEvaluator;
+import com.nineoldandroids.animation.TypeEvaluator;
+
 
 public class PopupWindowAnimator implements TypeEvaluator<Float> {
 	private final float s = 1.70158f;

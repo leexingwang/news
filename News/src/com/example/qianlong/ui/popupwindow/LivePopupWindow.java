@@ -1,23 +1,18 @@
 package com.example.qianlong.ui.popupwindow;
 
 import com.example.qianlong.R;
-import com.example.qianlong.R.id;
-import com.example.qianlong.R.layout;
 import com.example.qianlong.utils.uiutils.FastBlur;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
+import com.nineoldandroids.animation.ObjectAnimator;
+import com.nineoldandroids.animation.ValueAnimator;
 
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -165,8 +160,6 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 			child.setVisibility(View.INVISIBLE);
 			mHandler.postDelayed(new Runnable() {
 				
-				@SuppressLint("NewApi")
-				@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 				@Override
 				public void run() {
 					child.setVisibility(View.VISIBLE);
@@ -182,8 +175,6 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 		
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	@SuppressLint("NewApi")
 	private void closeAnimation(ViewGroup layout){
 		for(int i=0;i<layout.getChildCount();i++){
 			final View child = layout.getChildAt(i);
@@ -192,9 +183,6 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 			}
 			child.setOnClickListener(this);
 			mHandler.postDelayed(new Runnable() {
-				
-				@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-				@Override
 				public void run() {
 					child.setVisibility(View.VISIBLE);
 					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 600);
