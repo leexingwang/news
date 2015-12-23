@@ -1,7 +1,7 @@
 package com.example.topnewgrid.view;
 
 import com.example.topnewgrid.R;
-import com.example.topnewgrid.adapter.DragAdapter;
+import com.example.topnewgrid.adapter.ChannelDragAdapter;
 import com.example.topnewgrid.tools.DataTools;
 
 import android.content.Context;
@@ -23,7 +23,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DragGrid extends GridView {
+public class ChannelDragGrid extends GridView {
 	/** 点击时候的X位置 */
 	public int downX;
 	/** 点击时候的Y位置 */
@@ -81,17 +81,17 @@ public class DragGrid extends GridView {
 	/* 移动时候最后个动画的ID */
 	private String LastAnimationID;
 	
-	public DragGrid(Context context) {
+	public ChannelDragGrid(Context context) {
 		super(context);
 		init(context);
 	}
 
-	public DragGrid(Context context, AttributeSet attrs, int defStyle) {
+	public ChannelDragGrid(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
 
-	public DragGrid(Context context, AttributeSet attrs) {
+	public ChannelDragGrid(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
@@ -171,7 +171,7 @@ public class DragGrid extends GridView {
 		int tempPostion = pointToPosition(x, y);
 //		if (tempPostion != AdapterView.INVALID_POSITION) {
 			dropPosition = tempPostion;
-			DragAdapter mDragAdapter = (DragAdapter) getAdapter();
+			ChannelDragAdapter mDragAdapter = (ChannelDragAdapter) getAdapter();
 			//显示刚拖动的ITEM
 			mDragAdapter.setShowDropItem(true);
 			//刷新适配器，让对应的ITEM显示
@@ -202,7 +202,7 @@ public class DragGrid extends GridView {
 				dragTextView.setEnabled(false);
 				itemHeight = dragViewGroup.getHeight();
 				itemWidth = dragViewGroup.getWidth();
-				itemTotalCount = DragGrid.this.getCount();
+				itemTotalCount = ChannelDragGrid.this.getCount();
 				int row = itemTotalCount / nColumns;// 算出行数
 				Remainder = (itemTotalCount % nColumns);// 算出最后一行多余的数量
 				if (Remainder != 0) {
@@ -279,7 +279,7 @@ public class DragGrid extends GridView {
 	
 	/** 隐藏 放下 的ITEM*/
 	private void hideDropItem() {
-		((DragAdapter) getAdapter()).setShowDropItem(false);
+		((ChannelDragAdapter) getAdapter()).setShowDropItem(false);
 	}
 	
 	/** 获取移动动画 */
@@ -390,7 +390,7 @@ public class DragGrid extends GridView {
 							// TODO Auto-generated method stub
 							// 如果为最后个动画结束，那执行下面的方法
 							if (animation.toString().equalsIgnoreCase(LastAnimationID)) {
-								DragAdapter mDragAdapter = (DragAdapter) getAdapter();
+								ChannelDragAdapter mDragAdapter = (ChannelDragAdapter) getAdapter();
 								mDragAdapter.exchange(startPosition,dropPosition);
 								startPosition = dropPosition;
 								dragPosition = dropPosition;

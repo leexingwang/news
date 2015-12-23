@@ -5,23 +5,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class DBUtil {
-	private static DBUtil mInstance;
+public class ChannelDBUtil {
+	private static ChannelDBUtil mInstance;
 	private Context mContext;
-	private SQLHelper mSQLHelp;
+	private ChannelSQLHelper mSQLHelp;
 	private SQLiteDatabase mSQLiteDatabase;
 
-	private DBUtil(Context context) {
+	private ChannelDBUtil(Context context) {
 		mContext = context;
-		mSQLHelp = new SQLHelper(context);
+		mSQLHelp = new ChannelSQLHelper(context);
 		mSQLiteDatabase = mSQLHelp.getWritableDatabase();
 	}
 	/**
 	 * 初始化数据库操作DBUtil类
 	 */
-	public static DBUtil getInstance(Context context) {
+	public static ChannelDBUtil getInstance(Context context) {
 		if (mInstance == null) {
-			mInstance = new DBUtil(context);
+			mInstance = new ChannelDBUtil(context);
 		}
 		return mInstance;
 	}
@@ -40,7 +40,7 @@ public class DBUtil {
 	 * 添加数据
 	 */
 	public void insertData(ContentValues values) {
-		mSQLiteDatabase.insert(SQLHelper.TABLE_CHANNEL, null, values);
+		mSQLiteDatabase.insert(ChannelSQLHelper.TABLE_CHANNEL, null, values);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class DBUtil {
 	 */
 	public void updateData(ContentValues values, String whereClause,
 			String[] whereArgs) {
-		mSQLiteDatabase.update(SQLHelper.TABLE_CHANNEL, values, whereClause,
+		mSQLiteDatabase.update(ChannelSQLHelper.TABLE_CHANNEL, values, whereClause,
 				whereArgs);
 	}
 
@@ -64,7 +64,7 @@ public class DBUtil {
 	 */
 	public void deleteData(String whereClause, String[] whereArgs) {
 		mSQLiteDatabase
-				.delete(SQLHelper.TABLE_CHANNEL, whereClause, whereArgs);
+				.delete(ChannelSQLHelper.TABLE_CHANNEL, whereClause, whereArgs);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class DBUtil {
 	public Cursor selectData(String[] columns, String selection,
 			String[] selectionArgs, String groupBy, String having,
 			String orderBy) {
-		Cursor cursor = mSQLiteDatabase.query(SQLHelper.TABLE_CHANNEL,columns, selection, selectionArgs, groupBy, having, orderBy);
+		Cursor cursor = mSQLiteDatabase.query(ChannelSQLHelper.TABLE_CHANNEL,columns, selection, selectionArgs, groupBy, having, orderBy);
 		return cursor;
 	}
 }

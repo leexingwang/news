@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/title_bar"
-        layout="@layout/title_bar" />
+        layout="@layout/channel_title_bar" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -48,7 +48,7 @@
                     android:id="@+id/my_category_text_ok"
                     style="@style/subscribe_my_tip_text_edit"
                     android:layout_alignParentRight="true"
-                    android:background="@drawable/subscribe_my_category_edit_bg"
+                    android:background="@drawable/channel_subscribe_my_category_edit_bg"
                     android:layout_marginRight="10dp"
                     android:text="@string/subscribe_my_category_edit" />
             </RelativeLayout>
@@ -57,7 +57,7 @@
                 android:id="@+id/seperate_line"
                 style="@style/subscribe_seperate_line" />
 
-            <com.example.topnewgrid.view.DragGrid
+            <com.example.topnewgrid.view.ChannelDragGrid
                 android:id="@+id/userGridView"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 android:layout_marginLeft="10.0dip"
                 android:text="@string/subscribe_more_category" />
 
-            <com.example.topnewgrid.view.OtherGridView
+            <com.example.topnewgrid.view.ChannelOtherGridView
                 android:id="@+id/otherGridView"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
 
     <include
         android:id="@+id/category_layout"
-        layout="@layout/subscribe_category_item"
+        layout="@layout/channel_subscribe_category_item"
         android:visibility="gone" />
 
 </RelativeLayout>

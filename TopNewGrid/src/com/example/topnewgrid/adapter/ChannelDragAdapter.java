@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class DragAdapter extends BaseAdapter {
+public class ChannelDragAdapter extends BaseAdapter {
 	/** TAG*/
 	private final static String TAG = "DragAdapter";
 	/** 是否显示底部的ITEM */
@@ -34,12 +34,12 @@ public class DragAdapter extends BaseAdapter {
 	
 	public boolean isEdit=false;
 
-	public DragAdapter(Context context, List<ChannelItem> channelList) {
+	public ChannelDragAdapter(Context context, List<ChannelItem> channelList) {
 		this.context = context;
 		this.channelList = channelList;
 	}
 	
-	public DragAdapter(Context context, List<ChannelItem> channelList,boolean isEdit) {
+	public ChannelDragAdapter(Context context, List<ChannelItem> channelList,boolean isEdit) {
 		this.context = context;
 		this.channelList = channelList;
 		this.isEdit=isEdit;
@@ -68,7 +68,7 @@ public class DragAdapter extends BaseAdapter {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = LayoutInflater.from(context).inflate(R.layout.subscribe_category_item, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.channel_subscribe_category_item, null);
 		item_text = (TextView) view.findViewById(R.id.text_item);
 		if (isEdit) {
 			view.findViewById(R.id.image_delete).setVisibility(View.VISIBLE);

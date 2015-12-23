@@ -1,13 +1,13 @@
 package com.example.topnewgrid;
 
 import java.util.ArrayList;
-import com.example.topnewgrid.adapter.OtherAdapter;
-import com.example.topnewgrid.adapter.DragAdapter;
+import com.example.topnewgrid.adapter.ChannelOtherAdapter;
+import com.example.topnewgrid.adapter.ChannelDragAdapter;
 import com.example.topnewgrid.app.AppApplication;
 import com.example.topnewgrid.bean.ChannelManage;
 import com.example.topnewgrid.bean.ChannelItem;
-import com.example.topnewgrid.view.DragGrid;
-import com.example.topnewgrid.view.OtherGridView;
+import com.example.topnewgrid.view.ChannelDragGrid;
+import com.example.topnewgrid.view.ChannelOtherGridView;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,15 +52,15 @@ import android.widget.Toast;
 public class ChannelActivity extends Activity implements OnItemClickListener,
 		OnClickListener {
 	/** 用户栏目的GRIDVIEW */
-	private DragGrid userGridView;
+	private ChannelDragGrid userGridView;
 	/** 其它栏目的GRIDVIEW */
-	private OtherGridView otherGridView;
+	private ChannelOtherGridView otherGridView;
 	/** 用户栏目的编辑按钮 */
 	private TextView userTextView;
 	/** 用户栏目对应的适配器，可以拖动 */
-	DragAdapter userAdapter;
+	ChannelDragAdapter userAdapter;
 	/** 其它栏目对应的适配器 */
-	OtherAdapter otherAdapter;
+	ChannelOtherAdapter otherAdapter;
 	/** 其它栏目列表 */
 	ArrayList<ChannelItem> otherChannelList = new ArrayList<ChannelItem>();
 	/** 用户栏目列表 */
@@ -73,7 +73,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.subscribe_activity);
+		setContentView(R.layout.channel_subscribe_activity);
 		initView();
 		initData();
 	}
@@ -84,16 +84,16 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 				AppApplication.getApp().getSQLHelper()).getUserChannel());
 		otherChannelList = ((ArrayList<ChannelItem>) ChannelManage.getManage(
 				AppApplication.getApp().getSQLHelper()).getOtherChannel());
-		userAdapter = new DragAdapter(this, userChannelList, isEdit);
+		userAdapter = new ChannelDragAdapter(this, userChannelList, isEdit);
 		userGridView.setAdapter(userAdapter);
-		otherAdapter = new OtherAdapter(this, otherChannelList);
+		otherAdapter = new ChannelOtherAdapter(this, otherChannelList);
 		otherGridView.setAdapter(this.otherAdapter);
 	}
 
 	/** 初始化布局 */
 	private void initView() {
-		userGridView = (DragGrid) findViewById(R.id.userGridView);
-		otherGridView = (OtherGridView) findViewById(R.id.otherGridView);
+		userGridView = (ChannelDragGrid) findViewById(R.id.userGridView);
+		otherGridView = (ChannelOtherGridView) findViewById(R.id.otherGridView);
 		userTextView = (TextView) findViewById(R.id.my_category_text_ok);
 		// 设置GRIDVIEW的ITEM的点击监听
 		otherGridView.setOnItemClickListener(this);
@@ -127,7 +127,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 							.findViewById(R.id.text_item);
 					final int[] startLocation = new int[2];
 					newTextView.getLocationInWindow(startLocation);
-					final ChannelItem channel = ((DragAdapter) parent
+					final ChannelItem channel = ((ChannelDragAdapter) parent
 							.getAdapter()).getItem(position);// 获取点击的频道内容
 					otherAdapter.setVisible(false);
 					// 添加到最后一个
@@ -151,7 +151,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 			} else {
 				final ImageView moveImageView = getView(view);
 				if (moveImageView != null) {
-					final ChannelItem channel = ((DragAdapter) parent
+					final ChannelItem channel = ((ChannelDragAdapter) parent
 							.getAdapter()).getItem(position);// 获取点击的频道内容
 					Toast.makeText(this, channel.getName(), Toast.LENGTH_SHORT).show();
 				}
@@ -164,7 +164,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 						.findViewById(R.id.text_item);
 				final int[] startLocation = new int[2];
 				newTextView.getLocationInWindow(startLocation);
-				final ChannelItem channel = ((OtherAdapter) parent.getAdapter())
+				final ChannelItem channel = ((ChannelOtherAdapter) parent.getAdapter())
 						.getItem(position);
 				userAdapter.setVisible(false);
 				// 添加到最后一个
@@ -197,7 +197,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 		case R.id.my_category_text_ok:
 			if (isEdit) {
 				isEdit = false;
-				userAdapter = new DragAdapter(this, userChannelList, isEdit);
+				userAdapter = new ChannelDragAdapter(this, userChannelList, isEdit);
 				userAdapter.notifyDataSetChanged();
 				userGridView.setAdapter(userAdapter);
 				userGridView.invalidateViews();
@@ -206,7 +206,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 
 			} else {
 				isEdit = true;
-				userAdapter = new DragAdapter(this, userChannelList, isEdit);
+				userAdapter = new ChannelDragAdapter(this, userChannelList, isEdit);
 				userAdapter.notifyDataSetChanged();
 				userGridView.setAdapter(userAdapter);
 				userGridView.invalidateViews();
@@ -266,7 +266,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 			public void onAnimationEnd(Animation animation) {
 				moveViewGroup.removeView(mMoveView);
 				// instanceof 方法判断2边实例是不是一样，判断点击的是DragGrid还是OtherGridView
-				if (clickGridView instanceof DragGrid) {
+				if (clickGridView instanceof ChannelDragGrid) {
 					otherAdapter.setVisible(true);
 					otherAdapter.notifyDataSetChanged();
 					userAdapter.remove();

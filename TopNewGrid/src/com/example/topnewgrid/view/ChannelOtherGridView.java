@@ -4,9 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-public class OtherGridView extends GridView {
+public class ChannelOtherGridView extends GridView {
 
-	public OtherGridView(Context paramContext, AttributeSet paramAttributeSet) {
+	public ChannelOtherGridView(Context paramContext, AttributeSet paramAttributeSet) {
 		super(paramContext, paramAttributeSet);
 	}
 

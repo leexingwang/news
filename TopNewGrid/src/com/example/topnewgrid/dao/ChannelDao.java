@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.topnewgrid.bean.ChannelItem;
-import com.example.topnewgrid.db.SQLHelper;
+import com.example.topnewgrid.db.ChannelSQLHelper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,10 +14,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class ChannelDao implements ChannelDaoInface {
-	private SQLHelper helper = null;
+	private ChannelSQLHelper helper = null;
 
 	public ChannelDao(Context context) {
-		helper = new SQLHelper(context);
+		helper = new ChannelSQLHelper(context);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ChannelDao implements ChannelDaoInface {
 			values.put("id", item.getId());
 			values.put("orderId", item.getOrderId());
 			values.put("selected", item.getSelected());
-			id = database.insert(SQLHelper.TABLE_CHANNEL, null, values);
+			id = database.insert(ChannelSQLHelper.TABLE_CHANNEL, null, values);
 			flag = (id != -1 ? true : false);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -53,7 +53,7 @@ public class ChannelDao implements ChannelDaoInface {
 		int count = 0;
 		try {
 			database = helper.getWritableDatabase();
-			count = database.delete(SQLHelper.TABLE_CHANNEL, whereClause, whereArgs);
+			count = database.delete(ChannelSQLHelper.TABLE_CHANNEL, whereClause, whereArgs);
 			flag = (count > 0 ? true : false);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -74,7 +74,7 @@ public class ChannelDao implements ChannelDaoInface {
 		int count = 0;
 		try {
 			database = helper.getWritableDatabase();
-			count = database.update(SQLHelper.TABLE_CHANNEL, values, whereClause, whereArgs);
+			count = database.update(ChannelSQLHelper.TABLE_CHANNEL, values, whereClause, whereArgs);
 			flag = (count > 0 ? true : false);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -95,7 +95,7 @@ public class ChannelDao implements ChannelDaoInface {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			database = helper.getReadableDatabase();
-			cursor = database.query(true, SQLHelper.TABLE_CHANNEL, null, selection,
+			cursor = database.query(true, ChannelSQLHelper.TABLE_CHANNEL, null, selection,
 					selectionArgs, null, null, null, null);
 			int cols_len = cursor.getColumnCount();
 			while (cursor.moveToNext()) {
@@ -127,7 +127,7 @@ public class ChannelDao implements ChannelDaoInface {
 		Cursor cursor = null;
 		try {
 			database = helper.getReadableDatabase();
-			cursor = database.query(false, SQLHelper.TABLE_CHANNEL, null, selection,selectionArgs, null, null, null, null);
+			cursor = database.query(false, ChannelSQLHelper.TABLE_CHANNEL, null, selection,selectionArgs, null, null, null, null);
 			int cols_len = cursor.getColumnCount();
 			while (cursor.moveToNext()) {
 				Map<String, String> map = new HashMap<String, String>();
@@ -155,7 +155,7 @@ public class ChannelDao implements ChannelDaoInface {
 	}
 
 	public void clearFeedTable() {
-		String sql = "DELETE FROM " + SQLHelper.TABLE_CHANNEL + ";";
+		String sql = "DELETE FROM " + ChannelSQLHelper.TABLE_CHANNEL + ";";
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(sql);
 		revertSeq();
@@ -163,7 +163,7 @@ public class ChannelDao implements ChannelDaoInface {
 
 	private void revertSeq() {
 		String sql = "update sqlite_sequence set seq=0 where name='"
-				+ SQLHelper.TABLE_CHANNEL + "'";
+				+ ChannelSQLHelper.TABLE_CHANNEL + "'";
 		SQLiteDatabase db = helper.getWritableDatabase();
 		db.execSQL(sql);
 	}

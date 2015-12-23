@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.topnewgrid.R;
 import com.example.topnewgrid.bean.ChannelItem;
-import com.example.topnewgrid.view.OtherGridView;
+import com.example.topnewgrid.view.ChannelOtherGridView;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class OtherAdapter extends BaseAdapter {
+public class ChannelOtherAdapter extends BaseAdapter {
 	private Context context;
 	public List<ChannelItem> channelList;
 	private TextView item_text;
@@ -23,7 +23,7 @@ public class OtherAdapter extends BaseAdapter {
 	/** ÒªÉ¾³ýµÄposition */
 	public int remove_position = -1;
 
-	public OtherAdapter(Context context, List<ChannelItem> channelList) {
+	public ChannelOtherAdapter(Context context, List<ChannelItem> channelList) {
 		this.context = context;
 		this.channelList = channelList;
 	}
@@ -48,7 +48,7 @@ public class OtherAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = LayoutInflater.from(context).inflate(R.layout.subscribe_category_other_item, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.channel_subscribe_category_other_item, null);
 		item_text = (TextView) view.findViewById(R.id.text_item);
 		ChannelItem channel = getItem(position);
 		item_text.setText(channel.getName());

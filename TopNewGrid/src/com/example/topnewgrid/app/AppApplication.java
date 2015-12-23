@@ -1,12 +1,12 @@
 package com.example.topnewgrid.app;
 
-import com.example.topnewgrid.db.SQLHelper;
+import com.example.topnewgrid.db.ChannelSQLHelper;
 
 import android.app.Application;
 
 public class AppApplication extends Application {
 	private static AppApplication mAppApplication;
-	private SQLHelper sqlHelper;
+	private ChannelSQLHelper sqlHelper;
 
 	@Override
 	public void onCreate() {
@@ -21,9 +21,9 @@ public class AppApplication extends Application {
 	}
 	
 	/** 获取数据库Helper */
-	public SQLHelper getSQLHelper() {
+	public ChannelSQLHelper getSQLHelper() {
 		if (sqlHelper == null)
-			sqlHelper = new SQLHelper(mAppApplication);
+			sqlHelper = new ChannelSQLHelper(mAppApplication);
 		return sqlHelper;
 	}
 	
