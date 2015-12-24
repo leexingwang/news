@@ -7,14 +7,14 @@ import android.app.Dialog;
 import android.content.Context;
 
 /**
- * å¯¹è¯æ¡†åˆ›å»ºå·¥å…·ç±»
+ * ¶Ô»°¿ò´´½¨¹¤¾ßÀà
  * 
  */
 public class DialogUtil {
 
 
 	/**
-	 * åˆ›å»ºè¿›åº¦å¯¹è¯æ¡†
+	 * ´´½¨½ø¶È¶Ô»°¿ò
 	 * @param context
 	 * @param content
 	 * @return

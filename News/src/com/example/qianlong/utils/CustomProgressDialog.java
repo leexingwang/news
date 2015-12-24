@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 /**
- * è‡ªå®šä¹‰åœ†å½¢è¿›åº¦æ¡å¯¹è¯æ¡†
+ * ×Ô¶¨ÒåÔ²ĞÎ½ø¶ÈÌõ¶Ô»°¿ò
  */
 public class CustomProgressDialog extends ProgressDialog{
 

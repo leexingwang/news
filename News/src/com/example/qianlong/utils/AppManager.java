@@ -1,6 +1,5 @@
 package com.example.qianlong.utils;
 
-
 import java.util.Stack;
 
 import android.app.Activity;
@@ -8,84 +7,99 @@ import android.app.ActivityManager;
 import android.content.Context;
 
 public class AppManager {
-	
+
 	private static Stack<Activity> activityStack;
 	private static AppManager instance;
-	
-	private AppManager(){}
+
+	private AppManager() {
+	}
+
 	/**
-	 * å•ä¸€å®ä¾‹
+	 * µ¥Ò»ÊµÀı
 	 */
-	public static AppManager getAppManager(){
-		if(instance==null){
-			instance=new AppManager();
+	public static AppManager getAppManager() {
+		if (instance == null) {
+			instance = new AppManager();
 		}
 		return instance;
 	}
+
 	/**
-	 * æ·»åŠ Activityåˆ°å †ï¿½?
+	 * Ìí¼ÓActivityÕ»ÄÚ
 	 */
-	public void addActivity(Activity activity){
-		if(activityStack==null){
-			activityStack=new Stack<Activity>();
+	public void addActivity(Activity activity) {
+		if (activityStack == null) {
+			activityStack = new Stack<Activity>();
 		}
 		activityStack.add(activity);
 	}
+
 	/**
-	 * è·å–å½“å‰Activityï¼ˆå †æ ˆä¸­ï¿½?ï¿½ï¿½ï¿½?ï¿½ï¿½å‹å…¥çš„ï¼‰
+	 * »ñÈ¡µ±Ç°activity
 	 */
-	public Activity currentActivity(){
-		Activity activity=activityStack.lastElement();
+	public Activity currentActivity() {
+		Activity activity = activityStack.lastElement();
 		return activity;
 	}
+
 	/**
-	 * ç»“æŸå½“å‰Activityï¼ˆå †æ ˆä¸­ï¿½?ï¿½ï¿½ï¿½?ï¿½ï¿½å‹å…¥çš„ï¼‰
+	 * ½áÊøµ±Ç°activity
 	 */
-	public void finishActivity(){
-		Activity activity=activityStack.lastElement();
+	public void finishActivity() {
+		Activity activity = activityStack.lastElement();
 		finishActivity(activity);
 	}
+
 	/**
-	 * ç»“æŸæŒ‡å®šçš„Activity
+	 * ½áÊøÖ¸¶¨µÄactivity
 	 */
-	public void finishActivity(Activity activity){
-		if(activity!=null){
+	public void finishActivity(Activity activity) {
+		if (activity != null) {
 			activityStack.remove(activity);
 			activity.finish();
-			activity=null;
+			activity = null;
 		}
 	}
+
 	/**
-	 * ç»“æŸæŒ‡å®šç±»åçš„Activity
+	 * ½áÊøÖ¸¶¨ÀàĞÍµÄactivity
+	 * 
+	 * @param cls
 	 */
-	public void finishActivity(Class<?> cls){
+	public void finishActivity(Class<?> cls) {
 		for (Activity activity : activityStack) {
-			if(activity.getClass().equals(cls) ){
+			if (activity.getClass().equals(cls)) {
 				finishActivity(activity);
 			}
 		}
 	}
+
 	/**
-	 * ç»“æŸï¿½?ï¿½ï¿½Activity
+	 * ½áÊøËùÓĞactivity
 	 */
-	public void finishAllActivity(){
-		for (int i = 0, size = activityStack.size(); i < size; i++){
-            if (null != activityStack.get(i)){
-            	activityStack.get(i).finish();
-            }
-	    }
+	public void finishAllActivity() {
+		for (int i = 0, size = activityStack.size(); i < size; i++) {
+			if (null != activityStack.get(i)) {
+				activityStack.get(i).finish();
+			}
+		}
 		activityStack.clear();
 	}
+
 	/**
-	 * ï¿½?ï¿½ï¿½åº”ç”¨ç¨‹åº
+	 * ÍË³öÕû¸öÓ¦ÓÃ
+	 * 
+	 * @param context
 	 */
 	public void AppExit(Context context) {
 		try {
 			finishAllActivity();
-			ActivityManager activityMgr= (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+			ActivityManager activityMgr = (ActivityManager) context
+					.getSystemService(Context.ACTIVITY_SERVICE);
 			activityMgr.restartPackage(context.getPackageName());
 			System.exit(0);
 			android.os.Process.killProcess(android.os.Process.myPid());
-		} catch (Exception e) {	}
+		} catch (Exception e) {
+		}
 	}
 }

@@ -38,7 +38,7 @@ import android.widget.ListView;
 public class CommonUtil {
 
 	public static void showInfoDialog(Context context, String message) {
-		showInfoDialog(context, message, "提示", "确定", null);
+		showInfoDialog(context, message, "��ʾ", "ȷ��", null);
 	}
 
 	public static void showInfoDialog(Context context, String message,
@@ -70,7 +70,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 将指定byte数组转换成16进制字符串
+	 * ��ָ����byte���黻��16�����ַ���
 	 * 
 	 * @param b
 	 * @return
@@ -88,8 +88,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 判断当前是否有可用的网络以及网络类型 0：无网络 1：WIFI 2：CMWAP 3：CMNET
-	 * 
+	 * �ж�����
 	 * @param context
 	 * @return
 	 */
@@ -122,9 +121,9 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 获取现在时间
+	 * ��ȡʱ��
 	 * 
-	 * @return 返回短时间字符串格式yyyy-MM-dd HH:mm:ss
+	 * @return ��ʽyyyy-MM-dd HH:mm:ss
 	 */
 
 	public static String getStringDate() {
@@ -135,7 +134,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+	 *dp--->px
 	 */
 	public static int dip2px(Context context, float dpValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -143,7 +142,7 @@ public class CommonUtil {
 	}
 
 	/**
-	 * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+	 * px---> dp
 	 */
 	public static int px2dip(Context context, float pxValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -228,18 +227,18 @@ public class CommonUtil {
 		Bitmap bitmap = Bitmap.createBitmap(bd.getIntrinsicWidth(),
 				bd.getIntrinsicHeight(), Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
-		canvas.drawBitmap(b, 0, 0, p); // 关键代码，使用新的Paint画原图，
+		canvas.drawBitmap(b, 0, 0, p); 
 
 		return new BitmapDrawable(bitmap);
 	}
 
-	/** 设置Selector。 本次只增加点击变暗的效果，注释的代码为更多的效果 */
+
 	public static StateListDrawable createSLD(Context context, Drawable drawable) {
 		StateListDrawable bg = new StateListDrawable();
 		int brightness = 50 - 127;
 		ColorMatrix cMatrix = new ColorMatrix();
 		cMatrix.set(new float[] { 1, 0, 0, 0, brightness, 0, 1, 0, 0,
-				brightness,// 改变亮度
+				brightness,// 
 				0, 0, 1, 0, brightness, 0, 0, 0, 1, 0 });
 
 		Paint paint = new Paint();
@@ -287,30 +286,30 @@ public class CommonUtil {
 		long curTime = System.currentTimeMillis();
 		difference_months = (int) (((curTime / 2592000) % 12) - ((created / 2592000) % 12));
 		if (difference_months > 0) {
-			when.append(difference_months + "月");
+			when.append(difference_months + "��");
 		}
 
 		difference_days = (int) (((curTime / 86400) % 30) - ((created / 86400) % 30));
 		if (difference_days > 0) {
-			when.append(difference_days + "天");
+			when.append(difference_days + "��");
 		}
 
 		difference_hours = (int) (((curTime / 3600) % 24) - ((created / 3600) % 24));
 		if (difference_hours > 0) {
-			when.append(difference_hours + "小时");
+			when.append(difference_hours + "Сʱ");
 		}
 
 		difference_minutes = (int) (((curTime / 60) % 60) - ((created / 60) % 60));
 		if (difference_minutes > 0) {
-			when.append(difference_minutes + "分钟");
+			when.append(difference_minutes + "����");
 		}
 
 		difference_seconds = (int) ((curTime % 60) - (created % 60));
 		if (difference_seconds > 0) {
-			when.append(difference_seconds + "秒");
+			when.append(difference_seconds + "��");
 		}
 
-		return when.append("前").toString();
+		return when.append("ǰ").toString();
 	}
 
 	public static boolean hasToken(Context ct) {
@@ -323,22 +322,19 @@ public class CommonUtil {
 	}
 
 	public static void setListViewHeightBasedOnChildren(ListView listView) {
-		// 获取ListView对应的Adapter
 		ListAdapter listAdapter = listView.getAdapter();
 		if (listAdapter == null) {
 			return;
 		}
 		int totalHeight = 0;
-		for (int i = 0; i < listAdapter.getCount(); i++) { // listAdapter.getCount()返回数据项的数目
+		for (int i = 0; i < listAdapter.getCount(); i++) { 
 			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0); // 计算子项View 的宽高
-			totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
+			listItem.measure(0, 0); 
+			totalHeight += listItem.getMeasuredHeight(); 
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight
 				+ (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		// listView.getDividerHeight()获取子项间分隔符占用的高度
-		// params.height最后得到整个ListView完整显示需要的高度
 		listView.setLayoutParams(params);
 	}
 

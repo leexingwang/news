@@ -8,7 +8,7 @@ import android.view.View;
 
 
 /**
- * å®šä¹‰äº†æ‹‰åŠ¨åˆ·æ–°çš„æ¥å£
+ * ¶¨ÒåÁËÀ­¶¯Ë¢ĞÂµÄ½Ó¿Ú
  * 
  * @author Li Hong
  * @since 2013-8-22
@@ -17,89 +17,89 @@ import android.view.View;
 public interface IPullToRefresh<T extends View> {
     
     /**
-     * è®¾ç½®å½“å‰ä¸‹æ‹‰åˆ·æ–°æ˜¯å¦å¯ç”¨
+     * ÉèÖÃµ±Ç°ÏÂÀ­Ë¢ĞÂÊÇ·ñ¿ÉÓÃ
      * 
-     * @param pullRefreshEnabled trueè¡¨ç¤ºå¯ç”¨ï¼Œfalseè¡¨ç¤ºä¸å¯ç”¨
+     * @param pullRefreshEnabled true±íÊ¾¿ÉÓÃ£¬false±íÊ¾²»¿ÉÓÃ
      */
     public void setPullRefreshEnabled(boolean pullRefreshEnabled);
     
     /**
-     * è®¾ç½®å½“å‰ä¸Šæ‹‰åŠ è½½æ›´å¤šæ˜¯å¦å¯ç”¨
+     * ÉèÖÃµ±Ç°ÉÏÀ­¼ÓÔØ¸ü¶àÊÇ·ñ¿ÉÓÃ
      * 
-     * @param pullLoadEnabled trueè¡¨ç¤ºå¯ç”¨ï¼Œfalseè¡¨ç¤ºä¸å¯ç”¨
+     * @param pullLoadEnabled true±íÊ¾¿ÉÓÃ£¬false±íÊ¾²»¿ÉÓÃ
      */
     public void setPullLoadEnabled(boolean pullLoadEnabled);
     
     /**
-     * æ»‘åŠ¨åˆ°åº•éƒ¨æ˜¯å¦è‡ªåŠ¨åŠ è½½æ›´å¤šæ•°æ®
+     * »¬¶¯µ½µ×²¿ÊÇ·ñ×Ô¶¯¼ÓÔØ¸ü¶àÊı¾İ
      * 
-     * @param scrollLoadEnabled å¦‚æœè¿™ä¸ªå€¼ä¸ºtrueçš„è¯ï¼Œé‚£ä¹ˆä¸Šæ‹‰åŠ è½½æ›´å¤šçš„åŠŸèƒ½å°†ä¼šç¦ç”¨
+     * @param scrollLoadEnabled Èç¹ûÕâ¸öÖµÎªtrueµÄ»°£¬ÄÇÃ´ÉÏÀ­¼ÓÔØ¸ü¶àµÄ¹¦ÄÜ½«»á½ûÓÃ
      */
     public void setScrollLoadEnabled(boolean scrollLoadEnabled);
     
     /**
-     * åˆ¤æ–­å½“å‰ä¸‹æ‹‰åˆ·æ–°æ˜¯å¦å¯ç”¨
+     * ÅĞ¶Ïµ±Ç°ÏÂÀ­Ë¢ĞÂÊÇ·ñ¿ÉÓÃ
      * 
-     * @return trueå¦‚æœå¯ç”¨ï¼Œfalseä¸å¯ç”¨
+     * @return trueÈç¹û¿ÉÓÃ£¬false²»¿ÉÓÃ
      */
     public boolean isPullRefreshEnabled();
     
     /**
-     * åˆ¤æ–­ä¸Šæ‹‰åŠ è½½æ˜¯å¦å¯ç”¨
+     * ÅĞ¶ÏÉÏÀ­¼ÓÔØÊÇ·ñ¿ÉÓÃ
      * 
-     * @return trueå¯ç”¨ï¼Œfalseä¸å¯ç”¨
+     * @return true¿ÉÓÃ£¬false²»¿ÉÓÃ
      */
     public boolean isPullLoadEnabled();
     
     /**
-     * æ»‘åŠ¨åˆ°åº•éƒ¨åŠ è½½æ˜¯å¦å¯ç”¨
+     * »¬¶¯µ½µ×²¿¼ÓÔØÊÇ·ñ¿ÉÓÃ
      * 
-     * @return trueå¯ç”¨ï¼Œå¦åˆ™ä¸å¯ç”¨
+     * @return true¿ÉÓÃ£¬·ñÔò²»¿ÉÓÃ
      */
     public boolean isScrollLoadEnabled();
     
     /**
-     * è®¾ç½®åˆ·æ–°çš„ç›‘å¬å™¨
+     * ÉèÖÃË¢ĞÂµÄ¼àÌıÆ÷
      * 
-     * @param refreshListener ç›‘å¬å™¨å¯¹è±¡
+     * @param refreshListener ¼àÌıÆ÷¶ÔÏó
      */
     public void setOnRefreshListener(OnRefreshListener<T> refreshListener);
     
     /**
-     * ç»“æŸä¸‹æ‹‰åˆ·æ–°
+     * ½áÊøÏÂÀ­Ë¢ĞÂ
      */
     public void onPullDownRefreshComplete();
     
     /**
-     * ç»“æŸä¸Šæ‹‰åŠ è½½æ›´å¤š
+     * ½áÊøÉÏÀ­¼ÓÔØ¸ü¶à
      */
     public void onPullUpRefreshComplete();
     
     /**
-     * å¾—åˆ°å¯åˆ·æ–°çš„Viewå¯¹è±¡
+     * µÃµ½¿ÉË¢ĞÂµÄView¶ÔÏó
      * 
-     * @return è¿”å›è°ƒç”¨{@link #createRefreshableView(Context, AttributeSet)} æ–¹æ³•è¿”å›çš„å¯¹è±¡
+     * @return ·µ»Øµ÷ÓÃ{@link #createRefreshableView(Context, AttributeSet)} ·½·¨·µ»ØµÄ¶ÔÏó
      */
     public T getRefreshableView();
     
     /**
-     * å¾—åˆ°Headerå¸ƒå±€å¯¹è±¡
+     * µÃµ½Header²¼¾Ö¶ÔÏó
      * 
-     * @return Headerå¸ƒå±€å¯¹è±¡
+     * @return Header²¼¾Ö¶ÔÏó
      */
     public LoadingLayout getHeaderLoadingLayout();
     
     /**
-     * å¾—åˆ°Footerå¸ƒå±€å¯¹è±¡
+     * µÃµ½Footer²¼¾Ö¶ÔÏó
      * 
-     * @return Footerå¸ƒå±€å¯¹è±¡
+     * @return Footer²¼¾Ö¶ÔÏó
      */
     public LoadingLayout getFooterLoadingLayout();
     
     /**
-     * è®¾ç½®æœ€åæ›´æ–°çš„æ—¶é—´æ–‡æœ¬
+     * ÉèÖÃ×îºó¸üĞÂµÄÊ±¼äÎÄ±¾
      * 
-     * @param label æ–‡æœ¬
+     * @param label ÎÄ±¾
      */
     public void setLastUpdatedLabel(CharSequence label);
 }

@@ -17,33 +17,33 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * è¿™ä¸ªç±»å°è£…äº†ä¸‹æ‹‰åˆ·æ–°çš„å¸ƒå±€
+ * Õâ¸öÀà·â×°ÁËÏÂÀ­Ë¢ĞÂµÄ²¼¾Ö
  * 
  * @author Li Hong
  * @since 2013-7-30
  */
 public class HeaderLoadingLayout extends LoadingLayout {
-    /** æ—‹è½¬åŠ¨ç”»æ—¶é—´ */
+    /** Ğı×ª¶¯»­Ê±¼ä */
     private static final int ROTATE_ANIM_DURATION = 150;
-    /**Headerçš„å®¹å™¨*/
+    /**HeaderµÄÈİÆ÷*/
     private RelativeLayout mHeaderContainer;
-    /**ç®­å¤´å›¾ç‰‡*/
+    /**¼ıÍ·Í¼Æ¬*/
     private ImageView mArrowImageView;
-    /**è¿›åº¦æ¡*/
+    /**½ø¶ÈÌõ*/
     private ProgressBar mProgressBar;
-    /**çŠ¶æ€æç¤ºTextView*/
+    /**×´Ì¬ÌáÊ¾TextView*/
     private TextView mHintTextView;
-    /**æœ€åæ›´æ–°æ—¶é—´çš„TextView*/
+    /**×îºó¸üĞÂÊ±¼äµÄTextView*/
     private TextView mHeaderTimeView;
-    /**æœ€åæ›´æ–°æ—¶é—´çš„æ ‡é¢˜*/
+    /**×îºó¸üĞÂÊ±¼äµÄ±êÌâ*/
     private TextView mHeaderTimeViewTitle;
-    /**å‘ä¸Šçš„åŠ¨ç”»*/
+    /**ÏòÉÏµÄ¶¯»­*/
     private Animation mRotateUpAnim;
-    /**å‘ä¸‹çš„åŠ¨ç”»*/
+    /**ÏòÏÂµÄ¶¯»­*/
     private Animation mRotateDownAnim;
     
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      */
@@ -53,7 +53,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
     }
 
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      * @param attrs attrs
@@ -64,7 +64,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
     }
 
     /**
-     * åˆå§‹åŒ–
+     * ³õÊ¼»¯
      * 
      * @param context context
      */
@@ -78,7 +78,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
         
         float pivotValue = 0.5f;    // SUPPRESS CHECKSTYLE
         float toDegree = -180f;     // SUPPRESS CHECKSTYLE
-        // åˆå§‹åŒ–æ—‹è½¬åŠ¨ç”»
+        // ³õÊ¼»¯Ğı×ª¶¯»­
         mRotateUpAnim = new RotateAnimation(0.0f, toDegree, Animation.RELATIVE_TO_SELF, pivotValue,
                 Animation.RELATIVE_TO_SELF, pivotValue);
         mRotateUpAnim.setDuration(ROTATE_ANIM_DURATION);
@@ -91,7 +91,7 @@ public class HeaderLoadingLayout extends LoadingLayout {
 
     @Override
     public void setLastUpdatedLabel(CharSequence label) {
-        // å¦‚æœæœ€åæ›´æ–°çš„æ—¶é—´çš„æ–‡æœ¬æ˜¯ç©ºçš„è¯ï¼Œéšè—å‰é¢çš„æ ‡é¢˜
+        // Èç¹û×îºó¸üĞÂµÄÊ±¼äµÄÎÄ±¾ÊÇ¿ÕµÄ»°£¬Òş²ØÇ°ÃæµÄ±êÌâ
         mHeaderTimeViewTitle.setVisibility(TextUtils.isEmpty(label) ? View.INVISIBLE : View.VISIBLE);
         mHeaderTimeView.setText(label);
     }

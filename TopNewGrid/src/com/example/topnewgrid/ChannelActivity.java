@@ -23,7 +23,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,7 +36,7 @@ import android.widget.Toast;
  * 
  * @Package com.example.topnewgrid
  * 
- * @Description: TODO
+ * @Description: 
  * 
  *               Copyright: Copyright (c) 2015
  * 
@@ -120,7 +119,7 @@ public class ChannelActivity extends Activity implements OnItemClickListener,
 		switch (parent.getId()) {
 		case R.id.userGridView:
 			// position为 0，1 的不可以进行任何操作
-			if (position != 0 && position != 1 && isEdit) {
+			if (position != 0 && isEdit) {
 				final ImageView moveImageView = getView(view);
 				if (moveImageView != null) {
 					TextView newTextView = (TextView) view

@@ -69,7 +69,7 @@ public class LazyViewPager extends ViewGroup {
 
     private static final boolean USE_CACHE = false;
 
-    private static final int DEFAULT_OFFSCREEN_PAGES = 0;//é»˜è®¤çš„åŠ è½½é¡µé¢,ViewPageræ˜¯1ä¸ª,æ‰€ä»¥ä¼šåŠ è½½ä¸¤ä¸ªFragment
+    private static final int DEFAULT_OFFSCREEN_PAGES = 0;//Ä¬ÈÏµÄ¼ÓÔØÒ³Ãæ,ViewPagerÊÇ1¸ö,ËùÒÔ»á¼ÓÔØÁ½¸öFragment
     private static final int MAX_SETTLE_DURATION = 600; // ms
 
     static class ItemInfo {

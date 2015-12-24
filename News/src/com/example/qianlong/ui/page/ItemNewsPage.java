@@ -78,11 +78,11 @@ public class ItemNewsPage extends BasePage {
 		topNewsView = inflater.inflate(R.layout.layout_roll_view, null);
 		ViewUtils.inject(this, view);
 		ViewUtils.inject(this, topNewsView);
-		// ä¸Šæ‹‰åŠ è½½ä¸å¯ç”¨
+		// ÉÏÀ­¼ÓÔØ²»¿ÉÓÃ
 		ptrLv.setPullLoadEnabled(false);
-		// æ»šåŠ¨åˆ°åº•è‡ªåŠ¨åŠ è½½å¯ç”¨
+		// ¹ö¶¯µ½µ××Ô¶¯¼ÓÔØ¿ÉÓÃ
 		ptrLv.setScrollLoadEnabled(true);
-		// å¾—åˆ°å®é™…çš„ListView è®¾ç½®ç‚¹å‡»
+		// µÃµ½Êµ¼ÊµÄListView ÉèÖÃµã»÷
 		ptrLv.getRefreshableView().setOnItemClickListener(
 				new OnItemClickListener() {
 
@@ -115,7 +115,7 @@ public class ItemNewsPage extends BasePage {
 					}
 				});
 		setLastUpdateTime();
-		// è®¾ç½®ä¸‹æ‹‰åˆ·æ–°çš„listener
+		// ÉèÖÃÏÂÀ­Ë¢ĞÂµÄlistener
 		ptrLv.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
 			@Override
@@ -307,7 +307,7 @@ public class ItemNewsPage extends BasePage {
 					mViewPager.setLayoutParams(new LinearLayout.LayoutParams(
 							LayoutParams.MATCH_PARENT,
 							LayoutParams.WRAP_CONTENT));
-					// topæ–°é—»çš„å›¾ç‰‡åœ°å€
+					// topĞÂÎÅµÄÍ¼Æ¬µØÖ·
 					mViewPager.setUriList(urlList);
 					mViewPager.setTitle(topNewsTitle, titleList);
 					mViewPager.startRoll();

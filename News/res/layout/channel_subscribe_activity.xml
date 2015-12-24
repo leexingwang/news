@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/subscribe_activity_bg" >
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/channel_title_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/title_bar" >
+
+        <LinearLayout
+            android:id="@+id/subscribe_main_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/subscribe_bg"
+            android:orientation="vertical"
+            android:paddingBottom="14.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="14.0dip" >
+
+                <TextView
+                    android:id="@+id/my_category_text"
+                    style="@style/subscribe_my_tip_text"
+                    android:text="@string/subscribe_my_category" />
+
+                <TextView
+                    android:id="@+id/my_category_tip_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12.0dip"
+                    android:layout_toRightOf="@id/my_category_text"
+                    android:text="@string/subscribe_manager_category_info_2"
+                    android:textColor="@color/subscribe_tip_text"
+                    android:textSize="11.0sp" />
+
+                <TextView
+                    android:id="@+id/my_category_text_ok"
+                    style="@style/subscribe_my_tip_text_edit"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/channel_subscribe_my_category_edit_bg"
+                    android:text="@string/subscribe_my_category_edit" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/seperate_line"
+                style="@style/subscribe_seperate_line" />
+
+            <com.topnewgrid.view.ChannelDragGrid
+                android:id="@+id/userGridView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dip"
+                android:layout_marginRight="14dip"
+                android:gravity="center"
+                android:horizontalSpacing="14dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="4"
+                android:scrollbars="vertical"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="14.0px" />
+
+            <View
+                android:id="@+id/seperate_line2"
+                style="@style/subscribe_seperate_line" />
+
+            <TextView
+                android:id="@+id/more_category_text"
+                style="@style/subscribe_more_tip_text"
+                android:layout_marginBottom="14.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:text="@string/subscribe_more_category" />
+
+            <com.topnewgrid.view.ChannelOtherGridView
+                android:id="@+id/otherGridView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dip"
+                android:layout_marginRight="14dip"
+                android:gravity="center"
+                android:horizontalSpacing="14dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="4"
+                android:scrollbars="vertical"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="14.0px" />
+
+            <View style="@style/subscribe_seperate_line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dip"
+                android:layout_marginRight="14dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/text_item1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/channel_subscribe_item_bg"
+                    android:gravity="center"
+                    android:minHeight="56.0dip"
+                    android:minWidth="72.0dip"
+                    android:textColor="@color/channel_subscribe_item_text_color"
+                    android:text="追问"
+                    android:textSize="14.0sp" />
+
+                <TextView
+                    android:id="@+id/text_item2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/channel_subscribe_item_bg"
+                    android:gravity="center"
+                    android:minHeight="56.0dip"
+                    android:minWidth="72.0dip"
+                    android:textColor="@color/channel_subscribe_item_text_color"
+                    android:text="大作"
+                    android:textSize="14.0sp" />
+
+                <TextView
+                    android:id="@+id/text_item3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/channel_subscribe_item_bg"
+                    android:gravity="center"
+                    android:minHeight="56.0dip"
+                    android:minWidth="72.0dip"
+                    android:textColor="@color/channel_subscribe_item_text_color"
+                    android:text="自选股"
+                    android:textSize="14.0sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/category_layout"
+        layout="@layout/channel_subscribe_category_item"
+        android:visibility="gone" />
+
+</RelativeLayout>

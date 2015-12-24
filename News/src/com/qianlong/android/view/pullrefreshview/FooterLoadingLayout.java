@@ -13,19 +13,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * è¿™ä¸ªç±»å°è£…äº†ä¸‹æ‹‰åˆ·æ–°çš„å¸ƒå±€
+ * Õâ¸öÀà·â×°ÁËÏÂÀ­Ë¢ĞÂµÄ²¼¾Ö
  * 
  * @author Li Hong
  * @since 2013-7-30
  */
 public class FooterLoadingLayout extends LoadingLayout {
-    /**è¿›åº¦æ¡*/
+    /**½ø¶ÈÌõ*/
     private ProgressBar mProgressBar;
-    /** æ˜¾ç¤ºçš„æ–‡æœ¬ */
+    /** ÏÔÊ¾µÄÎÄ±¾ */
     private TextView mHintView;
     
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      */
@@ -35,7 +35,7 @@ public class FooterLoadingLayout extends LoadingLayout {
     }
 
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      * @param attrs attrs
@@ -46,7 +46,7 @@ public class FooterLoadingLayout extends LoadingLayout {
     }
 
     /**
-     * åˆå§‹åŒ–
+     * ³õÊ¼»¯
      * 
      * @param context context
      */

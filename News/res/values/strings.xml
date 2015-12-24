@@ -8,5 +8,16 @@
     <string name="tab_setting">设置</string>
     <string name="share_content">千龙智慧北京新闻平台非常的好</string>
     <string name="removeItem">删除</string>
+    
+    
+    
+    
+    <string name="drawer_btn_rss">频道管理</string>
+    <string name="subscribe_my_category">我的频道</string>
+    <string name="subscribe_my_category_edit">编辑</string>
+    <string name="subscribe_my_category_ok">完成</string>
+    <string name="subscribe_more_category">更多频道</string>
+    <string name="subscribe_manager_category_info">单击增删频道</string>
+    <string name="subscribe_manager_category_info_2">单击编辑增删频道，长按拖拽排序</string>
 
 </resources>

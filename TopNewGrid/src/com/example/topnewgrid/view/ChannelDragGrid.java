@@ -193,7 +193,7 @@ public class ChannelDragGrid extends GridView {
 
 				startPosition = position;// 第一次点击的postion
 				dragPosition = position;
-				if (startPosition <= 1) {
+				if (startPosition < 1) {
 					return false;
 				}
 				ViewGroup dragViewGroup = (ViewGroup) getChildAt(dragPosition - getFirstVisiblePosition());
@@ -298,8 +298,8 @@ public class ChannelDragGrid extends GridView {
 	public void OnMove(int x, int y) {
 		// 拖动的VIEW下方的POSTION
 		int dPosition = pointToPosition(x, y);
-		// 判断下方的POSTION是否是最开始2个不能拖动的
-		if (dPosition > 1) {
+		// 判断下方的POSTION是否是最开始1个不能拖动的
+		if (dPosition >= 1) {
 	        if ((dPosition == -1) || (dPosition == dragPosition)){
 	        	return;
 	        }

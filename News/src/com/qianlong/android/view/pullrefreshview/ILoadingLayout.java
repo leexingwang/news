@@ -1,14 +1,14 @@
 package com.qianlong.android.view.pullrefreshview;
 
 /**
- * ä¸‹æ‹‰åˆ·æ–°å’Œä¸Šæ‹‰åŠ è½½æ›´å¤šçš„ç•Œé¢æ¥å£
+ * ÏÂÀ­Ë¢ĞÂºÍÉÏÀ­¼ÓÔØ¸ü¶àµÄ½çÃæ½Ó¿Ú
  * 
  * @author Li Hong
  * @since 2013-7-29
  */
 public interface ILoadingLayout {
     /**
-     * å½“å‰çš„çŠ¶æ€
+     * µ±Ç°µÄ×´Ì¬
      */
     public enum State {
         
@@ -53,30 +53,30 @@ public interface ILoadingLayout {
     }
 
     /**
-     * è®¾ç½®å½“å‰çŠ¶æ€ï¼Œæ´¾ç”Ÿç±»åº”è¯¥æ ¹æ®è¿™ä¸ªçŠ¶æ€çš„å˜åŒ–æ¥æ”¹å˜Viewçš„å˜åŒ–
+     * ÉèÖÃµ±Ç°×´Ì¬£¬ÅÉÉúÀàÓ¦¸Ã¸ù¾İÕâ¸ö×´Ì¬µÄ±ä»¯À´¸Ä±äViewµÄ±ä»¯
      * 
-     * @param state çŠ¶æ€
+     * @param state ×´Ì¬
      */
     public void setState(State state);
     
     /**
-     * å¾—åˆ°å½“å‰çš„çŠ¶æ€
+     * µÃµ½µ±Ç°µÄ×´Ì¬
      *  
-     * @return çŠ¶æ€
+     * @return ×´Ì¬
      */
     public State getState();
     
     /**
-     * å¾—åˆ°å½“å‰Layoutçš„å†…å®¹å¤§å°ï¼Œå®ƒå°†ä½œä¸ºä¸€ä¸ªåˆ·æ–°çš„ä¸´ç•Œç‚¹
+     * µÃµ½µ±Ç°LayoutµÄÄÚÈİ´óĞ¡£¬Ëü½«×÷ÎªÒ»¸öË¢ĞÂµÄÁÙ½çµã
      * 
-     * @return é«˜åº¦
+     * @return ¸ß¶È
      */
     public int getContentSize();
     
     /**
-     * åœ¨æ‹‰åŠ¨æ—¶è°ƒç”¨
+     * ÔÚÀ­¶¯Ê±µ÷ÓÃ
      * 
-     * @param scale æ‹‰åŠ¨çš„æ¯”ä¾‹
+     * @param scale À­¶¯µÄ±ÈÀı
      */
     public void onPull(float scale);
 }

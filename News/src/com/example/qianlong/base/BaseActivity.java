@@ -1,19 +1,19 @@
 package com.example.qianlong.base;
 
 import com.example.qianlong.R;
-import com.example.qianlong.application.QLApplication;
+import com.example.qianlong.application.AppApplication;
 import com.example.qianlong.utils.AppManager;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomProgressDialog;
 import com.example.qianlong.utils.CustomToast;
 import com.example.qianlong.utils.DialogUtil;
 import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.topnewgrid.ChannelActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +31,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 		OnClickListener {
 
 	protected Context ct;
-	protected QLApplication app;
+	protected AppApplication app;
 	@ViewInject(R.id.loading_view)
 	protected View loadingView;
 	@ViewInject(R.id.ll_load_fail)
@@ -105,7 +105,6 @@ public abstract class BaseActivity extends FragmentActivity implements
 		case R.id.imgbtn_left:
 			this.finish();
 			break;
-
 		default:
 			break;
 		}
@@ -182,7 +181,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 //		params.addHeader("x-deviceid", app.deviceId);
 //		params.addHeader("x-channel", app.channel);
 		if (0 == CommonUtil.isNetworkAvailable(ct)) {
-			showToast("Âä†ËΩΩÂ§±Ë¥•ÔºåËØ∑Ê£ÄÊü•ÁΩëÁªúÔºÅ");
+			showToast("º”‘ÿ ß∞‹£¨«ÎºÏ≤ÈÕ¯¬Á£°");
 		} else {
 			LogUtils.d(url);
 			http.send(method, url, params, callback);

@@ -19,9 +19,7 @@ public class SettingPage extends BasePage {
 
 	@Override
 	protected View initView(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.news_center_frame, null);
-		ViewUtils.inject(this, view);
-		initTitleBar(view);
+		View view = inflater.inflate(R.layout.settings_frame, null);
 		return view;
 	}
 

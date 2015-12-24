@@ -74,7 +74,7 @@ public class NewsDetailActivity extends BaseActivity {
 			@Override
 			public void onReceivedError(WebView view, int errorCode,
 					String description, String failingUrl) {
-				Toast.makeText(ct, "åŠ è½½å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç½‘ç»œ", 0).show();
+				Toast.makeText(ct, "¼ÓÔØÊ§°Ü£¬Çë¼ì²éÍøÂç", 0).show();
 				super.onReceivedError(view, errorCode, description, failingUrl);
 			}
 		});
@@ -85,7 +85,7 @@ public class NewsDetailActivity extends BaseActivity {
 	protected void processClick(View v) {
 		switch (v.getId()) {
 		case R.id.btn_right:
-			// åˆ†äº«
+			// ·ÖÏí
 			showShare();
 			break;
 
@@ -96,13 +96,13 @@ public class NewsDetailActivity extends BaseActivity {
 	}
 
 	private void showShare() {
-		Toast.makeText(ct, "åˆ†äº«", 0).show();
+		Toast.makeText(ct, "·ÖÏí", 0).show();
 //		OnekeyShare oks = new OnekeyShare();
 //		oks.setNotification(R.drawable.icon,
 //				ct.getString(R.string.app_name));
 //
 //		oks.setTitle(title);
-//		oks.setText("åˆ†äº«æ–°é—»:"+title);
+//		oks.setText("·ÖÏíÐÂÎÅ:"+title);
 //		if(!TextUtils.isEmpty(imgUrl)){
 //			oks.setImageUrl(imgUrl);
 //		}else{

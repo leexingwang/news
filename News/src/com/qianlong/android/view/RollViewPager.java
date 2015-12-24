@@ -38,9 +38,9 @@ public class RollViewPager extends ViewPager {
 	private BitmapUtils bitmapUtils;
 	private PagerAdapter adapter;
 
-	/** è§¦æ‘¸æ—¶æŒ‰ä¸‹çš„ç‚¹ **/
+	/** ´¥ÃşÊ±°´ÏÂµÄµã **/
 	PointF downP = new PointF();
-	/** è§¦æ‘¸æ—¶å½“å‰çš„ç‚¹ **/
+	/** ´¥ÃşÊ±µ±Ç°µÄµã **/
 	PointF curP = new PointF();
 	private int abc = 1;
 	private float mLastMotionX;
@@ -62,24 +62,12 @@ public class RollViewPager extends ViewPager {
 
 				start = System.currentTimeMillis();
 				handler.removeCallbacksAndMessages(null);
-				// è®°å½•æŒ‰ä¸‹æ—¶å€™çš„åæ ‡
-				// åˆ‡è®°ä¸å¯ç”¨ downP = curP ï¼Œè¿™æ ·åœ¨æ”¹å˜curPçš„æ—¶å€™ï¼ŒdownPä¹Ÿä¼šæ”¹å˜
 				downP.x = event.getX();
 				downP.y = event.getY();
-				// æ­¤å¥ä»£ç æ˜¯ä¸ºäº†é€šçŸ¥ä»–çš„çˆ¶ViewPagerç°åœ¨è¿›è¡Œçš„æ˜¯æœ¬æ§ä»¶çš„æ“ä½œï¼Œä¸è¦å¯¹æˆ‘çš„æ“ä½œè¿›è¡Œå¹²æ‰°
-				// getParent().requestDisallowInterceptTouchEvent(true);
 				break;
 			case MotionEvent.ACTION_MOVE:
 				handler.removeCallbacks(viewPagerTask);
 				Log.i("d", (curP.x - downP.x) + "----" + (curP.y - downP.y));
-				// if (Math.abs(curP.x - downP.x) > Math.abs(curP.y - downP.y)
-				// && (getCurrentItem() == 0 || getCurrentItem() == getAdapter()
-				// .getCount() - 1)) {
-				// getParent().requestDisallowInterceptTouchEvent(false);
-				// } else {
-				// getParent().requestDisallowInterceptTouchEvent(false);
-				// }
-				// æ­¤å¥ä»£ç æ˜¯ä¸ºäº†é€šçŸ¥ä»–çš„çˆ¶ViewPagerç°åœ¨è¿›è¡Œçš„æ˜¯æœ¬æ§ä»¶çš„æ“ä½œï¼Œä¸è¦å¯¹æˆ‘çš„æ“ä½œè¿›è¡Œå¹²æ‰°
 				break;
 			case MotionEvent.ACTION_CANCEL:
 				// getParent().requestDisallowInterceptTouchEvent(false);
@@ -291,27 +279,27 @@ public class RollViewPager extends ViewPager {
 
 	// @Override
 	// public boolean onTouchEvent(MotionEvent arg0) {
-	// // æ¯æ¬¡è¿›è¡ŒonTouchäº‹ä»¶éƒ½è®°å½•å½“å‰çš„æŒ‰ä¸‹çš„åæ ‡
+	// // Ã¿´Î½øĞĞonTouchÊÂ¼ş¶¼¼ÇÂ¼µ±Ç°µÄ°´ÏÂµÄ×ø±ê
 	// curP.x = arg0.getX();
 	// curP.y = arg0.getY();
 	//
 	// if (arg0.getAction() == MotionEvent.ACTION_DOWN) {
-	// // è®°å½•æŒ‰ä¸‹æ—¶å€™çš„åæ ‡
-	// // åˆ‡è®°ä¸å¯ç”¨ downP = curP ï¼Œè¿™æ ·åœ¨æ”¹å˜curPçš„æ—¶å€™ï¼ŒdownPä¹Ÿä¼šæ”¹å˜
+	// // ¼ÇÂ¼°´ÏÂÊ±ºòµÄ×ø±ê
+	// // ÇĞ¼Ç²»¿ÉÓÃ downP = curP £¬ÕâÑùÔÚ¸Ä±äcurPµÄÊ±ºò£¬downPÒ²»á¸Ä±ä
 	// downP.x = arg0.getX();
 	// downP.y = arg0.getY();
-	// // æ­¤å¥ä»£ç æ˜¯ä¸ºäº†é€šçŸ¥ä»–çš„çˆ¶ViewPagerç°åœ¨è¿›è¡Œçš„æ˜¯æœ¬æ§ä»¶çš„æ“ä½œï¼Œä¸è¦å¯¹æˆ‘çš„æ“ä½œè¿›è¡Œå¹²æ‰°
+	// // ´Ë¾ä´úÂëÊÇÎªÁËÍ¨ÖªËûµÄ¸¸ViewPagerÏÖÔÚ½øĞĞµÄÊÇ±¾¿Ø¼şµÄ²Ù×÷£¬²»Òª¶ÔÎÒµÄ²Ù×÷½øĞĞ¸ÉÈÅ
 	// getParent().requestDisallowInterceptTouchEvent(true);
 	// }
 	//
 	// if (arg0.getAction() == MotionEvent.ACTION_MOVE) {
-	// // æ­¤å¥ä»£ç æ˜¯ä¸ºäº†é€šçŸ¥ä»–çš„çˆ¶ViewPagerç°åœ¨è¿›è¡Œçš„æ˜¯æœ¬æ§ä»¶çš„æ“ä½œï¼Œä¸è¦å¯¹æˆ‘çš„æ“ä½œè¿›è¡Œå¹²æ‰°
+	// // ´Ë¾ä´úÂëÊÇÎªÁËÍ¨ÖªËûµÄ¸¸ViewPagerÏÖÔÚ½øĞĞµÄÊÇ±¾¿Ø¼şµÄ²Ù×÷£¬²»Òª¶ÔÎÒµÄ²Ù×÷½øĞĞ¸ÉÈÅ
 	// getParent().requestDisallowInterceptTouchEvent(true);
 	// }
 	//
 	// if (arg0.getAction() == MotionEvent.ACTION_UP) {
-	// // åœ¨upæ—¶åˆ¤æ–­æ˜¯å¦æŒ‰ä¸‹å’Œæ¾æ‰‹çš„åæ ‡ä¸ºä¸€ä¸ªç‚¹
-	// // å¦‚æœæ˜¯ä¸€ä¸ªç‚¹ï¼Œå°†æ‰§è¡Œç‚¹å‡»äº‹ä»¶ï¼Œè¿™æ˜¯æˆ‘è‡ªå·±å†™çš„ç‚¹å‡»äº‹ä»¶ï¼Œè€Œä¸æ˜¯onclick
+	// // ÔÚupÊ±ÅĞ¶ÏÊÇ·ñ°´ÏÂºÍËÉÊÖµÄ×ø±êÎªÒ»¸öµã
+	// // Èç¹ûÊÇÒ»¸öµã£¬½«Ö´ĞĞµã»÷ÊÂ¼ş£¬ÕâÊÇÎÒ×Ô¼ºĞ´µÄµã»÷ÊÂ¼ş£¬¶ø²»ÊÇonclick
 	// if (downP.x == curP.x && downP.y == curP.y) {
 	// // onSingleTouch();
 	// return true;

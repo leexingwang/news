@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 /**
- * è¿™ä¸ªå®ç°äº†ä¸‹æ‹‰åˆ·æ–°å’Œä¸Šæ‹‰åŠ è½½æ›´å¤šçš„åŠŸèƒ½
+ * Õâ¸öÊµÏÖÁËÏÂÀ­Ë¢ĞÂºÍÉÏÀ­¼ÓÔØ¸ü¶àµÄ¹¦ÄÜ
  * 
  * @author Li Hong
  * @since 2013-7-29
@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
  */
 public abstract class PullToRefreshBase<T extends View> extends LinearLayout implements IPullToRefresh<T> {
     /**
-     * å®šä¹‰äº†ä¸‹æ‹‰åˆ·æ–°å’Œä¸Šæ‹‰åŠ è½½æ›´å¤šçš„æ¥å£ã€‚
+     * ¶¨ÒåÁËÏÂÀ­Ë¢ĞÂºÍÉÏÀ­¼ÓÔØ¸ü¶àµÄ½Ó¿Ú¡£
      * 
      * @author Li Hong
      * @since 2013-7-29
@@ -32,64 +32,64 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     public interface OnRefreshListener<V extends View> {
      
         /**
-         * ä¸‹æ‹‰æ¾æ‰‹åä¼šè¢«è°ƒç”¨
+         * ÏÂÀ­ËÉÊÖºó»á±»µ÷ÓÃ
          * 
-         * @param refreshView åˆ·æ–°çš„View
+         * @param refreshView Ë¢ĞÂµÄView
          */
         void onPullDownToRefresh(final PullToRefreshBase<V> refreshView);
         
         /**
-         * åŠ è½½æ›´å¤šæ—¶ä¼šè¢«è°ƒç”¨æˆ–ä¸Šæ‹‰æ—¶è°ƒç”¨
+         * ¼ÓÔØ¸ü¶àÊ±»á±»µ÷ÓÃ»òÉÏÀ­Ê±µ÷ÓÃ
          * 
-         * @param refreshView åˆ·æ–°çš„View
+         * @param refreshView Ë¢ĞÂµÄView
          */
         void onPullUpToRefresh(final PullToRefreshBase<V> refreshView);
     }
     
-    /**å›æ»šçš„æ—¶é—´*/
+    /**»Ø¹öµÄÊ±¼ä*/
     private static final int SCROLL_DURATION = 150;
-    /**é˜»å°¼ç³»æ•°*/
+    /**×èÄáÏµÊı*/
     private static final float OFFSET_RADIO = 2.5f;
-    /**ä¸Šä¸€æ¬¡ç§»åŠ¨çš„ç‚¹ */
+    /**ÉÏÒ»´ÎÒÆ¶¯µÄµã */
     private float mLastMotionY = -1;
-    /**ä¸‹æ‹‰åˆ·æ–°å’ŒåŠ è½½æ›´å¤šçš„ç›‘å¬å™¨ */
+    /**ÏÂÀ­Ë¢ĞÂºÍ¼ÓÔØ¸ü¶àµÄ¼àÌıÆ÷ */
     private OnRefreshListener<T> mRefreshListener;
-    /**ä¸‹æ‹‰åˆ·æ–°çš„å¸ƒå±€ */
+    /**ÏÂÀ­Ë¢ĞÂµÄ²¼¾Ö */
     private LoadingLayout mHeaderLayout;
-    /**ä¸Šæ‹‰åŠ è½½æ›´å¤šçš„å¸ƒå±€*/
+    /**ÉÏÀ­¼ÓÔØ¸ü¶àµÄ²¼¾Ö*/
     private LoadingLayout mFooterLayout;
-    /**HeaderViewçš„é«˜åº¦*/
+    /**HeaderViewµÄ¸ß¶È*/
     private int mHeaderHeight;
-    /**FooterViewçš„é«˜åº¦*/
+    /**FooterViewµÄ¸ß¶È*/
     private int mFooterHeight;
-    /**ä¸‹æ‹‰åˆ·æ–°æ˜¯å¦å¯ç”¨*/
+    /**ÏÂÀ­Ë¢ĞÂÊÇ·ñ¿ÉÓÃ*/
     private boolean mPullRefreshEnabled = true;
-    /**ä¸Šæ‹‰åŠ è½½æ˜¯å¦å¯ç”¨*/
+    /**ÉÏÀ­¼ÓÔØÊÇ·ñ¿ÉÓÃ*/
     private boolean mPullLoadEnabled = false;
-    /**åˆ¤æ–­æ»‘åŠ¨åˆ°åº•éƒ¨åŠ è½½æ˜¯å¦å¯ç”¨*/
+    /**ÅĞ¶Ï»¬¶¯µ½µ×²¿¼ÓÔØÊÇ·ñ¿ÉÓÃ*/
     private boolean mScrollLoadEnabled = false;
-    /**æ˜¯å¦æˆªæ–­touchäº‹ä»¶*/
+    /**ÊÇ·ñ½Ø¶ÏtouchÊÂ¼ş*/
     private boolean mInterceptEventEnable = true;
-    /**è¡¨ç¤ºæ˜¯å¦æ¶ˆè´¹äº†touchäº‹ä»¶ï¼Œå¦‚æœæ˜¯ï¼Œåˆ™ä¸è°ƒç”¨çˆ¶ç±»çš„onTouchEventæ–¹æ³•*/
+    /**±íÊ¾ÊÇ·ñÏû·ÑÁËtouchÊÂ¼ş£¬Èç¹ûÊÇ£¬Ôò²»µ÷ÓÃ¸¸ÀàµÄonTouchEvent·½·¨*/
     private boolean mIsHandledTouchEvent = false;
-    /**ç§»åŠ¨ç‚¹çš„ä¿æŠ¤èŒƒå›´å€¼*/
+    /**ÒÆ¶¯µãµÄ±£»¤·¶Î§Öµ*/
     private int mTouchSlop;
-    /**ä¸‹æ‹‰çš„çŠ¶æ€*/
+    /**ÏÂÀ­µÄ×´Ì¬*/
     private State mPullDownState = State.NONE;
-    /**ä¸Šæ‹‰çš„çŠ¶æ€*/
+    /**ÉÏÀ­µÄ×´Ì¬*/
     private State mPullUpState = State.NONE;
-    /**å¯ä»¥ä¸‹æ‹‰åˆ·æ–°çš„View*/
+    /**¿ÉÒÔÏÂÀ­Ë¢ĞÂµÄView*/
     T mRefreshableView;
-    /**å¹³æ»‘æ»šåŠ¨çš„Runnable*/
+    /**Æ½»¬¹ö¶¯µÄRunnable*/
     private SmoothScrollRunnable mSmoothScrollRunnable;
-    /**å¯åˆ·æ–°Viewçš„åŒ…è£…å¸ƒå±€*/
+    /**¿ÉË¢ĞÂViewµÄ°ü×°²¼¾Ö*/
     private FrameLayout mRefreshableViewWrapper;
     
-    // æ»‘åŠ¨è·ç¦»åŠåæ ‡ 
+    // »¬¶¯¾àÀë¼°×ø±ê 
     private float xDistance, yDistance, xLast, yLast; 
     
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      */
@@ -99,7 +99,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      * @param attrs attrs
@@ -110,7 +110,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
 //    /**
-//     * æ„é€ æ–¹æ³•
+//     * ¹¹Ôì·½·¨
 //     * 
 //     * @param context context
 //     * @param attrs attrs
@@ -123,7 +123,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 //    }
 
     /**
-     * åˆå§‹åŒ–
+     * ³õÊ¼»¯
      * 
      * @param context context
      */
@@ -143,7 +143,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         addRefreshableView(context, mRefreshableView);
         addHeaderAndFooter(context);
 
-        // å¾—åˆ°Headerçš„é«˜åº¦ï¼Œè¿™ä¸ªé«˜åº¦éœ€è¦ç”¨è¿™ç§æ–¹å¼å¾—åˆ°ï¼Œåœ¨onLayoutæ–¹æ³•é‡Œé¢å¾—åˆ°çš„é«˜åº¦å§‹ç»ˆæ˜¯0
+        // µÃµ½HeaderµÄ¸ß¶È£¬Õâ¸ö¸ß¶ÈĞèÒªÓÃÕâÖÖ·½Ê½µÃµ½£¬ÔÚonLayout·½·¨ÀïÃæµÃµ½µÄ¸ß¶ÈÊ¼ÖÕÊÇ0
         getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -154,11 +154,11 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * åˆå§‹åŒ–paddingï¼Œæˆ‘ä»¬æ ¹æ®headerå’Œfooterçš„é«˜åº¦æ¥è®¾ç½®top paddingå’Œbottom padding
+     * ³õÊ¼»¯padding£¬ÎÒÃÇ¸ù¾İheaderºÍfooterµÄ¸ß¶ÈÀ´ÉèÖÃtop paddingºÍbottom padding
      */
     private void refreshLoadingViewsSize() {
-        // å¾—åˆ°headerå’Œfooterçš„å†…å®¹é«˜åº¦ï¼Œå®ƒå°†ä¼šä½œä¸ºæ‹–åŠ¨åˆ·æ–°çš„ä¸€ä¸ªä¸´ç•Œå€¼ï¼Œå¦‚æœæ‹–åŠ¨è·ç¦»å¤§äºè¿™ä¸ªé«˜åº¦
-        // ç„¶åå†æ¾å¼€æ‰‹ï¼Œå°±ä¼šè§¦å‘åˆ·æ–°æ“ä½œ
+        // µÃµ½headerºÍfooterµÄÄÚÈİ¸ß¶È£¬Ëü½«»á×÷ÎªÍÏ¶¯Ë¢ĞÂµÄÒ»¸öÁÙ½çÖµ£¬Èç¹ûÍÏ¶¯¾àÀë´óÓÚÕâ¸ö¸ß¶È
+        // È»ºóÔÙËÉ¿ªÊÖ£¬¾Í»á´¥·¢Ë¢ĞÂ²Ù×÷
         int headerHeight = (null != mHeaderLayout) ? mHeaderLayout.getContentSize() : 0;
         int footerHeight = (null != mFooterLayout) ? mFooterLayout.getContentSize() : 0;
         
@@ -173,8 +173,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         mHeaderHeight = headerHeight;
         mFooterHeight = footerHeight;
         
-        // è¿™é‡Œå¾—åˆ°Headerå’ŒFooterçš„é«˜åº¦ï¼Œè®¾ç½®çš„paddingçš„topå’Œbottomå°±åº”è¯¥æ˜¯headerå’Œfooterçš„é«˜åº¦
-        // å› ä¸ºheaderå’Œfooteræ˜¯å®Œå…¨çœ‹ä¸è§çš„
+        // ÕâÀïµÃµ½HeaderºÍFooterµÄ¸ß¶È£¬ÉèÖÃµÄpaddingµÄtopºÍbottom¾ÍÓ¦¸ÃÊÇheaderºÍfooterµÄ¸ß¶È
+        // ÒòÎªheaderºÍfooterÊÇÍêÈ«¿´²»¼ûµÄ
         headerHeight = (null != mHeaderLayout) ? mHeaderLayout.getMeasuredHeight() : 0;
         footerHeight = (null != mFooterLayout) ? mFooterLayout.getMeasuredHeight() : 0;
         if (0 == footerHeight) {
@@ -199,7 +199,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         // We need to update the header/footer when our size changes
         refreshLoadingViewsSize();
         
-        // è®¾ç½®åˆ·æ–°Viewçš„å¤§å°
+        // ÉèÖÃË¢ĞÂViewµÄ´óĞ¡
         refreshRefreshableViewSize(w, h);
         
         /**
@@ -256,26 +256,26 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         case MotionEvent.ACTION_MOVE:
             final float deltaY = event.getY() - mLastMotionY;
             final float absDiff = Math.abs(deltaY);
-            // è¿™é‡Œæœ‰ä¸‰ä¸ªæ¡ä»¶ï¼š
-            // 1ï¼Œä½ç§»å·®å¤§äºmTouchSlopï¼Œè¿™æ˜¯ä¸ºäº†é˜²æ­¢å¿«é€Ÿæ‹–åŠ¨å¼•å‘åˆ·æ–°
-            // 2ï¼ŒisPullRefreshing()ï¼Œå¦‚æœå½“å‰æ­£åœ¨ä¸‹æ‹‰åˆ·æ–°çš„è¯ï¼Œæ˜¯å…è®¸å‘ä¸Šæ»‘åŠ¨ï¼Œå¹¶æŠŠåˆ·æ–°çš„HeaderViewæŒ¤ä¸Šå»
-            // 3ï¼ŒisPullLoading()ï¼Œç†ç”±ä¸ç¬¬2æ¡ç›¸åŒ
+            // ÕâÀïÓĞÈı¸öÌõ¼ş£º
+            // 1£¬Î»ÒÆ²î´óÓÚmTouchSlop£¬ÕâÊÇÎªÁË·ÀÖ¹¿ìËÙÍÏ¶¯Òı·¢Ë¢ĞÂ
+            // 2£¬isPullRefreshing()£¬Èç¹ûµ±Ç°ÕıÔÚÏÂÀ­Ë¢ĞÂµÄ»°£¬ÊÇÔÊĞíÏòÉÏ»¬¶¯£¬²¢°ÑË¢ĞÂµÄHeaderView¼·ÉÏÈ¥
+            // 3£¬isPullLoading()£¬ÀíÓÉÓëµÚ2ÌõÏàÍ¬
             if (absDiff > mTouchSlop || isPullRefreshing() || isPullLoading())  {
                 mLastMotionY = event.getY();
-                // ç¬¬ä¸€ä¸ªæ˜¾ç¤ºå‡ºæ¥ï¼ŒHeaderå·²ç»æ˜¾ç¤ºæˆ–æ‹‰ä¸‹
+                // µÚÒ»¸öÏÔÊ¾³öÀ´£¬HeaderÒÑ¾­ÏÔÊ¾»òÀ­ÏÂ
                 if (isPullRefreshEnabled() && isReadyForPullDown()) {
-                    // 1ï¼ŒMath.abs(getScrollY()) > 0ï¼šè¡¨ç¤ºå½“å‰æ»‘åŠ¨çš„åç§»é‡çš„ç»å¯¹å€¼å¤§äº0ï¼Œè¡¨ç¤ºå½“å‰HeaderViewæ»‘å‡ºæ¥äº†æˆ–å®Œå…¨
-                    // ä¸å¯è§ï¼Œå­˜åœ¨è¿™æ ·ä¸€ç§caseï¼Œå½“æ­£åœ¨åˆ·æ–°æ—¶å¹¶ä¸”RefreshableViewå·²ç»æ»‘åˆ°é¡¶éƒ¨ï¼Œå‘ä¸Šæ»‘åŠ¨ï¼Œé‚£ä¹ˆæˆ‘ä»¬æœŸæœ›çš„ç»“æœæ˜¯
-                    // ä¾ç„¶èƒ½å‘ä¸Šæ»‘åŠ¨ï¼Œç›´åˆ°HeaderViewå®Œå…¨ä¸å¯è§
-                    // 2ï¼ŒdeltaY > 0.5fï¼šè¡¨ç¤ºä¸‹æ‹‰çš„å€¼å¤§äº0.5f
+                    // 1£¬Math.abs(getScrollY()) > 0£º±íÊ¾µ±Ç°»¬¶¯µÄÆ«ÒÆÁ¿µÄ¾ø¶ÔÖµ´óÓÚ0£¬±íÊ¾µ±Ç°HeaderView»¬³öÀ´ÁË»òÍêÈ«
+                    // ²»¿É¼û£¬´æÔÚÕâÑùÒ»ÖÖcase£¬µ±ÕıÔÚË¢ĞÂÊ±²¢ÇÒRefreshableViewÒÑ¾­»¬µ½¶¥²¿£¬ÏòÉÏ»¬¶¯£¬ÄÇÃ´ÎÒÃÇÆÚÍûµÄ½á¹ûÊÇ
+                    // ÒÀÈ»ÄÜÏòÉÏ»¬¶¯£¬Ö±µ½HeaderViewÍêÈ«²»¿É¼û
+                    // 2£¬deltaY > 0.5f£º±íÊ¾ÏÂÀ­µÄÖµ´óÓÚ0.5f
                     mIsHandledTouchEvent = (Math.abs(getScrollYValue()) > 0 || deltaY > 0.5f);
-                    // å¦‚æœæˆªæ–­äº‹ä»¶ï¼Œæˆ‘ä»¬åˆ™ä»ç„¶æŠŠè¿™ä¸ªäº‹ä»¶äº¤ç»™åˆ·æ–°Viewå»å¤„ç†ï¼Œå…¸å‹çš„æƒ…å†µæ˜¯è®©ListView/GridViewå°†æŒ‰ä¸‹
-                    // Childçš„Selectoréšè—
+                    // Èç¹û½Ø¶ÏÊÂ¼ş£¬ÎÒÃÇÔòÈÔÈ»°ÑÕâ¸öÊÂ¼ş½»¸øË¢ĞÂViewÈ¥´¦Àí£¬µäĞÍµÄÇé¿öÊÇÈÃListView/GridView½«°´ÏÂ
+                    // ChildµÄSelectorÒş²Ø
                     if (mIsHandledTouchEvent) {
                         mRefreshableView.onTouchEvent(event);
                     }
                 } else if (isPullLoadEnabled() && isReadyForPullUp()) {
-                    // åŸç†å¦‚ä¸Š
+                    // Ô­ÀíÈçÉÏ
                     mIsHandledTouchEvent = (Math.abs(getScrollYValue()) > 0 || deltaY < -0.5f);
                 }
             }
@@ -326,16 +326,16 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         case MotionEvent.ACTION_UP:
             if (mIsHandledTouchEvent) {
                 mIsHandledTouchEvent = false;
-                // å½“ç¬¬ä¸€ä¸ªæ˜¾ç¤ºå‡ºæ¥æ—¶
+                // µ±µÚÒ»¸öÏÔÊ¾³öÀ´Ê±
                 if (isReadyForPullDown()) {
-                    // è°ƒç”¨åˆ·æ–°
+                    // µ÷ÓÃË¢ĞÂ
                     if (mPullRefreshEnabled && (mPullDownState == State.RELEASE_TO_REFRESH)) {
                         startRefreshing();
                         handled = true;
                     }
                     resetHeaderLayout();
                 } else if (isReadyForPullUp()) {
-                    // åŠ è½½æ›´å¤š
+                    // ¼ÓÔØ¸ü¶à
                     if (isPullLoadEnabled() && (mPullUpState == State.RELEASE_TO_REFRESH)) {
                         startLoading();
                         handled = true;
@@ -393,11 +393,11 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
             mPullDownState = State.RESET;
             onStateChanged(State.RESET, true);
             
-            // å›æ»šåŠ¨æœ‰ä¸€ä¸ªæ—¶é—´ï¼Œæˆ‘ä»¬åœ¨å›æ»šå®Œæˆåå†è®¾ç½®çŠ¶æ€ä¸ºnormal
-            // åœ¨å°†LoadingLayoutçš„çŠ¶æ€è®¾ç½®ä¸ºnormalä¹‹å‰ï¼Œæˆ‘ä»¬åº”è¯¥ç¦æ­¢
-            // æˆªæ–­Touchäº‹ä»¶ï¼Œå› ä¸ºè®¾é‡Œæœ‰ä¸€ä¸ªpostçŠ¶æ€ï¼Œå¦‚æœæœ‰postçš„Runnable
-            // æœªè¢«æ‰§è¡Œæ—¶ï¼Œç”¨æˆ·å†ä¸€æ¬¡å‘èµ·ä¸‹æ‹‰åˆ·æ–°ï¼Œå¦‚æœæ­£åœ¨åˆ·æ–°æ—¶ï¼Œè¿™ä¸ªRunnable
-            // å†æ¬¡è¢«æ‰§è¡Œåˆ°ï¼Œé‚£ä¹ˆå°±ä¼šæŠŠæ­£åœ¨åˆ·æ–°çš„çŠ¶æ€æ”¹ä¸ºæ­£å¸¸çŠ¶æ€ï¼Œè¿™å°±ä¸ç¬¦åˆæœŸæœ›
+            // »Ø¹ö¶¯ÓĞÒ»¸öÊ±¼ä£¬ÎÒÃÇÔÚ»Ø¹öÍê³ÉºóÔÙÉèÖÃ×´Ì¬Îªnormal
+            // ÔÚ½«LoadingLayoutµÄ×´Ì¬ÉèÖÃÎªnormalÖ®Ç°£¬ÎÒÃÇÓ¦¸Ã½ûÖ¹
+            // ½Ø¶ÏTouchÊÂ¼ş£¬ÒòÎªÉèÀïÓĞÒ»¸öpost×´Ì¬£¬Èç¹ûÓĞpostµÄRunnable
+            // Î´±»Ö´ĞĞÊ±£¬ÓÃ»§ÔÙÒ»´Î·¢ÆğÏÂÀ­Ë¢ĞÂ£¬Èç¹ûÕıÔÚË¢ĞÂÊ±£¬Õâ¸öRunnable
+            // ÔÙ´Î±»Ö´ĞĞµ½£¬ÄÇÃ´¾Í»á°ÑÕıÔÚË¢ĞÂµÄ×´Ì¬¸ÄÎªÕı³£×´Ì¬£¬Õâ¾Í²»·ûºÏÆÚÍû
             postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -457,10 +457,10 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * å¼€å§‹åˆ·æ–°ï¼Œé€šå¸¸ç”¨äºè°ƒç”¨è€…ä¸»åŠ¨åˆ·æ–°ï¼Œå…¸å‹çš„æƒ…å†µæ˜¯è¿›å…¥ç•Œé¢ï¼Œå¼€å§‹ä¸»åŠ¨åˆ·æ–°ï¼Œè¿™ä¸ªåˆ·æ–°å¹¶ä¸æ˜¯ç”±ç”¨æˆ·æ‹‰åŠ¨å¼•èµ·çš„
+     * ¿ªÊ¼Ë¢ĞÂ£¬Í¨³£ÓÃÓÚµ÷ÓÃÕßÖ÷¶¯Ë¢ĞÂ£¬µäĞÍµÄÇé¿öÊÇ½øÈë½çÃæ£¬¿ªÊ¼Ö÷¶¯Ë¢ĞÂ£¬Õâ¸öË¢ĞÂ²¢²»ÊÇÓÉÓÃ»§À­¶¯ÒıÆğµÄ
      * 
-     * @param smoothScroll è¡¨ç¤ºæ˜¯å¦æœ‰å¹³æ»‘æ»šåŠ¨ï¼Œtrueè¡¨ç¤ºå¹³æ»‘æ»šåŠ¨ï¼Œfalseè¡¨ç¤ºæ— å¹³æ»‘æ»šåŠ¨
-     * @param delayMillis å»¶è¿Ÿæ—¶é—´
+     * @param smoothScroll ±íÊ¾ÊÇ·ñÓĞÆ½»¬¹ö¶¯£¬true±íÊ¾Æ½»¬¹ö¶¯£¬false±íÊ¾ÎŞÆ½»¬¹ö¶¯
+     * @param delayMillis ÑÓ³ÙÊ±¼ä
      */
     public void doPullRefreshing(final boolean smoothScroll, final long delayMillis) {
         postDelayed(new Runnable() {
@@ -476,64 +476,64 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * åˆ›å»ºå¯ä»¥åˆ·æ–°çš„View
+     * ´´½¨¿ÉÒÔË¢ĞÂµÄView
      * 
      * @param context context
-     * @param attrs å±æ€§
+     * @param attrs ÊôĞÔ
      * @return View
      */
     protected abstract T createRefreshableView(Context context, AttributeSet attrs);
     
     /**
-     * åˆ¤æ–­åˆ·æ–°çš„Viewæ˜¯å¦æ»‘åŠ¨åˆ°é¡¶éƒ¨
+     * ÅĞ¶ÏË¢ĞÂµÄViewÊÇ·ñ»¬¶¯µ½¶¥²¿
      * 
-     * @return trueè¡¨ç¤ºå·²ç»æ»‘åŠ¨åˆ°é¡¶éƒ¨ï¼Œå¦åˆ™false
+     * @return true±íÊ¾ÒÑ¾­»¬¶¯µ½¶¥²¿£¬·ñÔòfalse
      */
     protected abstract boolean isReadyForPullDown();
     
     /**
-     * åˆ¤æ–­åˆ·æ–°çš„Viewæ˜¯å¦æ»‘åŠ¨åˆ°åº•
+     * ÅĞ¶ÏË¢ĞÂµÄViewÊÇ·ñ»¬¶¯µ½µ×
      * 
-     * @return trueè¡¨ç¤ºå·²ç»æ»‘åŠ¨åˆ°åº•éƒ¨ï¼Œå¦åˆ™false
+     * @return true±íÊ¾ÒÑ¾­»¬¶¯µ½µ×²¿£¬·ñÔòfalse
      */
     protected abstract boolean isReadyForPullUp();
     
     /**
-     * åˆ›å»ºHeaderçš„å¸ƒå±€
+     * ´´½¨HeaderµÄ²¼¾Ö
      * 
      * @param context context
-     * @param attrs å±æ€§
-     * @return LoadingLayoutå¯¹è±¡
+     * @param attrs ÊôĞÔ
+     * @return LoadingLayout¶ÔÏó
      */
     protected LoadingLayout createHeaderLoadingLayout(Context context, AttributeSet attrs) {
         return new HeaderLoadingLayout(context);
     }
     
     /**
-     * åˆ›å»ºFooterçš„å¸ƒå±€
+     * ´´½¨FooterµÄ²¼¾Ö
      * 
      * @param context context
-     * @param attrs å±æ€§
-     * @return LoadingLayoutå¯¹è±¡
+     * @param attrs ÊôĞÔ
+     * @return LoadingLayout¶ÔÏó
      */
     protected LoadingLayout createFooterLoadingLayout(Context context, AttributeSet attrs) {
         return new FooterLoadingLayout(context);
     }
     
     /**
-     * å¾—åˆ°å¹³æ»‘æ»šåŠ¨çš„æ—¶é—´ï¼Œæ´¾ç”Ÿç±»å¯ä»¥é‡å†™è¿™ä¸ªæ–¹æ³•æ¥æ§ä»¶æ»šåŠ¨æ—¶é—´
+     * µÃµ½Æ½»¬¹ö¶¯µÄÊ±¼ä£¬ÅÉÉúÀà¿ÉÒÔÖØĞ´Õâ¸ö·½·¨À´¿Ø¼ş¹ö¶¯Ê±¼ä
      * 
-     * @return è¿”å›å€¼æ—¶é—´ä¸ºæ¯«ç§’
+     * @return ·µ»ØÖµÊ±¼äÎªºÁÃë
      */
     protected long getSmoothScrollDuration() {
         return SCROLL_DURATION;
     }
     
     /**
-     * è®¡ç®—åˆ·æ–°Viewçš„å¤§å°
+     * ¼ÆËãË¢ĞÂViewµÄ´óĞ¡
      * 
-     * @param width å½“å‰å®¹å™¨çš„å®½åº¦
-     * @param height å½“å‰å®¹å™¨çš„å®½åº¦
+     * @param width µ±Ç°ÈİÆ÷µÄ¿í¶È
+     * @param height µ±Ç°ÈİÆ÷µÄ¿í¶È
      */
     protected void refreshRefreshableViewSize(int width, int height) {
         if (null != mRefreshableViewWrapper) {
@@ -546,28 +546,28 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * å°†åˆ·æ–°Viewæ·»åŠ åˆ°å½“å‰å®¹å™¨ä¸­
+     * ½«Ë¢ĞÂViewÌí¼Óµ½µ±Ç°ÈİÆ÷ÖĞ
      * 
      * @param context context
-     * @param refreshableView å¯ä»¥åˆ·æ–°çš„View
+     * @param refreshableView ¿ÉÒÔË¢ĞÂµÄView
      */
     protected void addRefreshableView(Context context, T refreshableView) {
         int width  = ViewGroup.LayoutParams.MATCH_PARENT;
         int height = ViewGroup.LayoutParams.MATCH_PARENT;
         
-        // åˆ›å»ºä¸€ä¸ªåŒ…è£…å®¹å™¨
+        // ´´½¨Ò»¸ö°ü×°ÈİÆ÷
         mRefreshableViewWrapper = new FrameLayout(context);
         mRefreshableViewWrapper.addView(refreshableView, width, height);
 
-        // è¿™é‡ŒæŠŠRefresh viewçš„é«˜åº¦è®¾ç½®ä¸ºä¸€ä¸ªå¾ˆå°çš„å€¼ï¼Œå®ƒçš„é«˜åº¦æœ€ç»ˆä¼šåœ¨onSizeChanged()æ–¹æ³•ä¸­è®¾ç½®ä¸ºMATCH_PARENT
-        // è¿™æ ·åšçš„åŸå› æ˜¯ï¼Œå¦‚æœæ­¤æ˜¯å®ƒçš„heightæ˜¯MATCH_PARENTï¼Œé‚£ä¹ˆfooterå¾—åˆ°çš„é«˜åº¦å°±æ˜¯0ï¼Œæ‰€ä»¥ï¼Œæˆ‘ä»¬å…ˆè®¾ç½®é«˜åº¦å¾ˆå°
-        // æˆ‘ä»¬å°±å¯ä»¥å¾—åˆ°headerå’Œfooterçš„æ­£å¸¸é«˜åº¦ï¼Œå½“onSizeChangedåï¼ŒRefresh viewçš„é«˜åº¦åˆä¼šå˜ä¸ºæ­£å¸¸ã€‚
+        // ÕâÀï°ÑRefresh viewµÄ¸ß¶ÈÉèÖÃÎªÒ»¸öºÜĞ¡µÄÖµ£¬ËüµÄ¸ß¶È×îÖÕ»áÔÚonSizeChanged()·½·¨ÖĞÉèÖÃÎªMATCH_PARENT
+        // ÕâÑù×öµÄÔ­ÒòÊÇ£¬Èç¹û´ËÊÇËüµÄheightÊÇMATCH_PARENT£¬ÄÇÃ´footerµÃµ½µÄ¸ß¶È¾ÍÊÇ0£¬ËùÒÔ£¬ÎÒÃÇÏÈÉèÖÃ¸ß¶ÈºÜĞ¡
+        // ÎÒÃÇ¾Í¿ÉÒÔµÃµ½headerºÍfooterµÄÕı³£¸ß¶È£¬µ±onSizeChangedºó£¬Refresh viewµÄ¸ß¶ÈÓÖ»á±äÎªÕı³£¡£
         height = 10;
         addView(mRefreshableViewWrapper, new LinearLayout.LayoutParams(width, height));
     }
     
     /**
-     * æ·»åŠ Headerå’ŒFooter
+     * Ìí¼ÓHeaderºÍFooter
      * 
      * @param context context
      */
@@ -597,19 +597,19 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * æ‹‰åŠ¨Header Layoutæ—¶è°ƒç”¨
+     * À­¶¯Header LayoutÊ±µ÷ÓÃ
      * 
-     * @param delta ç§»åŠ¨çš„è·ç¦»
+     * @param delta ÒÆ¶¯µÄ¾àÀë
      */
     protected void pullHeaderLayout(float delta) {
-        // å‘ä¸Šæ»‘åŠ¨ï¼Œå¹¶ä¸”å½“å‰scrollYä¸º0æ—¶ï¼Œä¸æ»‘åŠ¨
+        // ÏòÉÏ»¬¶¯£¬²¢ÇÒµ±Ç°scrollYÎª0Ê±£¬²»»¬¶¯
         int oldScrollY = getScrollYValue();
         if (delta < 0 && (oldScrollY - delta) >= 0) {
             setScrollTo(0, 0);
             return;
         }
         
-        // å‘ä¸‹æ»‘åŠ¨å¸ƒå±€
+        // ÏòÏÂ»¬¶¯²¼¾Ö
         setScrollBy(0, -(int)delta);
         
         if (null != mHeaderLayout && 0 != mHeaderHeight) {
@@ -617,7 +617,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
             mHeaderLayout.onPull(scale);
         }
         
-        // æœªå¤„äºåˆ·æ–°çŠ¶æ€ï¼Œæ›´æ–°ç®­å¤´
+        // Î´´¦ÓÚË¢ĞÂ×´Ì¬£¬¸üĞÂ¼ıÍ·
         int scrollY = Math.abs(getScrollYValue());
         if (isPullRefreshEnabled() && !isPullRefreshing()) { 
             if (scrollY > mHeaderHeight) {
@@ -632,9 +632,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
-     * æ‹‰Footeræ—¶è°ƒç”¨
+     * À­FooterÊ±µ÷ÓÃ
      * 
-     * @param delta ç§»åŠ¨çš„è·ç¦»
+     * @param delta ÒÆ¶¯µÄ¾àÀë
      */
     protected void pullFooterLayout(float delta) {
         int oldScrollY = getScrollYValue();
@@ -664,7 +664,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
-     * å¾—ç½®header
+     * µÃÖÃheader
      */
     protected void resetHeaderLayout() {
         final int scrollY = Math.abs(getScrollYValue());
@@ -683,7 +683,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * é‡ç½®footer
+     * ÖØÖÃfooter
      */
     protected void resetFooterLayout() {
         int scrollY = Math.abs(getScrollYValue());
@@ -702,28 +702,28 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * åˆ¤æ–­æ˜¯å¦æ­£åœ¨ä¸‹æ‹‰åˆ·æ–°
+     * ÅĞ¶ÏÊÇ·ñÕıÔÚÏÂÀ­Ë¢ĞÂ
      * 
-     * @return trueæ­£åœ¨åˆ·æ–°ï¼Œå¦åˆ™false
+     * @return trueÕıÔÚË¢ĞÂ£¬·ñÔòfalse
      */
     protected boolean isPullRefreshing() {
         return (mPullDownState == State.REFRESHING);
     }
     
     /**
-     * æ˜¯å¦æ­£çš„ä¸Šæ‹‰åŠ è½½æ›´å¤š
+     * ÊÇ·ñÕıµÄÉÏÀ­¼ÓÔØ¸ü¶à
      * 
-     * @return trueæ­£åœ¨åŠ è½½æ›´å¤šï¼Œå¦åˆ™false
+     * @return trueÕıÔÚ¼ÓÔØ¸ü¶à£¬·ñÔòfalse
      */
     protected boolean isPullLoading() {
         return (mPullUpState == State.REFRESHING);
     }
     
     /**
-     * å¼€å§‹åˆ·æ–°ï¼Œå½“ä¸‹æ‹‰æ¾å¼€åè¢«è°ƒç”¨
+     * ¿ªÊ¼Ë¢ĞÂ£¬µ±ÏÂÀ­ËÉ¿ªºó±»µ÷ÓÃ
      */
     protected void startRefreshing() {
-        // å¦‚æœæ­£åœ¨åˆ·æ–°
+        // Èç¹ûÕıÔÚË¢ĞÂ
         if (isPullRefreshing()) {
             return;
         }
@@ -736,7 +736,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         }
         
         if (null != mRefreshListener) {
-            // å› ä¸ºæ»šåŠ¨å›åŸå§‹ä½ç½®çš„æ—¶é—´æ˜¯200ï¼Œæˆ‘ä»¬éœ€è¦ç­‰å›æ»šå®Œåæ‰æ‰§è¡Œåˆ·æ–°å›è°ƒ
+            // ÒòÎª¹ö¶¯»ØÔ­Ê¼Î»ÖÃµÄÊ±¼äÊÇ200£¬ÎÒÃÇĞèÒªµÈ»Ø¹öÍêºó²ÅÖ´ĞĞË¢ĞÂ»Øµ÷
             postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -747,10 +747,10 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
 
     /**
-     * å¼€å§‹åŠ è½½æ›´å¤šï¼Œä¸Šæ‹‰æ¾å¼€åè°ƒç”¨
+     * ¿ªÊ¼¼ÓÔØ¸ü¶à£¬ÉÏÀ­ËÉ¿ªºóµ÷ÓÃ
      */
     protected void startLoading() {
-        // å¦‚æœæ­£åœ¨åŠ è½½
+        // Èç¹ûÕıÔÚ¼ÓÔØ
         if (isPullLoading()) {
             return;
         }
@@ -763,7 +763,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         }
         
         if (null != mRefreshListener) {
-            // å› ä¸ºæ»šåŠ¨å›åŸå§‹ä½ç½®çš„æ—¶é—´æ˜¯200ï¼Œæˆ‘ä»¬éœ€è¦ç­‰å›æ»šå®Œåæ‰æ‰§è¡ŒåŠ è½½å›è°ƒ
+            // ÒòÎª¹ö¶¯»ØÔ­Ê¼Î»ÖÃµÄÊ±¼äÊÇ200£¬ÎÒÃÇĞèÒªµÈ»Ø¹öÍêºó²ÅÖ´ĞĞ¼ÓÔØ»Øµ÷
             postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -774,59 +774,59 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * å½“çŠ¶æ€å‘ç”Ÿå˜åŒ–æ—¶è°ƒç”¨
+     * µ±×´Ì¬·¢Éú±ä»¯Ê±µ÷ÓÃ
      * 
-     * @param state çŠ¶æ€
-     * @param isPullDown æ˜¯å¦å‘ä¸‹
+     * @param state ×´Ì¬
+     * @param isPullDown ÊÇ·ñÏòÏÂ
      */
     protected void onStateChanged(State state, boolean isPullDown) {
         
     }
     
     /**
-     * è®¾ç½®æ»šåŠ¨ä½ç½®
+     * ÉèÖÃ¹ö¶¯Î»ÖÃ
      * 
-     * @param x æ»šåŠ¨åˆ°çš„xä½ç½®
-     * @param y æ»šåŠ¨åˆ°çš„yä½ç½®
+     * @param x ¹ö¶¯µ½µÄxÎ»ÖÃ
+     * @param y ¹ö¶¯µ½µÄyÎ»ÖÃ
      */
     private void setScrollTo(int x, int y) {
         scrollTo(x, y);
     }
     
     /**
-     * è®¾ç½®æ»šåŠ¨çš„åç§»
+     * ÉèÖÃ¹ö¶¯µÄÆ«ÒÆ
      * 
-     * @param x æ»šåŠ¨xä½ç½®
-     * @param y æ»šåŠ¨yä½ç½®
+     * @param x ¹ö¶¯xÎ»ÖÃ
+     * @param y ¹ö¶¯yÎ»ÖÃ
      */
     private void setScrollBy(int x, int y) {
         scrollBy(x, y);
     }
     
     /**
-     * å¾—åˆ°å½“å‰Yçš„æ»šåŠ¨å€¼
+     * µÃµ½µ±Ç°YµÄ¹ö¶¯Öµ
      * 
-     * @return æ»šåŠ¨å€¼
+     * @return ¹ö¶¯Öµ
      */
     private int getScrollYValue() {
         return getScrollY();
     }
     
     /**
-     * å¹³æ»‘æ»šåŠ¨
+     * Æ½»¬¹ö¶¯
      * 
-     * @param newScrollValue æ»šåŠ¨çš„å€¼
+     * @param newScrollValue ¹ö¶¯µÄÖµ
      */
     private void smoothScrollTo(int newScrollValue) {
         smoothScrollTo(newScrollValue, getSmoothScrollDuration(), 0);
     }
     
     /**
-     * å¹³æ»‘æ»šåŠ¨
+     * Æ½»¬¹ö¶¯
      * 
-     * @param newScrollValue æ»šåŠ¨çš„å€¼
-     * @param duration æ»šåŠ¨æ—¶å€™
-     * @param delayMillis å»¶è¿Ÿæ—¶é—´ï¼Œ0ä»£è¡¨ä¸å»¶è¿Ÿ
+     * @param newScrollValue ¹ö¶¯µÄÖµ
+     * @param duration ¹ö¶¯Ê±ºò
+     * @param delayMillis ÑÓ³ÙÊ±¼ä£¬0´ú±í²»ÑÓ³Ù
      */
     private void smoothScrollTo(int newScrollValue, long duration, long delayMillis) {
         if (null != mSmoothScrollRunnable) {
@@ -849,51 +849,51 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
     }
     
     /**
-     * è®¾ç½®æ˜¯å¦æˆªæ–­touchäº‹ä»¶
+     * ÉèÖÃÊÇ·ñ½Ø¶ÏtouchÊÂ¼ş
      * 
-     * @param enabled trueæˆªæ–­ï¼Œfalseä¸æˆªæ–­
+     * @param enabled true½Ø¶Ï£¬false²»½Ø¶Ï
      */
     private void setInterceptTouchEventEnabled(boolean enabled) {
         mInterceptEventEnable = enabled;
     }
     
     /**
-     * æ ‡å¿—æ˜¯å¦æˆªæ–­touchäº‹ä»¶
+     * ±êÖ¾ÊÇ·ñ½Ø¶ÏtouchÊÂ¼ş
      * 
-     * @return trueæˆªæ–­ï¼Œfalseä¸æˆªæ–­
+     * @return true½Ø¶Ï£¬false²»½Ø¶Ï
      */
     private boolean isInterceptTouchEventEnabled() {
         return mInterceptEventEnable;
     }
     
     /**
-     * å®ç°äº†å¹³æ»‘æ»šåŠ¨çš„Runnable
+     * ÊµÏÖÁËÆ½»¬¹ö¶¯µÄRunnable
      * 
      * @author Li Hong
      * @since 2013-8-22
      */
     final class SmoothScrollRunnable implements Runnable {
-        /**åŠ¨ç”»æ•ˆæœ*/
+        /**¶¯»­Ğ§¹û*/
         private final Interpolator mInterpolator;
-        /**ç»“æŸY*/
+        /**½áÊøY*/
         private final int mScrollToY;
-        /**å¼€å§‹Y*/
+        /**¿ªÊ¼Y*/
         private final int mScrollFromY;
-        /**æ»‘åŠ¨æ—¶é—´*/
+        /**»¬¶¯Ê±¼ä*/
         private final long mDuration;
-        /**æ˜¯å¦ç»§ç»­è¿è¡Œ*/
+        /**ÊÇ·ñ¼ÌĞøÔËĞĞ*/
         private boolean mContinueRunning = true;
-        /**å¼€å§‹æ—¶åˆ»*/
+        /**¿ªÊ¼Ê±¿Ì*/
         private long mStartTime = -1;
-        /**å½“å‰Y*/
+        /**µ±Ç°Y*/
         private int mCurrentY = -1;
 
         /**
-         * æ„é€ æ–¹æ³•
+         * ¹¹Ôì·½·¨
          * 
-         * @param fromY å¼€å§‹Y
-         * @param toY ç»“æŸY
-         * @param duration åŠ¨ç”»æ—¶é—´
+         * @param fromY ¿ªÊ¼Y
+         * @param toY ½áÊøY
+         * @param duration ¶¯»­Ê±¼ä
          */
         public SmoothScrollRunnable(int fromY, int toY, long duration) {
             mScrollFromY = fromY;
@@ -943,7 +943,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
         }
 
         /**
-         * åœæ­¢æ»‘åŠ¨
+         * Í£Ö¹»¬¶¯
          */
         public void stop() {
             mContinueRunning = false;

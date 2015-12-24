@@ -8,22 +8,22 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 /**
- * è¿™ä¸ªç±»å®šä¹‰äº†Headerå’ŒFooterçš„å…±é€šè¡Œä¸º
+ * Õâ¸öÀà¶¨ÒåÁËHeaderºÍFooterµÄ¹²Í¨ĞĞÎª
  * 
  * @author Li Hong
  * @since 2013-8-16
  */
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout {
     
-    /**å®¹å™¨å¸ƒå±€*/
+    /**ÈİÆ÷²¼¾Ö*/
     protected View mContainer;
-    /**å½“å‰çš„çŠ¶æ€*/
+    /**µ±Ç°µÄ×´Ì¬*/
     private State mCurState = State.NONE;
-    /**å‰ä¸€ä¸ªçŠ¶æ€*/
+    /**Ç°Ò»¸ö×´Ì¬*/
     private State mPreState = State.NONE;
     
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      */
@@ -32,7 +32,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
     
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      * @param attrs attrs
@@ -42,7 +42,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
     
     /**
-     * æ„é€ æ–¹æ³•
+     * ¹¹Ôì·½·¨
      * 
      * @param context context
      * @param attrs attrs
@@ -55,7 +55,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
     
     /**
-     * åˆå§‹åŒ–
+     * ³õÊ¼»¯
      * 
      * @param context context
      * @param attrs attrs
@@ -73,7 +73,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
 
     /**
-     * æ˜¾ç¤ºæˆ–éšè—è¿™ä¸ªå¸ƒå±€
+     * ÏÔÊ¾»òÒş²ØÕâ¸ö²¼¾Ö
      * 
      * @param show flag
      */
@@ -95,43 +95,43 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
     
     /**
-     * è®¾ç½®æœ€åæ›´æ–°çš„æ—¶é—´æ–‡æœ¬
+     * ÉèÖÃ×îºó¸üĞÂµÄÊ±¼äÎÄ±¾
      * 
-     * @param label æ–‡æœ¬
+     * @param label ÎÄ±¾
      */
     public void setLastUpdatedLabel(CharSequence label) {
         
     }
     
     /**
-     * è®¾ç½®åŠ è½½ä¸­çš„å›¾ç‰‡
+     * ÉèÖÃ¼ÓÔØÖĞµÄÍ¼Æ¬
      * 
-     * @param drawable å›¾ç‰‡
+     * @param drawable Í¼Æ¬
      */
     protected abstract void onLoadingDrawableSet(Drawable imageDrawable);
 
     /**
-     * è®¾ç½®æ‹‰åŠ¨çš„æ–‡æœ¬ï¼Œå…¸å‹çš„æ˜¯â€œä¸‹æ‹‰å¯ä»¥åˆ·æ–°â€
+     * ÉèÖÃÀ­¶¯µÄÎÄ±¾£¬µäĞÍµÄÊÇ¡°ÏÂÀ­¿ÉÒÔË¢ĞÂ¡±
      * 
-     * @param pullLabel æ‹‰åŠ¨çš„æ–‡æœ¬
+     * @param pullLabel À­¶¯µÄÎÄ±¾
      */
     public void setPullLabel(CharSequence pullLabel) {
         
     }
 
     /**
-     * è®¾ç½®æ­£åœ¨åˆ·æ–°çš„æ–‡æœ¬ï¼Œå…¸å‹çš„æ˜¯â€œæ­£åœ¨åˆ·æ–°â€
+     * ÉèÖÃÕıÔÚË¢ĞÂµÄÎÄ±¾£¬µäĞÍµÄÊÇ¡°ÕıÔÚË¢ĞÂ¡±
      * 
-     * @param refreshingLabel åˆ·æ–°æ–‡æœ¬
+     * @param refreshingLabel Ë¢ĞÂÎÄ±¾
      */
     public void setRefreshingLabel(CharSequence refreshingLabel) {
         
     }
 
     /**
-     * è®¾ç½®é‡Šæ”¾çš„æ–‡æœ¬ï¼Œå…¸å‹çš„æ˜¯â€œæ¾å¼€å¯ä»¥åˆ·æ–°â€
+     * ÉèÖÃÊÍ·ÅµÄÎÄ±¾£¬µäĞÍµÄÊÇ¡°ËÉ¿ª¿ÉÒÔË¢ĞÂ¡±
      * 
-     * @param releaseLabel é‡Šæ”¾æ–‡æœ¬
+     * @param releaseLabel ÊÍ·ÅÎÄ±¾
      */
     public void setReleaseLabel(CharSequence releaseLabel) {
         
@@ -157,19 +157,19 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
     
     /**
-     * å¾—åˆ°å‰ä¸€ä¸ªçŠ¶æ€
+     * µÃµ½Ç°Ò»¸ö×´Ì¬
      * 
-     * @return çŠ¶æ€
+     * @return ×´Ì¬
      */
     protected State getPreState() {
         return mPreState;
     }
     
     /**
-     * å½“çŠ¶æ€æ”¹å˜æ—¶è°ƒç”¨
+     * µ±×´Ì¬¸Ä±äÊ±µ÷ÓÃ
      * 
-     * @param curState å½“å‰çŠ¶æ€
-     * @param oldState è€çš„çŠ¶æ€
+     * @param curState µ±Ç°×´Ì¬
+     * @param oldState ÀÏµÄ×´Ì¬
      */
     protected void onStateChanged(State curState, State oldState) {
         switch (curState) {
@@ -199,43 +199,43 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
     }
     
     /**
-     * å½“çŠ¶æ€è®¾ç½®ä¸º{@link State#RESET}æ—¶è°ƒç”¨
+     * µ±×´Ì¬ÉèÖÃÎª{@link State#RESET}Ê±µ÷ÓÃ
      */
     protected abstract void onReset();
     
     /**
-     * å½“çŠ¶æ€è®¾ç½®ä¸º{@link State#PULL_TO_REFRESH}æ—¶è°ƒç”¨
+     * µ±×´Ì¬ÉèÖÃÎª{@link State#PULL_TO_REFRESH}Ê±µ÷ÓÃ
      */
     protected abstract void onPullToRefresh();
     
     /**
-     * å½“çŠ¶æ€è®¾ç½®ä¸º{@link State#RELEASE_TO_REFRESH}æ—¶è°ƒç”¨
+     * µ±×´Ì¬ÉèÖÃÎª{@link State#RELEASE_TO_REFRESH}Ê±µ÷ÓÃ
      */
     protected abstract void onReleaseToRefresh();
     
     /**
-     * å½“çŠ¶æ€è®¾ç½®ä¸º{@link State#REFRESHING}æ—¶è°ƒç”¨
+     * µ±×´Ì¬ÉèÖÃÎª{@link State#REFRESHING}Ê±µ÷ÓÃ
      */
     protected abstract void onRefreshing();
     
     /**
-     * å½“çŠ¶æ€è®¾ç½®ä¸º{@link State#NO_MORE_DATA}æ—¶è°ƒç”¨
+     * µ±×´Ì¬ÉèÖÃÎª{@link State#NO_MORE_DATA}Ê±µ÷ÓÃ
      */
     protected abstract void onNoMoreData() ;
     
     /**
-     * å¾—åˆ°å½“å‰Layoutçš„å†…å®¹å¤§å°ï¼Œå®ƒå°†ä½œä¸ºä¸€ä¸ªåˆ·æ–°çš„ä¸´ç•Œç‚¹
+     * µÃµ½µ±Ç°LayoutµÄÄÚÈİ´óĞ¡£¬Ëü½«×÷ÎªÒ»¸öË¢ĞÂµÄÁÙ½çµã
      * 
-     * @return é«˜åº¦
+     * @return ¸ß¶È
      */
     public abstract int getContentSize();
     
     /**
-     * åˆ›å»ºLoadingçš„View
+     * ´´½¨LoadingµÄView
      * 
      * @param context context
      * @param attrs attrs
-     * @return Loadingçš„View
+     * @return LoadingµÄView
      */
     protected abstract View createLoadingView(Context context, AttributeSet attrs);
 }

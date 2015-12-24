@@ -8,14 +8,14 @@ import android.os.Bundle;
 import android.widget.BaseAdapter;
 
 /**
- * Adapter鍩虹被
+ * Adapter基类
  * 
  */
 public abstract class QLBaseAdapter<T, Q> extends BaseAdapter {
 
 	public Context context;
 	public List<T> list;//
-	public Q view; // 杩欓噷涓嶄竴瀹氭槸ListView,姣斿GridView,CustomListView
+	public Q view; // 这里不一定是ListView,比如GridView,CustomListView
 
 
 	public QLBaseAdapter(Context context, List<T> list, Q view) {

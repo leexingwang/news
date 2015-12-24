@@ -10,8 +10,10 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.topnewgrid.ChannelActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,7 @@ public abstract class BasePage implements OnClickListener {
 	protected ImageButton rightBtn;
 	protected ImageButton leftImgBtn;
 	protected ImageButton rightImgBtn;
+	protected ImageButton isbackImgBtn;
 	protected TextView titleTv;
 	protected LinearLayout loadfailView;
 	public boolean isLoadSuccess = false;
@@ -46,12 +49,14 @@ public abstract class BasePage implements OnClickListener {
 		rightBtn = (ImageButton) view.findViewById(R.id.btn_right);
 		leftImgBtn = (ImageButton) view.findViewById(R.id.imgbtn_left);
 		rightImgBtn = (ImageButton) view.findViewById(R.id.imgbtn_right);
+		isbackImgBtn = (ImageButton) view.findViewById(R.id.imgbtn_channel);
 		leftImgBtn.setImageResource(R.drawable.img_menu);
 		titleTv = (TextView) view.findViewById(R.id.txt_title);
 		leftBtn.setVisibility(View.GONE);
 		rightBtn.setVisibility(View.GONE);
 		if (leftImgBtn != null)
 			leftImgBtn.setOnClickListener(this);
+		isbackImgBtn.setOnClickListener(this);
 
 	}
 
@@ -97,12 +102,8 @@ public abstract class BasePage implements OnClickListener {
 		} else {
 			params = new RequestParams();
 		}
-		// è®¾å¤‡ID
-		// params.addHeader("x-deviceid", app.deviceId);
-		// æ¸ é“ï¼Œç»Ÿè®¡ç”¨
-		// params.addHeader("x-channel", app.channel);
 		if (0 == CommonUtil.isNetworkAvailable(ct)) {
-			showToast("æ— ç½‘ç»œï¼Œè¯·æ£€æŸ¥ç½‘ç»œè¿æ¥ï¼");
+			showToast("ÎŞÍøÂç£¬Çë¼ì²éÍøÂçÁ¬½Ó£¡");
 		} else {
 			http.send(method, url, params, callback);
 		}
@@ -113,7 +114,9 @@ public abstract class BasePage implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.imgbtn_left:
 			break;
-
+		case R.id.imgbtn_channel:
+			ct.startActivity(new Intent(ct, ChannelActivity.class));
+			break;
 		default:
 			break;
 		}

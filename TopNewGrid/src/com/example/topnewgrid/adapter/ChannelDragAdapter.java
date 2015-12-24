@@ -14,7 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class ChannelDragAdapter extends BaseAdapter {
-	/** TAG*/
+	/** TAG */
 	private final static String TAG = "DragAdapter";
 	/** 是否显示底部的ITEM */
 	private boolean isItemShow = false;
@@ -31,20 +31,21 @@ public class ChannelDragAdapter extends BaseAdapter {
 	private TextView item_text;
 	/** 要删除的position */
 	public int remove_position = -1;
-	
-	public boolean isEdit=false;
+
+	public boolean isEdit = false;
 
 	public ChannelDragAdapter(Context context, List<ChannelItem> channelList) {
 		this.context = context;
 		this.channelList = channelList;
 	}
-	
-	public ChannelDragAdapter(Context context, List<ChannelItem> channelList,boolean isEdit) {
+
+	public ChannelDragAdapter(Context context, List<ChannelItem> channelList,
+			boolean isEdit) {
 		this.context = context;
 		this.channelList = channelList;
-		this.isEdit=isEdit;
+		this.isEdit = isEdit;
 	}
-	
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -65,20 +66,21 @@ public class ChannelDragAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return position;
 	}
-	
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = LayoutInflater.from(context).inflate(R.layout.channel_subscribe_category_item, null);
+		View view = LayoutInflater.from(context).inflate(
+				R.layout.channel_subscribe_category_item, null);
 		item_text = (TextView) view.findViewById(R.id.text_item);
-		if (isEdit) {
+		if (isEdit && position != 0) {
 			view.findViewById(R.id.image_delete).setVisibility(View.VISIBLE);
-		}else{
+		} else {
 			view.findViewById(R.id.image_delete).setVisibility(View.INVISIBLE);
 		}
 		ChannelItem channel = getItem(position);
 		item_text.setText(channel.getName());
-		if ((position == 0) || (position == 1)){
-//			item_text.setTextColor(context.getResources().getColor(R.color.black));
+		if ((position == 0)) {
+			// item_text.setTextColor(context.getResources().getColor(R.color.black));
 			item_text.setEnabled(false);
 		}
 		if (isChanged && (position == holdPosition) && !isItemShow) {
@@ -92,7 +94,7 @@ public class ChannelDragAdapter extends BaseAdapter {
 			item_text.setSelected(true);
 			item_text.setEnabled(true);
 		}
-		if(remove_position == position){
+		if (remove_position == position) {
 			item_text.setText("");
 		}
 		return view;
@@ -108,7 +110,8 @@ public class ChannelDragAdapter extends BaseAdapter {
 	public void exchange(int dragPostion, int dropPostion) {
 		holdPosition = dropPostion;
 		ChannelItem dragItem = getItem(dragPostion);
-		Log.d(TAG, "startPostion=" + dragPostion + ";endPosition=" + dropPostion);
+		Log.d(TAG, "startPostion=" + dragPostion + ";endPosition="
+				+ dropPostion);
 		if (dragPostion < dropPostion) {
 			channelList.add(dropPostion + 1, dragItem);
 			channelList.remove(dragPostion);
@@ -119,7 +122,7 @@ public class ChannelDragAdapter extends BaseAdapter {
 		isChanged = true;
 		notifyDataSetChanged();
 	}
-	
+
 	/** 获取频道列表 */
 	public List<ChannelItem> getChannnelLst() {
 		return channelList;
@@ -137,21 +140,22 @@ public class ChannelDragAdapter extends BaseAdapter {
 		remove_position = -1;
 		notifyDataSetChanged();
 	}
-	
+
 	/** 设置频道列表 */
 	public void setListDate(List<ChannelItem> list) {
 		channelList = list;
 	}
-	
+
 	/** 获取是否可见 */
 	public boolean isVisible() {
 		return isVisible;
 	}
-	
+
 	/** 设置是否可见 */
 	public void setVisible(boolean visible) {
 		isVisible = visible;
 	}
+
 	/** 显示放下的ITEM */
 	public void setShowDropItem(boolean show) {
 		isItemShow = show;

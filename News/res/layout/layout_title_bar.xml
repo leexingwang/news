@@ -36,23 +36,32 @@
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_centerInParent="true"
+            android:background="@drawable/cbn_home_title"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:singleLine="true"
-            android:background="@drawable/cbn_home_title"
             android:text="" />
+
+        <ImageButton
+            android:id="@+id/imgbtn_channel"
+            android:layout_toRightOf="@id/txt_title"
+            android:layout_width="30dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/arrow02" />
     </RelativeLayout>
-    
+
     <ImageButton
         android:id="@+id/imgbtn_text"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:visibility="gone"
-        android:src="@drawable/icon_textsize"
         android:background="@android:color/transparent"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_textsize"
+        android:visibility="gone" />
 
     <ImageButton
         android:id="@+id/imgbtn_right"
@@ -63,13 +72,13 @@
         android:background="@android:color/transparent"
         android:scaleType="centerInside" />
 
-    <ImageButton 
+    <ImageButton
         android:id="@+id/btn_right"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="@android:color/transparent"
-        android:scaleType="centerInside"  />
+        android:scaleType="centerInside" />
 
 </LinearLayout>

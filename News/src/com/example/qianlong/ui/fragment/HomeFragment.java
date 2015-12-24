@@ -3,8 +3,6 @@ package com.example.qianlong.ui.fragment;
 import java.util.ArrayList;
 
 import com.example.qianlong.R;
-import com.example.qianlong.R.id;
-import com.example.qianlong.R.layout;
 import com.example.qianlong.base.BaseFragment;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.ui.page.NewsCenterPage;
@@ -15,8 +13,10 @@ import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.qianlong.android.view.CustomViewPager;
 import com.qianlong.android.view.LazyViewPager.OnPageChangeListener;
+import com.topnewgrid.ChannelActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -42,6 +42,7 @@ public class HomeFragment extends BaseFragment {
 	@ViewInject(R.id.main_radio)
 	public RadioGroup mainRg;
 	private int curCheckId = R.id.rb_news_center;
+	@SuppressWarnings("unused")
 	private int curIndex;
 	private LivePopupWindow mMoreWindow;
 	@ViewInject(R.id.rb_popupwindow)
@@ -54,7 +55,7 @@ public class HomeFragment extends BaseFragment {
 		adapter = new HomePagerAdapter(ct, pages);
 		viewPager.setAdapter(adapter);
 		viewPager.setScrollable(false);
-		// 涓嶈繘琛岄鍔犺浇
+		// 不进行预加载
 		viewPager.setOffscreenPageLimit(0);
 		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
@@ -124,6 +125,7 @@ public class HomeFragment extends BaseFragment {
 	}
 
 	class HomePagerAdapter extends PagerAdapter {
+		@SuppressWarnings("unused")
 		private Context mContext;
 		private ArrayList<BasePage> pages;
 

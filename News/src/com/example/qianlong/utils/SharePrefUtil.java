@@ -13,7 +13,7 @@ import android.text.TextUtils;
 
 
 /**
- * SharePreferencesæ“ä½œå·¥å…·ç±»
+ * SharePreferences²Ù×÷¹¤¾ßÀà
  */
 public class SharePrefUtil {
 	private static String tag = SharePrefUtil.class.getSimpleName();
@@ -22,18 +22,18 @@ public class SharePrefUtil {
 
 	public interface KEY {
 		
-		String FUNCTION_ALL_JSON = "all_function_json";//æ‰€æœ‰çš„Funcation Json
-		String FUNCTION_SELECTED_ID = "selcted_function_ids";//é€‰ä¸­çš„function ids
+		String FUNCTION_ALL_JSON = "all_function_json";//ËùÓĞµÄFuncation Json
+		String FUNCTION_SELECTED_ID = "selcted_function_ids";//Ñ¡ÖĞµÄfunction ids
 		
-		String CATE_ALL_JSON = "all_cate_json";//æ‰€æœ‰çš„æ–°é—»ç›®å½• Json
-		String CATE_SELECTED_JSON = "selcted_cate_json";//é€‰ä¸­çš„æ–°é—»ç›®å½•ids
-		String CATE_EXTEND_ID = "extend_cate_ids";//æ¨èçš„æ–°é—» ç›®å½•ids
+		String CATE_ALL_JSON = "all_cate_json";//ËùÓĞµÄĞÂÎÅÄ¿Â¼ Json
+		String CATE_SELECTED_JSON = "selcted_cate_json";//Ñ¡ÖĞµÄĞÂÎÅÄ¿Â¼ids
+		String CATE_EXTEND_ID = "extend_cate_ids";//ÍÆ¼öµÄĞÂÎÅ Ä¿Â¼ids
 		
-		String VOTE_SELECTED_ID = "selcted_vote_ids";//é€‰ä¸­çš„function ids
+		String VOTE_SELECTED_ID = "selcted_vote_ids";//Ñ¡ÖĞµÄfunction ids
 	}
 
 	/**
-	 * ä¿å­˜å¸ƒå°”å€¼
+	 * ±£´æ²¼¶ûÖµ
 	 * 
 	 * @param context
 	 * @param key
@@ -46,7 +46,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * ä¿å­˜å­—ç¬¦ä¸²
+	 * ±£´æ×Ö·û´®
 	 * 
 	 * @param context
 	 * @param key
@@ -66,7 +66,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * ä¿å­˜longå‹
+	 * ±£´ælongĞÍ
 	 * 
 	 * @param context
 	 * @param key
@@ -79,7 +79,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * ä¿å­˜intå‹
+	 * ±£´æintĞÍ
 	 * 
 	 * @param context
 	 * @param key
@@ -92,7 +92,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * ä¿å­˜floatå‹
+	 * ±£´æfloatĞÍ
 	 * 
 	 * @param context
 	 * @param key
@@ -105,7 +105,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * è·å–å­—ç¬¦å€¼
+	 * »ñÈ¡×Ö·ûÖµ
 	 * 
 	 * @param context
 	 * @param key
@@ -119,7 +119,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * è·å–intå€¼
+	 * »ñÈ¡intÖµ
 	 * 
 	 * @param context
 	 * @param key
@@ -133,7 +133,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * è·å–longå€¼
+	 * »ñÈ¡longÖµ
 	 * 
 	 * @param context
 	 * @param key
@@ -147,7 +147,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * è·å–floatå€¼
+	 * »ñÈ¡floatÖµ
 	 * 
 	 * @param context
 	 * @param key
@@ -161,7 +161,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * è·å–å¸ƒå°”å€¼
+	 * »ñÈ¡²¼¶ûÖµ
 	 * 
 	 * @param context
 	 * @param key
@@ -176,7 +176,7 @@ public class SharePrefUtil {
 	}
 	
 	/**
-	 * å°†å¯¹è±¡è¿›è¡Œbase64ç¼–ç åä¿å­˜åˆ°SharePrefä¸­
+	 * ½«¶ÔÏó½øĞĞbase64±àÂëºó±£´æµ½SharePrefÖĞ
 	 * 
 	 * @param context
 	 * @param key
@@ -191,7 +191,7 @@ public class SharePrefUtil {
 		try {
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(object);
-			// å°†å¯¹è±¡çš„è½¬ä¸ºbase64ç 
+			// ½«¶ÔÏóµÄ×ªÎªbase64Âë
 			String objBase64 = new String(Base64.encodeBase64(baos
 					.toByteArray()));
 
@@ -204,7 +204,7 @@ public class SharePrefUtil {
 	}
 
 	/**
-	 * å°†SharePrefä¸­ç»è¿‡base64ç¼–ç çš„å¯¹è±¡è¯»å–å‡ºæ¥
+	 * ½«SharePrefÖĞ¾­¹ıbase64±àÂëµÄ¶ÔÏó¶ÁÈ¡³öÀ´
 	 * 
 	 * @param context
 	 * @param key
@@ -218,7 +218,7 @@ public class SharePrefUtil {
 		if (TextUtils.isEmpty(objBase64))
 			return null;
 
-		// å¯¹Base64æ ¼å¼çš„å­—ç¬¦ä¸²è¿›è¡Œè§£ç 
+		// ¶ÔBase64¸ñÊ½µÄ×Ö·û´®½øĞĞ½âÂë
 		byte[] base64Bytes = Base64.decodeBase64(objBase64.getBytes());
 		ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
 
