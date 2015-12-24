@@ -61,7 +61,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.qianlong.android.ui.newscenter.NewsDetailActivity"
+            android:name="com.example.qianlong.NewsDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

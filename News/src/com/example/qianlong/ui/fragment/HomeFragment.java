@@ -2,6 +2,8 @@ package com.example.qianlong.ui.fragment;
 
 import java.util.ArrayList;
 
+import com.base.common.ui.CustomViewPager;
+import com.base.common.ui.LazyViewPager.OnPageChangeListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BaseFragment;
 import com.example.qianlong.base.BasePage;
@@ -11,8 +13,6 @@ import com.example.qianlong.ui.popupwindow.LivePopupWindow;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.qianlong.android.view.CustomViewPager;
-import com.qianlong.android.view.LazyViewPager.OnPageChangeListener;
 import com.topnewgrid.ChannelActivity;
 
 import android.content.Context;

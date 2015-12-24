@@ -13,7 +13,7 @@
          android:background="@drawable/news_tab_bg"
         android:orientation="horizontal" >
 
-        <com.qianlong.android.view.pagerindicator.TabPageIndicator
+        <com.base.common.ui.pagerindicator.TabPageIndicator
             android:id="@+id/indicator"
             style="@style/Theme.PageIndicatorDefaults"
             android:layout_width="0dp"

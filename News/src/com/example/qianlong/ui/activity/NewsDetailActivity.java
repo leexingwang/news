@@ -3,6 +3,7 @@ import com.example.qianlong.R;
 import com.example.qianlong.base.BaseActivity;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class NewsDetailActivity extends BaseActivity {
 	@ViewInject(R.id.news_detail_wv)
 	private WebView mWebView;
@@ -97,19 +99,6 @@ public class NewsDetailActivity extends BaseActivity {
 
 	private void showShare() {
 		Toast.makeText(ct, "分享", 0).show();
-//		OnekeyShare oks = new OnekeyShare();
-//		oks.setNotification(R.drawable.icon,
-//				ct.getString(R.string.app_name));
-//
-//		oks.setTitle(title);
-//		oks.setText("分享新闻:"+title);
-//		if(!TextUtils.isEmpty(imgUrl)){
-//			oks.setImageUrl(imgUrl);
-//		}else{
-//			oks.setImageUrl(Constants.APP_ICON_URL);
-//		}
-//		oks.setUrl(url);
-//		oks.show(ct);
 	}
 
 }

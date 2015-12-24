@@ -16,10 +16,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.base.common.ui.RollViewPager;
+import com.base.common.ui.RollViewPager.OnPagerClickCallback;
+import com.base.common.ui.pullrefreshview.PullToRefreshBase;
+import com.base.common.ui.pullrefreshview.PullToRefreshListView;
+import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.R.drawable;
 import com.example.qianlong.R.id;
 import com.example.qianlong.R.layout;
+import com.example.qianlong.adpter.NewsAdapter;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.CountList;
 import com.example.qianlong.bean.NewsListBean;
@@ -38,12 +44,6 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.qianlong.android.adapter.NewsAdapter;
-import com.qianlong.android.view.RollViewPager;
-import com.qianlong.android.view.RollViewPager.OnPagerClickCallback;
-import com.qianlong.android.view.pullrefreshview.PullToRefreshBase;
-import com.qianlong.android.view.pullrefreshview.PullToRefreshBase.OnRefreshListener;
-import com.qianlong.android.view.pullrefreshview.PullToRefreshListView;
 
 public class ItemNewsPage extends BasePage {
 	@ViewInject(R.id.lv_item_news)

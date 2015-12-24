@@ -82,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/more_window_auto"
+        android:padding="15dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="78dip"
         android:src="@drawable/tabbar_compose_background_icon_close" />
