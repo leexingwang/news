@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-
 /**
  * SharePreferences操作工具类
  */
@@ -21,15 +20,28 @@ public class SharePrefUtil {
 	private static SharedPreferences sp;
 
 	public interface KEY {
-		
-		String FUNCTION_ALL_JSON = "all_function_json";//所有的Funcation Json
-		String FUNCTION_SELECTED_ID = "selcted_function_ids";//选中的function ids
-		
-		String CATE_ALL_JSON = "all_cate_json";//所有的新闻目录 Json
-		String CATE_SELECTED_JSON = "selcted_cate_json";//选中的新闻目录ids
-		String CATE_EXTEND_ID = "extend_cate_ids";//推荐的新闻 目录ids
-		
-		String VOTE_SELECTED_ID = "selcted_vote_ids";//选中的function ids
+
+		String FUNCTION_ALL_JSON = "all_function_json";// 所有的Funcation Json
+		String FUNCTION_SELECTED_ID = "selcted_function_ids";// 选中的function ids
+
+		String CATE_ALL_JSON = "all_cate_json";// 所有的新闻目录 Json
+		String CATE_SELECTED_JSON = "selcted_cate_json";// 选中的新闻目录ids
+		String CATE_EXTEND_ID = "extend_cate_ids";// 推荐的新闻 目录ids
+
+		String VOTE_SELECTED_ID = "selcted_vote_ids";// 选中的function ids
+
+		// settings_push
+
+		String SETTINGS_PUSH_HONGGUAN = "settings_push_hongguan";
+		String SETTINGS_PUSH_SHANGYE = "settings_push_shangye";
+		String SETTINGS_PUSH_TOUZI = "settings_push_touzi";
+		String SETTINGS_PUSH_YEJIAN = "settings_push_yejian";
+		boolean SETTINGS_PUSH_DEFAULT = true;
+
+		// 3G/4G状况下看视频
+		String SETTINGS_3G_4G_GUANKAN = "settings_3G_4G_guankan";
+
+		boolean SETTINGS_3G_4G_DEFAULT = true;
 	}
 
 	/**
@@ -42,7 +54,7 @@ public class SharePrefUtil {
 	public static void saveBoolean(Context context, String key, boolean value) {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
-		    sp.edit().putBoolean(key, value).commit();
+		sp.edit().putBoolean(key, value).commit();
 	}
 
 	/**
@@ -56,10 +68,10 @@ public class SharePrefUtil {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		sp.edit().putString(key, value).commit();
-		
+
 	}
-	
-	public static void clear(Context context){
+
+	public static void clear(Context context) {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		sp.edit().clear().commit();
@@ -174,7 +186,7 @@ public class SharePrefUtil {
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		return sp.getBoolean(key, defValue);
 	}
-	
+
 	/**
 	 * 将对象进行base64编码后保存到SharePref中
 	 * 
@@ -185,7 +197,7 @@ public class SharePrefUtil {
 	public static void saveObj(Context context, String key, Object object) {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
-		
+
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ObjectOutputStream oos = null;
 		try {
@@ -195,8 +207,7 @@ public class SharePrefUtil {
 			String objBase64 = new String(Base64.encodeBase64(baos
 					.toByteArray()));
 
-			sp.edit()
-					.putString(key,objBase64).commit();
+			sp.edit().putString(key, objBase64).commit();
 			oos.close();
 		} catch (IOException e) {
 			e.printStackTrace();

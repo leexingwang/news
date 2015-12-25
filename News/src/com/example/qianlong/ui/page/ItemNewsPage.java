@@ -31,7 +31,7 @@ import com.example.qianlong.bean.CountList;
 import com.example.qianlong.bean.NewsListBean;
 import com.example.qianlong.bean.NewsListBean.News;
 import com.example.qianlong.bean.NewsListBean.TopNews;
-import com.example.qianlong.ui.activity.NewsDetailActivity;
+import com.example.qianlong.ui.activity.CBNNewsDetailActivity;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.Constants;
 import com.example.qianlong.utils.QLApi;
@@ -89,7 +89,7 @@ public class ItemNewsPage extends BasePage {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						Intent intent = new Intent(ct, NewsDetailActivity.class);
+						Intent intent = new Intent(ct, CBNNewsDetailActivity.class);
 						String url = "";
 						String title;
 						News newsItem;
@@ -293,7 +293,7 @@ public class ItemNewsPage extends BasePage {
 									TopNews news = topNews.get(position);
 									if (news.type.equals("news")) {
 										Intent intent = new Intent(ct,
-												NewsDetailActivity.class);
+												CBNNewsDetailActivity.class);
 										String url = topNews.get(position).url;
 										String title = topNews.get(position).title;
 										intent.putExtra("url", url);
@@ -351,7 +351,7 @@ public class ItemNewsPage extends BasePage {
 									TopNews news = topNews.get(position);
 									if (news.type.equals("news")) {
 										Intent intent = new Intent(ct,
-												NewsDetailActivity.class);
+												CBNNewsDetailActivity.class);
 										String url = topNews.get(position).url;
 										String commentUrl = topNews
 												.get(position).commenturl;

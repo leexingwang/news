@@ -225,6 +225,7 @@ public class ChannelActivity extends FragmentActivity implements
 
 			break;
 		case R.id.back:
+			saveChannel();
 			finish();
 			break;
 		default:

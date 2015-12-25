@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 @SuppressLint("SetJavaScriptEnabled")
-public class NewsDetailActivity extends BaseActivity {
+public class CBNNewsDetailActivity extends BaseActivity {
 	@ViewInject(R.id.news_detail_wv)
 	private WebView mWebView;
 	private WebSettings settings;

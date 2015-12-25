@@ -69,11 +69,27 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.qianlong.ui.activity.NewsDetailActivity"
+            android:name="com.example.qianlong.ui.activity.CBNNewsDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.topnewgrid.ChannelActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.ui.activity.CBNLiveActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.ui.activity.CBNSettingsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.ui.activity.CBNSettingsAboutUs"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.ui.activity.CBNSettingsPush"
             android:screenOrientation="portrait" >
         </activity>
     </application>

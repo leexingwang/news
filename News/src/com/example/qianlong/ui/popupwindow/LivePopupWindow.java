@@ -1,6 +1,7 @@
 package com.example.qianlong.ui.popupwindow;
 
 import com.example.qianlong.R;
+import com.example.qianlong.ui.activity.CBNLiveActivity;
 import com.example.qianlong.utils.uiutils.FastBlur;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
@@ -8,6 +9,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.animation.ValueAnimator;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -26,20 +28,21 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-public class LivePopupWindow extends PopupWindow implements OnClickListener{
+public class LivePopupWindow extends PopupWindow implements OnClickListener {
 
 	private String TAG = LivePopupWindow.class.getSimpleName();
 	Activity mContext;
 	private int mWidth;
 	private int mHeight;
-	private int statusBarHeight ;
-	private Bitmap mBitmap= null;
+	private int statusBarHeight;
+	private Bitmap mBitmap = null;
 	private Bitmap overlay = null;
-	
+
 	private Handler mHandler = new Handler();
 
 	public LivePopupWindow(Activity context) {
@@ -51,15 +54,14 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 		mContext.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
 		statusBarHeight = frame.top;
 		DisplayMetrics metrics = new DisplayMetrics();
-		mContext.getWindowManager().getDefaultDisplay()
-				.getMetrics(metrics);
+		mContext.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		mWidth = metrics.widthPixels;
 		mHeight = metrics.heightPixels;
-		
+
 		setWidth(mWidth);
 		setHeight(mHeight);
 	}
-	
+
 	private Bitmap blur() {
 		if (null != overlay) {
 			return overlay;
@@ -70,13 +72,14 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 		view.setDrawingCacheEnabled(true);
 		view.buildDrawingCache(true);
 		mBitmap = view.getDrawingCache();
-		
+
 		float scaleFactor = 8;
 		float radius = 40;
 		int width = mBitmap.getWidth();
-		int height =  mBitmap.getHeight();
+		int height = mBitmap.getHeight();
 
-		overlay = Bitmap.createBitmap((int) (width / scaleFactor),(int) (height / scaleFactor),Bitmap.Config.ARGB_8888);
+		overlay = Bitmap.createBitmap((int) (width / scaleFactor),
+				(int) (height / scaleFactor), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(overlay);
 		canvas.scale(1 / scaleFactor, 1 / scaleFactor);
 		Paint paint = new Paint();
@@ -84,11 +87,11 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 		canvas.drawBitmap(mBitmap, 0, 0, paint);
 
 		overlay = FastBlur.doBlur(overlay, (int) radius, true);
-		Log.i(TAG, "blur time is:"+(System.currentTimeMillis() - startMs));
+		Log.i(TAG, "blur time is:" + (System.currentTimeMillis() - startMs));
 		return overlay;
 	}
-	
-	private Animation showAnimation1(final View view,int fromY ,int toY) {
+
+	private Animation showAnimation1(final View view, int fromY, int toY) {
 		AnimationSet set = new AnimationSet(true);
 		TranslateAnimation go = new TranslateAnimation(0, 0, fromY, toY);
 		go.setDuration(300);
@@ -117,53 +120,53 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 		});
 		return set;
 	}
-	
 
-	public void showMoreWindow(View anchor,int bottomMargin) {
-		final RelativeLayout layout = (RelativeLayout)LayoutInflater.from(mContext).inflate(R.layout.center_live_window, null);
+	public void showMoreWindow(View anchor, int bottomMargin) {
+		final LinearLayout layout = (LinearLayout) LayoutInflater
+				.from(mContext).inflate(R.layout.center_live_window, null);
 		setContentView(layout);
-		
-		ImageView close= (ImageView)layout.findViewById(R.id.center_music_window_close);
-		android.widget.RelativeLayout.LayoutParams params =new android.widget.RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		params.bottomMargin = bottomMargin;
-		params.addRule(RelativeLayout.BELOW, R.id.more_window_auto);
-		params.addRule(RelativeLayout.RIGHT_OF, R.id.more_window_collect);
-		params.topMargin = 200;
-		params.leftMargin = 18;
-		close.setLayoutParams(params);
-		
+		ImageView close = (ImageView) layout
+				.findViewById(R.id.center_music_window_close);
+		layout.findViewById(R.id.more_window_local).setOnClickListener(this);
+		layout.findViewById(R.id.more_window_collect).setOnClickListener(this);
+		layout.findViewById(R.id.more_window_delete).setOnClickListener(this);
+		layout.findViewById(R.id.more_window_online).setOnClickListener(this);
+		init();
 		close.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (isShowing()) {
+
 					closeAnimation(layout);
 				}
 			}
 
 		});
-		
+
 		showAnimation(layout);
-		setBackgroundDrawable(new BitmapDrawable(mContext.getResources(), blur()));
+		setBackgroundDrawable(new BitmapDrawable(mContext.getResources(),
+				blur()));
 		setOutsideTouchable(true);
 		setFocusable(true);
 		showAtLocation(anchor, Gravity.BOTTOM, 0, statusBarHeight);
 	}
 
-	private void showAnimation(ViewGroup layout){
-		for(int i=0;i<layout.getChildCount();i++){
+	private void showAnimation(ViewGroup layout) {
+		for (int i = 0; i < layout.getChildCount(); i++) {
 			final View child = layout.getChildAt(i);
-			if(child.getId() == R.id.center_music_window_close){
+			if (child.getId() == R.id.center_music_window_close) {
 				continue;
 			}
 			child.setOnClickListener(this);
 			child.setVisibility(View.INVISIBLE);
 			mHandler.postDelayed(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					child.setVisibility(View.VISIBLE);
-					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 600, 0);
+					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child,
+							"translationY", 600, 0);
 					fadeAnim.setDuration(300);
 					PopupWindowAnimator kickAnimator = new PopupWindowAnimator();
 					kickAnimator.setDuration(150);
@@ -172,70 +175,75 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 				}
 			}, i * 50);
 		}
-		
+
 	}
 
-	private void closeAnimation(ViewGroup layout){
-		for(int i=0;i<layout.getChildCount();i++){
+	private void closeAnimation(ViewGroup layout) {
+		for (int i = 0; i < layout.getChildCount(); i++) {
 			final View child = layout.getChildAt(i);
-			if(child.getId() == R.id.center_music_window_close){
+			if (child.getId() == R.id.center_music_window_close) {
 				continue;
 			}
 			child.setOnClickListener(this);
 			mHandler.postDelayed(new Runnable() {
 				public void run() {
 					child.setVisibility(View.VISIBLE);
-					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 600);
+					ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child,
+							"translationY", 0, 600);
 					fadeAnim.setDuration(200);
 					PopupWindowAnimator kickAnimator = new PopupWindowAnimator();
 					kickAnimator.setDuration(100);
 					fadeAnim.setEvaluator(kickAnimator);
 					fadeAnim.start();
 					fadeAnim.addListener(new AnimatorListener() {
-						
+
 						@Override
 						public void onAnimationStart(Animator animation) {
 							// TODO Auto-generated method stub
-							
+
 						}
-						
+
 						@Override
 						public void onAnimationRepeat(Animator animation) {
 							// TODO Auto-generated method stub
-							
+
 						}
-						
+
 						@Override
 						public void onAnimationEnd(Animator animation) {
 							child.setVisibility(View.INVISIBLE);
+							dismiss();
+
 						}
-						
+
 						@Override
 						public void onAnimationCancel(Animator animation) {
 							// TODO Auto-generated method stub
-							
+
 						}
 					});
 				}
-			}, (layout.getChildCount()-i-1) * 30);
-			
-			if(child.getId() == R.id.more_window_local){
+			}, (layout.getChildCount() - i - 1) * 30);
+
+			if (child.getId() == R.id.more_window_local) {
 				mHandler.postDelayed(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						dismiss();
 					}
-				}, (layout.getChildCount()-i) * 30 + 80);
+				}, (layout.getChildCount() - i) * 30 + 80);
 			}
 		}
-		
+
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_window_local:
+			mContext.startActivity(new Intent(mContext, CBNLiveActivity.class));
+			dismiss();
 			break;
 		case R.id.more_window_online:
 			break;
@@ -243,16 +251,11 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 			break;
 		case R.id.more_window_collect:
 			break;
-		case R.id.more_window_auto:
-			break;
-		case R.id.more_window_external:
-			break;
-
 		default:
 			break;
 		}
 	}
-	
+
 	public void destroy() {
 		if (null != overlay) {
 			overlay.recycle();
@@ -265,5 +268,5 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener{
 			System.gc();
 		}
 	}
-	
+
 }
