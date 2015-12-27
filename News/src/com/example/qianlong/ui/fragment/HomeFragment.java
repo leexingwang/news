@@ -13,10 +13,9 @@ import com.example.qianlong.ui.popupwindow.LivePopupWindow;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.topnewgrid.ChannelActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
@@ -27,13 +26,6 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class HomeFragment extends BaseFragment {
-
-	@Override
-	protected View initView(LayoutInflater inflater) {
-		View view = inflater.inflate(R.layout.frag_home2, null);
-		ViewUtils.inject(this, view);
-		return view;
-	}
 
 	private HomePagerAdapter adapter;
 	private ArrayList<BasePage> pages = new ArrayList<BasePage>();
@@ -47,6 +39,14 @@ public class HomeFragment extends BaseFragment {
 	private LivePopupWindow mMoreWindow;
 	@ViewInject(R.id.rb_popupwindow)
 	public RadioButton radioButton;
+
+	@SuppressLint("InflateParams")
+	@Override
+	protected View initView(LayoutInflater inflater) {
+		View view = inflater.inflate(R.layout.frag_home2, null);
+		ViewUtils.inject(this, view);
+		return view;
+	}
 
 	@Override
 	protected void initData(Bundle savedInstanceState) {
@@ -84,10 +84,9 @@ public class HomeFragment extends BaseFragment {
 		pages.get(0).initData();
 		viewPager.setCurrentItem(0);
 		radioButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				showMoreWindow(viewPager);
 			}
 		});
