@@ -89,7 +89,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.qianlong.view.activity.CBNSettingsPushAcitivty"
+            android:name="com.example.qianlong.view.activity.CBNSettingsPush"
             android:screenOrientation="portrait" >
         </activity>
     </application>

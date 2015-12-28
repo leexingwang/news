@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CBNSettingsPushAcitivty extends Activity implements OnClickListener {
+public class CBNSettingsPush extends Activity implements OnClickListener {
 	private Button buttBack;
 	private ToggleButton toggleButtonHongguan;
 	private ToggleButton toggleButtonShangye;
@@ -30,7 +30,7 @@ public class CBNSettingsPushAcitivty extends Activity implements OnClickListener
 		toggleButtonHongguan.setOnToggleChanged(new OnToggleChanged() {
 			@Override
 			public void onToggle(boolean on) {
-				SharePrefUtil.saveBoolean(CBNSettingsPushAcitivty.this,
+				SharePrefUtil.saveBoolean(CBNSettingsPush.this,
 						SharePrefUtil.KEY.SETTINGS_PUSH_HONGGUAN, on);
 			}
 		});
@@ -39,7 +39,7 @@ public class CBNSettingsPushAcitivty extends Activity implements OnClickListener
 
 			@Override
 			public void onToggle(boolean on) {
-				SharePrefUtil.saveBoolean(CBNSettingsPushAcitivty.this,
+				SharePrefUtil.saveBoolean(CBNSettingsPush.this,
 						SharePrefUtil.KEY.SETTINGS_PUSH_SHANGYE, on);
 			}
 		});
@@ -48,7 +48,7 @@ public class CBNSettingsPushAcitivty extends Activity implements OnClickListener
 
 			@Override
 			public void onToggle(boolean on) {
-				SharePrefUtil.saveBoolean(CBNSettingsPushAcitivty.this,
+				SharePrefUtil.saveBoolean(CBNSettingsPush.this,
 						SharePrefUtil.KEY.SETTINGS_PUSH_TOUZI, on);
 			}
 		});
@@ -57,7 +57,7 @@ public class CBNSettingsPushAcitivty extends Activity implements OnClickListener
 
 			@Override
 			public void onToggle(boolean on) {
-				SharePrefUtil.saveBoolean(CBNSettingsPushAcitivty.this,
+				SharePrefUtil.saveBoolean(CBNSettingsPush.this,
 						SharePrefUtil.KEY.SETTINGS_PUSH_YEJIAN, on);
 
 			}
