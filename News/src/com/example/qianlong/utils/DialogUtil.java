@@ -1,8 +1,5 @@
 package com.example.qianlong.utils;
 
-
-
-
 import android.app.Dialog;
 import android.content.Context;
 
@@ -12,15 +9,15 @@ import android.content.Context;
  */
 public class DialogUtil {
 
-
 	/**
 	 * 创建进度对话框
+	 * 
 	 * @param context
 	 * @param content
 	 * @return
 	 */
-	public static Dialog createProgressDialog(Context context,String content){
+	public static Dialog createProgressDialog(Context context, String content) {
 		return new CustomProgressDialog(context, content);
 	}
-	
+
 }
