@@ -20,7 +20,6 @@ public class SettingPage extends BasePage {
 
 	public SettingPage(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -34,13 +33,11 @@ public class SettingPage extends BasePage {
 
 	@Override
 	public void initData() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.imgbut_settings:
 			ct.startActivity(new Intent(ct, CBNSettingsActivity.class));
