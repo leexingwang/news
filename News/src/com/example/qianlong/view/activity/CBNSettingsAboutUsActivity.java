@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CBNSettingsAboutUsAcitivty extends Activity implements OnClickListener {
+public class CBNSettingsAboutUsActivity extends Activity implements OnClickListener {
 	private Button buttBack;
 
 	@Override

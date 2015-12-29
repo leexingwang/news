@@ -58,10 +58,10 @@ public class CBNSettingsActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.imgbtn_about_us:
-			startActivity(new Intent(this, CBNSettingsAboutUsAcitivty.class));
+			startActivity(new Intent(this, CBNSettingsAboutUsActivity.class));
 			break;
 		case R.id.imgbtn_push:
-			startActivity(new Intent(this, CBNSettingsPush.class));
+			startActivity(new Intent(this, CBNSettingsPushActivity.class));
 			break;
 		default:
 			break;
