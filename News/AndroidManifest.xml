@@ -81,6 +81,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.example.qianlong.view.activity.CBNLiveTextActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.example.qianlong.view.activity.CBNSettingsActivity"
             android:screenOrientation="portrait" >
         </activity>
