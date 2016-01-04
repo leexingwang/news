@@ -8,17 +8,20 @@
     <include layout="@layout/cbn_pop_bar" />
 
     <com.base.common.ui.ToggleButton
+        android:id="@+id/toggle_live"
         android:layout_width="40dp"
         android:layout_height="20dp"
         android:layout_gravity="right|top"
         android:layout_margin="10dp"
         app:onColor="#23E47B" />
 
-    <ListView
+    <com.base.common.ui.pullrefreshview.PullToRefreshListView
         android:id="@+id/listview_live"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:footerDividersEnabled="false" >
-    </ListView>
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:footerDividersEnabled="false"
+        android:showDividers="none" >
+    </com.base.common.ui.pullrefreshview.PullToRefreshListView>
 
 </LinearLayout>

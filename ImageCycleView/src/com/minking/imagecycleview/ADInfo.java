@@ -1,9 +1,4 @@
 package com.minking.imagecycleview;
-/**
- * 描述：广告信息</br>
- * @author Eden Cheng</br>
- * @version 2015年4月23日 上午11:32:53
- */
 public class ADInfo {
 	String id = "";
 	String url = "";

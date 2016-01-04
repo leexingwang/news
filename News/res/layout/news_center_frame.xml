@@ -10,9 +10,9 @@
         layout="@layout/layout_title_bar" />
 
     <FrameLayout
-        android:layout_below="@id/title_bar"
         android:id="@+id/news_center_fl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar" />
 
 </RelativeLayout>
