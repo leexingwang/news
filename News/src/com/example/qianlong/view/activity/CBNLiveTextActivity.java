@@ -1,10 +1,7 @@
 package com.example.qianlong.view.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +68,8 @@ public class CBNLiveTextActivity extends Activity {
 				params.addBodyParameter("page", "1");
 				params.addBodyParameter("type", "2");
 				params.addBodyParameter("check",
-						MD5.MD5("stringlist" + 2 + 20 + 1 + "IGUadi9SuFix"));
+
+				MD5.MD5("stringlist" + 2 + 20 + 1 + "IGUadi9SuFix"));
 				http.send(HttpMethod.POST, HOSTFORTUNE, params,
 						new RequestCallBack() {
 							@Override

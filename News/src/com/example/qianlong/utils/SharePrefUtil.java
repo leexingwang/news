@@ -1,20 +1,13 @@
 package com.example.qianlong.utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import org.apache.commons.codec.binary.Base64;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
 
 /**
  * SharePreferences操作工具类
  */
 public class SharePrefUtil {
+	@SuppressWarnings("unused")
 	private static String tag = SharePrefUtil.class.getSimpleName();
 	private final static String SP_NAME = "config";
 	private static SharedPreferences sp;
@@ -185,64 +178,6 @@ public class SharePrefUtil {
 		if (sp == null)
 			sp = context.getSharedPreferences(SP_NAME, 0);
 		return sp.getBoolean(key, defValue);
-	}
-
-	/**
-	 * 将对象进行base64编码后保存到SharePref中
-	 * 
-	 * @param context
-	 * @param key
-	 * @param object
-	 */
-	public static void saveObj(Context context, String key, Object object) {
-		if (sp == null)
-			sp = context.getSharedPreferences(SP_NAME, 0);
-
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ObjectOutputStream oos = null;
-		try {
-			oos = new ObjectOutputStream(baos);
-			oos.writeObject(object);
-			// 将对象的转为base64码
-			String objBase64 = new String(Base64.encodeBase64(baos
-					.toByteArray()));
-
-			sp.edit().putString(key, objBase64).commit();
-			oos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 将SharePref中经过base64编码的对象读取出来
-	 * 
-	 * @param context
-	 * @param key
-	 * @param defValue
-	 * @return
-	 */
-	public static Object getObj(Context context, String key) {
-		if (sp == null)
-			sp = context.getSharedPreferences(SP_NAME, 0);
-		String objBase64 = sp.getString(key, null);
-		if (TextUtils.isEmpty(objBase64))
-			return null;
-
-		// 对Base64格式的字符串进行解码
-		byte[] base64Bytes = Base64.decodeBase64(objBase64.getBytes());
-		ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
-
-		ObjectInputStream ois;
-		Object obj = null;
-		try {
-			ois = new ObjectInputStream(bais);
-			obj = (Object) ois.readObject();
-			ois.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return obj;
 	}
 
 }
