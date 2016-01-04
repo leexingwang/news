@@ -1,4 +1,4 @@
-package com.example.qianlong.view.activity;
+package com.mvc.demo.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ import android.widget.ListView;
  * @author lixingwang
  * 
  */
-public class CBNLiveTextActivity extends Activity implements OnLiveListener {
+public class CBNLiveTextMVCDemoActivity extends Activity implements OnLiveListener {
 
 	List<Live> lives = new ArrayList<Live>();
 	PullToRefreshListView listView;
@@ -60,13 +60,13 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener {
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", "2", CBNLiveTextActivity.this);
+				live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", "2", CBNLiveTextMVCDemoActivity.this);
 			}
 
 			@Override
 			public void onPullUpToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				live7_24ModelImpl.getLiveInfo("stringlist", "20", "2", "2", CBNLiveTextActivity.this);
+				live7_24ModelImpl.getLiveInfo("stringlist", "20", "2", "2", CBNLiveTextMVCDemoActivity.this);
 			}
 		});
 		listView.getRefreshableView().setOnItemClickListener(

@@ -1,30 +1,19 @@
-package com.example.qianlong.view.activity;
+package com.mvp.demo.view;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.base.common.ui.pullrefreshview.PullToRefreshBase;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.example.qianlong.R;
 import com.example.qianlong.bean.Live;
-import com.example.qianlong.utils.MD5;
 import com.example.qianlong.view.adpter.TimelineAdapter;
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
-import com.mvc.demo.model.Live7_24Model.OnLiveListener;
-import com.mvc.demo.model.modelimpl.Live7_24ModelImpl;
+import com.mvp.demo.presenter.presenterimpl.LivePresenterImpl;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -35,12 +24,12 @@ import android.widget.ListView;
  * @author lixingwang
  * 
  */
-public class CBNLiveTextActivity extends Activity implements OnLiveListener {
+public class CBNLiveTextMVCDemoActivity extends Activity implements LiveView {
 
 	List<Live> lives = new ArrayList<Live>();
 	PullToRefreshListView listView;
 	TimelineAdapter adapter;
-	Live7_24ModelImpl live7_24ModelImpl;
+	LivePresenterImpl livePresenterImpl = new LivePresenterImpl(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +49,13 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener {
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", "2", CBNLiveTextActivity.this);
+				livePresenterImpl.getLiveInfo("stringlist", "20", "1", "2");
 			}
 
 			@Override
 			public void onPullUpToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				live7_24ModelImpl.getLiveInfo("stringlist", "20", "2", "2", CBNLiveTextActivity.this);
+				livePresenterImpl.getLiveInfo("stringlist", "20", "2", "2");
 			}
 		});
 		listView.getRefreshableView().setOnItemClickListener(
@@ -83,7 +72,6 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener {
 	Live live = new Live();
 
 	private void init() {
-		live7_24ModelImpl=new Live7_24ModelImpl();
 		for (int i = 0; i < 10; i++) {
 			live.setAdminName("SXS");
 			live.setLiveContent(i % 2 == 0 ? "12345"
@@ -103,15 +91,21 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener {
 		listView.onPullDownRefreshComplete();
 	    listView.onPullUpRefreshComplete();
 	}
+
+
 	@Override
-	public void onSuccess(List<Live> lives) {
+	public void setLiveInfo(List<Live> lives) {
+		// TODO Auto-generated method stub
 		loadedCompleted();
 		lives.addAll(lives);
 		adapter.notifyDataSetChanged();
+		
 	}
 
+
 	@Override
-	public void onError(HttpException arg0, String arg1) {
+	public void setLiveErrorInfo(HttpException arg0, String arg1) {
+		// TODO Auto-generated method stub
 		loadedCompleted();
 	}
 }
