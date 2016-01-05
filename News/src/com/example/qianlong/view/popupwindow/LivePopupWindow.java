@@ -2,6 +2,7 @@ package com.example.qianlong.view.popupwindow;
 
 import com.example.qianlong.R;
 import com.example.qianlong.utils.uiutils.FastBlur;
+import com.example.qianlong.view.activity.CBNBroadCastActivity;
 import com.example.qianlong.view.activity.CBNLiveActivity;
 import com.example.qianlong.view.activity.CBNLiveTextActivity;
 import com.nineoldandroids.animation.Animator;
@@ -249,6 +250,9 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener {
 			dismiss();
 			break;
 		case R.id.more_window_delete:
+			mContext.startActivity(new Intent(mContext,
+					CBNBroadCastActivity.class));
+			dismiss();
 			break;
 		case R.id.more_window_collect:
 			break;

@@ -67,6 +67,11 @@ public class TimelineAdapter extends BaseAdapter {
 		} else {
 			viewHolder.year_month_day.setVisibility(View.GONE);
 		}
+		if(live.getLiveType()==2){
+			viewHolder.live_content.setTextColor(context.getResources().getColor(R.color.red));
+		}else{
+			viewHolder.live_content.setTextColor(context.getResources().getColor(R.color.black));
+		}
 		viewHolder.live_content.setText(live.getLiveContent());
 		viewHolder.live_time.setText(live.getLiveDate().subSequence(11,
 				live.getLiveDate().length()));

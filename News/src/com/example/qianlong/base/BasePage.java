@@ -3,7 +3,7 @@ package com.example.qianlong.base;
 import com.example.qianlong.R;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomToast;
-import com.example.qianlong.view.activity.MainActivity;
+import com.example.qianlong.view.activity.CBNHomeActivity;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;

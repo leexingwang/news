@@ -35,6 +35,11 @@ public class SharePrefUtil {
 		String SETTINGS_3G_4G_GUANKAN = "settings_3G_4G_guankan";
 
 		boolean SETTINGS_3G_4G_DEFAULT = true;
+
+		// 7*24信息是否红色状态
+		String IS_7_24_RED = "7_24_red";
+
+		boolean IS_7_24_RED_DEFAULT = false;
 	}
 
 	/**

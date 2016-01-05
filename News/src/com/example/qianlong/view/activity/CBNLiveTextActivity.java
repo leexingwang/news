@@ -2,31 +2,27 @@ package com.example.qianlong.view.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
+import com.base.common.ui.ToggleButton;
+import com.base.common.ui.ToggleButton.OnToggleChanged;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.example.qianlong.R;
 import com.example.qianlong.bean.Live;
-import com.example.qianlong.utils.MD5;
+import com.example.qianlong.modle.Live7_24Model.OnLiveListener;
+import com.example.qianlong.modle.modleimpl.Live7_24ModelImpl;
+import com.example.qianlong.utils.CommonUtil;
+import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.view.adpter.TimelineAdapter;
-import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
-import com.mvc.demo.model.Live7_24Model.OnLiveListener;
-import com.mvc.demo.model.modelimpl.Live7_24ModelImpl;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -35,12 +31,18 @@ import android.widget.ListView;
  * @author lixingwang
  * 
  */
-public class CBNLiveTextActivity extends Activity implements OnLiveListener {
+public class CBNLiveTextActivity extends Activity implements OnLiveListener,
+		OnToggleChanged, OnClickListener {
 
-	List<Live> lives = new ArrayList<Live>();
-	PullToRefreshListView listView;
-	TimelineAdapter adapter;
-	Live7_24ModelImpl live7_24ModelImpl;
+	private List<Live> lives = new ArrayList<Live>();
+	private PullToRefreshListView listView;
+	private TimelineAdapter adapter;
+	private Live7_24ModelImpl live7_24ModelImpl;
+	private ToggleButton toggleButton;
+	private int pageNumber = 1;
+	private int newsType = 0;
+	private Button leftButton;
+	private Button rightButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +62,19 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener {
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", "2", CBNLiveTextActivity.this);
+				live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType
+						+ "", CBNLiveTextActivity.this,
+						Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+				setLastUpdateTime();
 			}
 
 			@Override
 			public void onPullUpToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				live7_24ModelImpl.getLiveInfo("stringlist", "20", "2", "2", CBNLiveTextActivity.this);
+				live7_24ModelImpl.getLiveInfo("stringlist", "20",
+						(pageNumber + 1) + "", newsType + "",
+						CBNLiveTextActivity.this,
+						Live7_24ModelImpl.LIVE_LOAD_MORE);
 			}
 		});
 		listView.getRefreshableView().setOnItemClickListener(
@@ -80,38 +88,92 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener {
 				});
 	}
 
-	Live live = new Live();
-
 	private void init() {
-		live7_24ModelImpl=new Live7_24ModelImpl();
-		for (int i = 0; i < 10; i++) {
-			live.setAdminName("SXS");
-			live.setLiveContent(i % 2 == 0 ? "12345"
-					: "沪指收报3539.18点，下跌0.94%，成交额2540.3亿元。深成指收报12664.89点，下跌1.75%，成交额4325.7亿元。创业板收报2714.05点，下跌2.36%，成交额1118.9亿元。");
-			live.setLiveDate("2015-12-29T15:08:0" + i);
-			live.setLiveFrom("");
-			live.setLiveID(52482);
-			live.setLivePic("");
-			live.setLiveType(4);
-			lives.add(live);
+		live7_24ModelImpl = new Live7_24ModelImpl();
+		toggleButton = (ToggleButton) findViewById(R.id.toggle_live);
+		toggleButton.setOnToggleChanged(this);
+		initToggle();
+		live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType + "",
+				CBNLiveTextActivity.this, Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+		rightButton = (Button) findViewById(R.id.right_Button);
+		leftButton = (Button) findViewById(R.id.leftButton);
+		rightButton.setOnClickListener(this);
+		leftButton.setOnClickListener(this);
+		rightButton
+				.setBackgroundResource(R.drawable.base_action_bar_action_refresh);
+	}
+
+	private void initToggle() {
+		boolean isRed = SharePrefUtil.getBoolean(this,
+				SharePrefUtil.KEY.IS_7_24_RED,
+				SharePrefUtil.KEY.IS_7_24_RED_DEFAULT);
+		if (isRed) {
+			toggleButton.setToggleOn();
+			newsType = 2;
+		} else {
+			toggleButton.setToggleOff();
+			newsType = 1;
+		}
+	}
+
+	private void loadedCompleted() {
+		listView.onPullDownRefreshComplete();
+		listView.onPullUpRefreshComplete();
+	}
+
+	@Override
+	public void onSuccess(List<Live> lives, int loadType) {
+		loadedCompleted();
+		if (loadType == Live7_24ModelImpl.LIVE_LOAD_MORE) {
+			this.lives.addAll(lives);
+			if (lives.size() != 20)
+				pageNumber++;
+		} else {
+			this.lives.clear();
+			this.lives.addAll(lives);
+			pageNumber = 1;
 		}
 
-	}
-
-
-	private void loadedCompleted(){
-		listView.onPullDownRefreshComplete();
-	    listView.onPullUpRefreshComplete();
-	}
-	@Override
-	public void onSuccess(List<Live> lives) {
-		loadedCompleted();
-		lives.addAll(lives);
 		adapter.notifyDataSetChanged();
+	}
+
+	private void setLastUpdateTime() {
+		String text = CommonUtil.getStringDate();
+		listView.setLastUpdatedLabel(text);
 	}
 
 	@Override
 	public void onError(HttpException arg0, String arg1) {
 		loadedCompleted();
+	}
+
+	@Override
+	public void onToggle(boolean on) {
+		SharePrefUtil.saveBoolean(this, SharePrefUtil.KEY.IS_7_24_RED, on);
+		if (on) {
+			newsType = 2;
+		} else {
+			newsType = 0;
+		}
+		live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType + "",
+				CBNLiveTextActivity.this, Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+	}
+
+	@Override
+	public void onClick(View view) {
+		switch (view.getId()) {
+		case R.id.right_Button:
+			pageNumber = 1;
+			live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType
+					+ "", CBNLiveTextActivity.this,
+					Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+			break;
+		case R.id.leftButton:
+			finish();
+			break;
+
+		default:
+			break;
+		}
 	}
 }
