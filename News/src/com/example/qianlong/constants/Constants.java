@@ -1,4 +1,4 @@
-package com.example.qianlong.utils;
+package com.example.qianlong.constants;
 
 public class Constants {
 	public final static String APP_ICON_URL="http://zhbj.qianlong.com/logo.png";

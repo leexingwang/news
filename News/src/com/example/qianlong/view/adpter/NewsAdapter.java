@@ -8,8 +8,8 @@ import com.example.qianlong.R.id;
 import com.example.qianlong.R.layout;
 import com.example.qianlong.base.QLBaseAdapter;
 import com.example.qianlong.bean.NewsListBean.News;
+import com.example.qianlong.constants.Constants;
 import com.example.qianlong.utils.CommonUtil;
-import com.example.qianlong.utils.Constants;
 import com.example.qianlong.utils.SharePrefUtil;
 import com.lidroid.xutils.BitmapUtils;
 

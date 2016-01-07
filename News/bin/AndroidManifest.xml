@@ -97,7 +97,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.example.qianlong.view.activity.CBNBroadCastActivity"
+            android:name="com.example.qianlong.view.activity.CBNLiveBroadCastActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.view.activity.CBNLoginActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>

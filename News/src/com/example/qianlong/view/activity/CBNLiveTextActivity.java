@@ -10,8 +10,8 @@ import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.example.qianlong.R;
 import com.example.qianlong.bean.Live;
-import com.example.qianlong.modle.Live7_24Model.OnLiveListener;
-import com.example.qianlong.modle.modleimpl.Live7_24ModelImpl;
+import com.example.qianlong.modle.LiveTextModle.OnLiveListener;
+import com.example.qianlong.modle.modleimpl.LiveTextModleImpl;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.view.adpter.TimelineAdapter;
@@ -37,7 +37,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 	private List<Live> lives = new ArrayList<Live>();
 	private PullToRefreshListView listView;
 	private TimelineAdapter adapter;
-	private Live7_24ModelImpl live7_24ModelImpl;
+	private LiveTextModleImpl live7_24ModelImpl;
 	private ToggleButton toggleButton;
 	private int pageNumber = 1;
 	private int newsType = 0;
@@ -64,7 +64,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 					PullToRefreshBase<ListView> refreshView) {
 				live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType
 						+ "", CBNLiveTextActivity.this,
-						Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+						LiveTextModleImpl.LIVE_LOAD_REFRESH);
 				setLastUpdateTime();
 			}
 
@@ -74,7 +74,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 				live7_24ModelImpl.getLiveInfo("stringlist", "20",
 						(pageNumber + 1) + "", newsType + "",
 						CBNLiveTextActivity.this,
-						Live7_24ModelImpl.LIVE_LOAD_MORE);
+						LiveTextModleImpl.LIVE_LOAD_MORE);
 			}
 		});
 		listView.getRefreshableView().setOnItemClickListener(
@@ -89,12 +89,12 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 	}
 
 	private void init() {
-		live7_24ModelImpl = new Live7_24ModelImpl();
+		live7_24ModelImpl = new LiveTextModleImpl();
 		toggleButton = (ToggleButton) findViewById(R.id.toggle_live);
 		toggleButton.setOnToggleChanged(this);
 		initToggle();
 		live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType + "",
-				CBNLiveTextActivity.this, Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+				CBNLiveTextActivity.this, LiveTextModleImpl.LIVE_LOAD_REFRESH);
 		rightButton = (Button) findViewById(R.id.right_Button);
 		leftButton = (Button) findViewById(R.id.leftButton);
 		rightButton.setOnClickListener(this);
@@ -112,7 +112,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 			newsType = 2;
 		} else {
 			toggleButton.setToggleOff();
-			newsType = 1;
+			newsType = 0;
 		}
 	}
 
@@ -124,7 +124,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 	@Override
 	public void onSuccess(List<Live> lives, int loadType) {
 		loadedCompleted();
-		if (loadType == Live7_24ModelImpl.LIVE_LOAD_MORE) {
+		if (loadType == LiveTextModleImpl.LIVE_LOAD_MORE) {
 			this.lives.addAll(lives);
 			if (lives.size() != 20)
 				pageNumber++;
@@ -133,7 +133,6 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 			this.lives.addAll(lives);
 			pageNumber = 1;
 		}
-
 		adapter.notifyDataSetChanged();
 	}
 
@@ -156,7 +155,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 			newsType = 0;
 		}
 		live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType + "",
-				CBNLiveTextActivity.this, Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+				CBNLiveTextActivity.this, LiveTextModleImpl.LIVE_LOAD_REFRESH);
 	}
 
 	@Override
@@ -166,7 +165,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 			pageNumber = 1;
 			live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType
 					+ "", CBNLiveTextActivity.this,
-					Live7_24ModelImpl.LIVE_LOAD_REFRESH);
+					LiveTextModleImpl.LIVE_LOAD_REFRESH);
 			break;
 		case R.id.leftButton:
 			finish();

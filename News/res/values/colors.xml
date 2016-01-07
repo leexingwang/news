@@ -6,18 +6,11 @@
     <color name="black">#000000</color>
     <color name="red">#E51A18</color>
     <color name="line_color">#523E2E</color>
-   
     <color name="search_tab_nomarl">#363636</color>
     <color name="search_tab_select">#E82926</color>
     <color name="menu_item_text_color">#E60200</color>
-    
     <color name="news_item_has_read_textcolor">#828282</color>
     <color name="news_item_no_read_textcolor">#363636</color>
-    
-    
-    
-    
-    
     <color name="transparent">#00000000</color>
 
     <item name="subscribe_item_text_color_normal_night" type="color">@color/default_text_night</item>
@@ -49,5 +42,7 @@
     <color name="subscribe_activity_bg">#ffefefef</color>
     <color name="subscribe_bg">#fff5f5f5</color>
     <color name="subscribe_seperate_line">#ffcdcdcd</color>
+    <!--  -->
+    <color name="bg_color">#fff5f5f5</color>
 
 </resources>

@@ -22,7 +22,7 @@
             android:background="@drawable/cbn_login_sz" />
 
         <com.base.common.ui.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/circleimage_profile_image"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@drawable/cbn_default" />

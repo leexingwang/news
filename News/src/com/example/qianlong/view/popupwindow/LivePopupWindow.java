@@ -2,7 +2,7 @@ package com.example.qianlong.view.popupwindow;
 
 import com.example.qianlong.R;
 import com.example.qianlong.utils.uiutils.FastBlur;
-import com.example.qianlong.view.activity.CBNBroadCastActivity;
+import com.example.qianlong.view.activity.CBNLiveBroadCastActivity;
 import com.example.qianlong.view.activity.CBNLiveActivity;
 import com.example.qianlong.view.activity.CBNLiveTextActivity;
 import com.nineoldandroids.animation.Animator;
@@ -145,8 +145,6 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener {
 		});
 
 		showAnimation(layout);
-		setBackgroundDrawable(new BitmapDrawable(mContext.getResources(),
-				blur()));
 		setOutsideTouchable(true);
 		setFocusable(true);
 		showAtLocation(anchor, Gravity.BOTTOM, 0, statusBarHeight);
@@ -250,11 +248,11 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener {
 			dismiss();
 			break;
 		case R.id.more_window_delete:
-			mContext.startActivity(new Intent(mContext,
-					CBNBroadCastActivity.class));
-			dismiss();
 			break;
 		case R.id.more_window_collect:
+			mContext.startActivity(new Intent(mContext,
+					CBNLiveBroadCastActivity.class));
+			dismiss();
 			break;
 		default:
 			break;

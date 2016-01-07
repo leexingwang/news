@@ -2,7 +2,7 @@ package com.example.qianlong.base;
 
 import com.example.qianlong.R;
 import com.example.qianlong.application.AppApplication;
-import com.example.qianlong.utils.AppManager;
+import com.example.qianlong.application.AppManager;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomProgressDialog;
 import com.example.qianlong.utils.CustomToast;

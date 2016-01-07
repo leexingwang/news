@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 
 import com.example.qianlong.bean.Live;
-import com.example.qianlong.modle.Live7_24Model;
+import com.example.qianlong.modle.LiveTextModle;
 import com.example.qianlong.utils.MD5;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -18,7 +18,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
-public class Live7_24ModelImpl implements Live7_24Model {
+public class LiveTextModleImpl implements LiveTextModle {
 	private String HOSTFORTUNE = "http://app.yicai.com/srv/app.ashx";
 	private List<Live> lives = new ArrayList<Live>();
 	public static int LIVE_LOAD_MORE = 1;

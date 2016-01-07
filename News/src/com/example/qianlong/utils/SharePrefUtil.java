@@ -31,7 +31,7 @@ public class SharePrefUtil {
 		String SETTINGS_PUSH_YEJIAN = "settings_push_yejian";
 		boolean SETTINGS_PUSH_DEFAULT = true;
 
-		// 3G/4G状况下看视频
+		// 3G/4G状况下听广播看视频
 		String SETTINGS_3G_4G_GUANKAN = "settings_3G_4G_guankan";
 
 		boolean SETTINGS_3G_4G_DEFAULT = true;
