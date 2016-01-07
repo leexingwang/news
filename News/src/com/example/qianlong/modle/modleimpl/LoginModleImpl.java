@@ -32,7 +32,7 @@ public class LoginModleImpl implements LoginModle {
 			OnRegistListener onRegistListener) {
 		String json = new Gson().toJson(new RegistEntiy(phone_number, username,
 				plain_password));
-		postRegist(LoginConstants.OAUTH2_URL_Regist, json, onRegistListener);
+		postRegist(LoginConstants.OAUTH2_URL+"users", json, onRegistListener);
 
 	}
 
@@ -46,6 +46,29 @@ public class LoginModleImpl implements LoginModle {
 			public void onResponse(Response response) throws IOException {
 				TLog.log(response.body().string());
 				onRegistListener.onRegistSuccess();
+
+			}
+
+			@Override
+			public void onFailure(Request arg0, IOException arg1) {
+				TLog.log(arg0.toString());
+				onRegistListener.onRegistError();
+
+			}
+		});
+	}
+
+	@Override
+	public void userRegistConfirm(String id, String confirmationToken,
+			final OnRegistListener onRegistListener) {
+		RequestBody body = RequestBody.create(JSON, "");
+		Request request = new Request.Builder().url(LoginConstants.OAUTH2_URL+"users/"+id+LoginConstants.CONFIRM+confirmationToken).post(body).build();
+		client.newCall(request).enqueue(new Callback() {
+
+			@Override
+			public void onResponse(Response response) throws IOException {
+				TLog.log(response.body().string());
+				onRegistListener.onRegistSuccess(); 
 
 			}
 
