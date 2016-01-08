@@ -1,13 +1,13 @@
 package com.example.qianlong.bean;
 
-public class RegistEntiy {
+public class RegistEntity {
 	private String phone_number;
 
 	private String username;
 
 	private String plain_password;
 
-	public RegistEntiy(String phone_number, String username,
+	public RegistEntity(String phone_number, String username,
 			String plain_password) {
 		super();
 		this.phone_number = phone_number;
