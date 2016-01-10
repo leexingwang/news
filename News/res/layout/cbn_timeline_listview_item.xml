@@ -55,7 +55,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="30dp"
-            android:layout_toRightOf="@id/ll_time_left"
             android:minHeight="40dp"
             android:text="111111111"
             android:textSize="14sp" />

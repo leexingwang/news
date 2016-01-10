@@ -7,6 +7,7 @@ import com.base.common.ui.LazyViewPager.OnPageChangeListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BaseFragment;
 import com.example.qianlong.base.BasePage;
+import com.example.qianlong.view.adpter.HomePagerAdapter;
 import com.example.qianlong.view.page.NewsCenterPage;
 import com.example.qianlong.view.page.SettingPage;
 import com.example.qianlong.view.popupwindow.LivePopupWindow;
@@ -15,9 +16,7 @@ import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -117,50 +116,44 @@ public class HomeFragment extends BaseFragment {
 		mainRg.check(curCheckId);
 	}
 
-	public NewsCenterPage getNewsCenterPage() {
-		NewsCenterPage page = (NewsCenterPage) pages.get(1);
-		return page;
-
-	}
-
-	class HomePagerAdapter extends PagerAdapter {
-		@SuppressWarnings("unused")
-		private Context mContext;
-		private ArrayList<BasePage> pages;
-
-		public HomePagerAdapter(Context ct, ArrayList<BasePage> pages) {
-			this.mContext = ct;
-			this.pages = pages;
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return pages.size();
-		}
-
-		@Override
-		public boolean isViewFromObject(View arg0, Object arg1) {
-			// TODO Auto-generated method stub
-			return arg1 == arg0;
-		}
-
-		@Override
-		public void destroyItem(View container, int position, Object object) {
-			// TODO Auto-generated method stub
-			((CustomViewPager) container).removeView(pages.get(position)
-					.getContentView());
-		}
-
-		@Override
-		public Object instantiateItem(View arg0, int arg1) {
-			// TODO Auto-generated method stub
-			((CustomViewPager) arg0).addView(pages.get(arg1).getContentView(),
-					0);
-			return pages.get(arg1).getContentView();
-		}
-
-	}
+	// class HomePagerAdapter extends PagerAdapter {
+	// @SuppressWarnings("unused")
+	// private Context mContext;
+	// private ArrayList<BasePage> pages;
+	//
+	// public HomePagerAdapter(Context ct, ArrayList<BasePage> pages) {
+	// this.mContext = ct;
+	// this.pages = pages;
+	// }
+	//
+	// @Override
+	// public int getCount() {
+	// // TODO Auto-generated method stub
+	// return pages.size();
+	// }
+	//
+	// @Override
+	// public boolean isViewFromObject(View arg0, Object arg1) {
+	// // TODO Auto-generated method stub
+	// return arg1 == arg0;
+	// }
+	//
+	// @Override
+	// public void destroyItem(View container, int position, Object object) {
+	// // TODO Auto-generated method stub
+	// ((CustomViewPager) container).removeView(pages.get(position)
+	// .getContentView());
+	// }
+	//
+	// @Override
+	// public Object instantiateItem(View arg0, int arg1) {
+	// // TODO Auto-generated method stub
+	// ((CustomViewPager) arg0).addView(pages.get(arg1).getContentView(),
+	// 0);
+	// return pages.get(arg1).getContentView();
+	// }
+	//
+	// }
 
 	@Override
 	protected void processClick(View v) {
@@ -173,7 +166,6 @@ public class HomeFragment extends BaseFragment {
 			mMoreWindow = new LivePopupWindow(getActivity());
 			mMoreWindow.init();
 		}
-
 		mMoreWindow.showMoreWindow(view, 100);
 	}
 }

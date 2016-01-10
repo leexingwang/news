@@ -28,7 +28,6 @@ public class NewsPage extends BasePage {
 		category = newsCategory;
 	}
 
-
 	@Override
 	protected View initView(LayoutInflater inflater) {
 		View view = inflater.inflate(R.layout.frag_news, null);
@@ -121,13 +120,11 @@ public class NewsPage extends BasePage {
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
 			return category.children.size();
 		}
 
 		@Override
 		public boolean isViewFromObject(View arg0, Object arg1) {
-			// TODO Auto-generated method stub
 			return arg1 == arg0;
 		}
 
@@ -135,7 +132,6 @@ public class NewsPage extends BasePage {
 
 	@Override
 	protected void processClick(View v) {
-		// TODO Auto-generated method stub
 
 	}
 

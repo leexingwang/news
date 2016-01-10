@@ -1,5 +1,9 @@
 package com.example.qianlong.application;
 
+
+import okhttp3.OkHttpClient;
+
+import com.network.http.okhttp.OkHttpUtils;
 import com.topnewgrid.db.ChannelSQLHelper;
 
 import android.app.Application;
@@ -14,6 +18,7 @@ public class AppApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		mAppApplication = this;
+		OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
 	}
 
 	/** ªÒ»°Application */

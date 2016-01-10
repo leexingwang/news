@@ -83,7 +83,9 @@ public class NewsCenterPage extends BasePage {
 		pageList.clear();
 		BasePage newsPage = new NewsPage(ct, newsCategory);
 		pageList.add(newsPage);
-		switchFragment(0);
+		news_center_fl.removeAllViews();
+		news_center_fl.addView(pageList.get(0).getContentView());
+		pageList.get(0).initData();
 	}
 
 	@ViewInject(R.id.news_center_fl)
