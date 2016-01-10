@@ -9,7 +9,7 @@ import com.base.common.ui.pullrefreshview.PullToRefreshBase;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.example.qianlong.R;
-import com.example.qianlong.bean.Live;
+import com.example.qianlong.bean.LiveBean;
 import com.example.qianlong.modle.LiveTextModle.OnLiveListener;
 import com.example.qianlong.modle.modleimpl.LiveTextModleImpl;
 import com.example.qianlong.utils.CommonUtil;
@@ -34,7 +34,7 @@ import android.widget.ListView;
 public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 		OnToggleChanged, OnClickListener {
 
-	private List<Live> lives = new ArrayList<Live>();
+	private List<LiveBean> lives = new ArrayList<LiveBean>();
 	private PullToRefreshListView listView;
 	private TimelineAdapter adapter;
 	private LiveTextModleImpl live7_24ModelImpl;
@@ -122,7 +122,7 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 	}
 
 	@Override
-	public void onSuccess(List<Live> lives, int loadType) {
+	public void onSuccess(List<LiveBean> lives, int loadType) {
 		loadedCompleted();
 		if (loadType == LiveTextModleImpl.LIVE_LOAD_MORE) {
 			this.lives.addAll(lives);

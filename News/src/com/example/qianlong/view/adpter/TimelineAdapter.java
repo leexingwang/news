@@ -3,7 +3,7 @@ package com.example.qianlong.view.adpter;
 import java.util.List;
 
 import com.example.qianlong.R;
-import com.example.qianlong.bean.Live;
+import com.example.qianlong.bean.LiveBean;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,10 +15,10 @@ import android.widget.TextView;
 public class TimelineAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<Live> list;
+	private List<LiveBean> list;
 	private LayoutInflater inflater;
 
-	public TimelineAdapter(Context context, List<Live> list) {
+	public TimelineAdapter(Context context, List<LiveBean> list) {
 		super();
 		this.context = context;
 		this.list = list;
@@ -43,7 +43,7 @@ public class TimelineAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder = null;
-		Live live = list.get(position);
+		LiveBean live = list.get(position);
 		if (convertView == null) {
 			inflater = LayoutInflater.from(this.context);
 			convertView = inflater.inflate(R.layout.cbn_timeline_listview_item,

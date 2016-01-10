@@ -1,6 +1,6 @@
 package com.example.qianlong.bean;
 
-public class Live {
+public class LiveBean {
 	private String AdminName;
 
 	private String LiveFrom;

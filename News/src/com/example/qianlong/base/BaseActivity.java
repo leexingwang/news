@@ -54,29 +54,29 @@ public abstract class BaseActivity extends FragmentActivity implements
 		loadfailView = (LinearLayout) findViewById(R.id.ll_load_fail);
 		initData();
 	}
-	
+
 	protected void initTitleBar() {
 		leftBtn = (Button) findViewById(R.id.btn_left);
 		rightBtn = (ImageButton) findViewById(R.id.btn_right);
-		if(leftBtn!=null){
+		if (leftBtn != null) {
 			leftBtn.setVisibility(View.GONE);
 		}
-		if(rightBtn!=null){
+		if (rightBtn != null) {
 			rightBtn.setVisibility(View.GONE);
 		}
 		leftImgBtn = (ImageButton) findViewById(R.id.imgbtn_left);
 		rightImgBtn = (ImageButton) findViewById(R.id.imgbtn_right);
-		if(rightImgBtn!=null){
+		if (rightImgBtn != null) {
 			rightImgBtn.setVisibility(View.INVISIBLE);
 		}
-		if(leftImgBtn!=null){
+		if (leftImgBtn != null) {
 			leftImgBtn.setImageResource(R.drawable.back);
 		}
 		titleTv = (TextView) findViewById(R.id.txt_title);
-		if(leftImgBtn!=null){
+		if (leftImgBtn != null) {
 			leftImgBtn.setOnClickListener(this);
 		}
-		if(rightBtn!=null){
+		if (rightBtn != null) {
 			rightBtn.setOnClickListener(this);
 		}
 	}
@@ -174,12 +174,10 @@ public abstract class BaseActivity extends FragmentActivity implements
 		if (params != null) {
 			if (params.getQueryStringParams() != null)
 				LogUtils.d(url + "?" + params.getQueryStringParams().toString());
-		}else{
+		} else {
 			params = new RequestParams();
-			
+
 		}
-//		params.addHeader("x-deviceid", app.deviceId);
-//		params.addHeader("x-channel", app.channel);
 		if (0 == CommonUtil.isNetworkAvailable(ct)) {
 			showToast("º”‘ÿ ß∞‹£¨«ÎºÏ≤ÈÕ¯¬Á£°");
 		} else {
@@ -192,6 +190,5 @@ public abstract class BaseActivity extends FragmentActivity implements
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		super.onActivityResult(arg0, arg1, arg2);
 	}
-	
 
 }

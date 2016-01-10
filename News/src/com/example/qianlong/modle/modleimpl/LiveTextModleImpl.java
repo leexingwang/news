@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-import com.example.qianlong.bean.Live;
+import com.example.qianlong.bean.LiveBean;
 import com.example.qianlong.modle.LiveTextModle;
 import com.example.qianlong.utils.MD5;
 import com.lidroid.xutils.HttpUtils;
@@ -20,7 +20,7 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 public class LiveTextModleImpl implements LiveTextModle {
 	private String HOSTFORTUNE = "http://app.yicai.com/srv/app.ashx";
-	private List<Live> lives = new ArrayList<Live>();
+	private List<LiveBean> lives = new ArrayList<LiveBean>();
 	public static int LIVE_LOAD_MORE = 1;
 	public static int LIVE_LOAD_REFRESH = 2;
 
@@ -55,7 +55,7 @@ public class LiveTextModleImpl implements LiveTextModle {
 					lives.clear();
 					for (int i = 0; i < jsonArray.length(); i++) {
 						JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-						Live liveTxt = new Live();
+						LiveBean liveTxt = new LiveBean();
 						liveTxt.setLiveID(jsonObject1.getInt("LiveID"));
 						liveTxt.setLiveType(jsonObject1.getInt("LiveType"));
 						liveTxt.setLiveFrom(jsonObject1.getString("LiveFrom"));
