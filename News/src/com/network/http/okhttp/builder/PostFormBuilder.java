@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class PostFormBuilder extends OkHttpRequestBuilder
 {
-    private List<FileInput> files = new ArrayList<>();
+    private List<FileInput> files = new ArrayList<FileInput>();
 
     @Override
     public RequestCall build()
@@ -79,7 +79,7 @@ public class PostFormBuilder extends OkHttpRequestBuilder
     {
         if (this.params == null)
         {
-            params = new LinkedHashMap<>();
+            params = new LinkedHashMap<String, String>();
         }
         params.put(key, val);
         return this;
@@ -98,7 +98,7 @@ public class PostFormBuilder extends OkHttpRequestBuilder
     {
         if (this.headers == null)
         {
-            headers = new LinkedHashMap<>();
+            headers = new LinkedHashMap<String, String>();
         }
         headers.put(key, val);
         return this;

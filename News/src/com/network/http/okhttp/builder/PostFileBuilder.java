@@ -63,7 +63,7 @@ public class PostFileBuilder extends OkHttpRequestBuilder
     {
         if (this.params == null)
         {
-            params = new LinkedHashMap<>();
+            params = new LinkedHashMap<String, String>();
         }
         params.put(key, val);
         return this;
@@ -81,7 +81,7 @@ public class PostFileBuilder extends OkHttpRequestBuilder
     {
         if (this.headers == null)
         {
-            headers = new LinkedHashMap<>();
+            headers = new LinkedHashMap<String, String>();
         }
         headers.put(key, val);
         return this;
