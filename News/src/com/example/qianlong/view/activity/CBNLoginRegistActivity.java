@@ -7,12 +7,14 @@ import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qianlong.R;
 import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.constants.LoginConstants;
 import com.example.qianlong.modle.LoginModle.OnRegistListener;
 import com.example.qianlong.modle.modleimpl.LoginModleImpl;
+import com.example.qianlong.utils.StringUtils;
 
 public class CBNLoginRegistActivity extends BaseActivity implements
 		OnRegistListener {
@@ -26,6 +28,7 @@ public class CBNLoginRegistActivity extends BaseActivity implements
 	private String phone_number;
 	private String username;
 	private String plain_password;
+	private String plain_password_angin;
 	private Handler handler;
 
 	@Override
@@ -73,12 +76,36 @@ public class CBNLoginRegistActivity extends BaseActivity implements
 		case R.id.textview_Regist_submit:
 			phone_number = editText_Regist_phonenumber.getText().toString();
 			username = editText_Regist_username.getText().toString();
-			plain_password = editText_Regist_password_angin.getText()
+			plain_password = editText_Regist_password.getText().toString();
+			plain_password_angin = editText_Regist_password_angin.getText()
 					.toString();
+			if(StringUtils.isBlank(phone_number)){
+				showToast("输入号码不能为空");
+				return;
+			}
+			if(StringUtils.isBlank(username)){
+				showToast("用户名不能为空");
+				return;
+			}
+			if(StringUtils.isBlank(plain_password)){
+				showToast("输入密码不能为空");
+				return;
+			}
+			if(StringUtils.isBlank(plain_password_angin)){
+				showToast("输入密码不能为空");
+				return;
+			}
+			if(!StringUtils.isEquals(plain_password, plain_password_angin)){
+				showToast("兩次密碼輸入不一致");
+				return;
+			}
+			if(!StringUtils.isPhoneNumberValid(phone_number)){
+				showToast("输入的号码不合法");
+				return;
+			}
 			loginModleImpl.userRegist(phone_number, username, plain_password,
 					this);
 			break;
-
 		default:
 			break;
 		}

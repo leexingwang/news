@@ -1,7 +1,7 @@
 package com.example.qianlong.view.popupwindow;
 
 import com.example.qianlong.R;
-import com.example.qianlong.utils.uiutils.FastBlur;
+import com.example.qianlong.utils.FastBlur;
 import com.example.qianlong.view.activity.CBNLiveBroadCastActivity;
 import com.example.qianlong.view.activity.CBNLiveActivity;
 import com.example.qianlong.view.activity.CBNLiveTextActivity;

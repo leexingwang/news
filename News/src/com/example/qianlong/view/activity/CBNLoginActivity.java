@@ -14,6 +14,7 @@ import com.example.qianlong.modle.LoginModle.OnRefreshTokenListener;
 import com.example.qianlong.modle.LoginModle.OnRegistListener;
 import com.example.qianlong.modle.modleimpl.LoginModleImpl;
 import com.example.qianlong.utils.SharePrefUtil;
+import com.example.qianlong.utils.StringUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -63,29 +64,6 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 				super.handleMessage(msg);
 			}
 		};
-		// loginModleImpl.userRegist("13148151103", "lixing", "123456", this);
-		// loginModleImpl.userRegistConfirm("40000030", "123456", this);
-		// loginModleImpl.userLogin("13148151103", "123456", this);
-		// loginModleImpl
-		// .userLoginAccessTokenValid(
-		// "NjJlNDNlOTIyMTFjZjRmZWU1YmZlNzJmNWY0NmU2MWM1NmIxNmU0MDA1ZGE1ZjFkMjU0N2ZiZmUwMWIxMGEwOQ",
-		// this);
-
-		// loginModleImpl
-		// .userLoginRefreshToken(
-		// "MTUyZjM2NmI5YzgxNmE2ZGFmYjNkNTkzYzAyNjFhMGExNWJiMWVhZmUwZmY2NTAwNzY3ZjU5NDRhMGNjYmViNw",
-		// this);
-		// loginModleImpl.userFixPassWord("40000004", "1234567", "1234567",
-		// this);
-		// loginModleImpl.userForgotPassWord("13148151103", this);
-		// loginModleImpl.userForgotResetPassWord("40000043", "123456",
-		// "489403",
-		// this);
-		// loginModleImpl.userChangeContact("40000004", "18121453675", "123456",
-		// this);
-		// loginModleImpl.userChangeContactValid("40000004", "18121453675",
-		// "698852",
-		// this);
 
 	}
 
@@ -129,6 +107,14 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 		case R.id.textview_login:
 			userName = editTextUsername.getText().toString();
 			passWord = editTextPassword.getText().toString();
+			if (StringUtils.isBlank(userName)) {
+				showToast("用户名或电话号码不能为空");
+				return;
+			}
+			if (StringUtils.isBlank(passWord)) {
+				showToast("密码不能为空");
+				return;
+			}
 			loginModleImpl.userLogin(userName, passWord, this);
 			break;
 		case R.id.textview_forget:

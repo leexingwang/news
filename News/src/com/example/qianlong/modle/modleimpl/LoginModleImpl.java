@@ -19,18 +19,12 @@ import com.example.qianlong.R;
 import com.example.qianlong.bean.LoginEnity;
 import com.example.qianlong.bean.RegistEntity;
 import com.example.qianlong.bean.RegistErrorEntity;
-import com.example.qianlong.bean.UserEntity;
 import com.example.qianlong.constants.LoginConstants;
 import com.example.qianlong.modle.LoginModle;
 import com.example.qianlong.utils.GsonTools;
-import com.example.qianlong.utils.JsonUtils;
 import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.utils.TLog;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class LoginModleImpl implements LoginModle {
 	public static final MediaType JSON = MediaType
@@ -344,6 +338,8 @@ public class LoginModleImpl implements LoginModle {
 				if (response.isSuccessful()) {
 					onForgotResetPassWordListener
 							.onForgotResetPassWordSuccess();
+				} else {
+					onForgotResetPassWordListener.onForgotResetPassWordError();
 				}
 
 			}
