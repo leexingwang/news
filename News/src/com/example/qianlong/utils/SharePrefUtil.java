@@ -40,6 +40,12 @@ public class SharePrefUtil {
 		String IS_7_24_RED = "7_24_red";
 
 		boolean IS_7_24_RED_DEFAULT = false;
+
+		String USER_NAME = "user_name";
+		String USER_PASSWORD = "user_password";
+		String USER_PHONENUMBER = "user_phonenumber";
+		String USER_ID = "user_id";
+		String USER_EMAIL = "user_email";
 	}
 
 	/**

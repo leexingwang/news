@@ -13,23 +13,33 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import android.content.Context;
+
+import com.example.qianlong.R;
+import com.example.qianlong.bean.LoginEnity;
 import com.example.qianlong.bean.RegistEntity;
 import com.example.qianlong.bean.RegistErrorEntity;
+import com.example.qianlong.bean.UserEntity;
 import com.example.qianlong.constants.LoginConstants;
 import com.example.qianlong.modle.LoginModle;
 import com.example.qianlong.utils.GsonTools;
+import com.example.qianlong.utils.JsonUtils;
+import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.utils.TLog;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class LoginModleImpl implements LoginModle {
 	public static final MediaType JSON = MediaType
 			.parse("application/json; charset=utf-8");
 	OkHttpClient client = new OkHttpClient();
+	private Context context;
 
-	public LoginModleImpl() {
+	public LoginModleImpl(Context context) {
+		this.context = context;
 	}
 
 	@Override
@@ -61,25 +71,44 @@ public class LoginModleImpl implements LoginModle {
 					}
 					RegistErrorEntity registErrorEntity = registErrorEntitys
 							.get(0);
+					String errorInformation = "";
 					if (LoginConstants.REGIST_ERROE_OLD_ALREADY
 							.equals(registErrorEntity.getMessage())) {
-						TLog.log("老用户");
+						errorInformation = context.getResources().getString(
+								R.string.cbn_regist_error_oldsystem);
 					} else if (LoginConstants.REGIST_ERROE_PHONE_ALREADY
 							.equals(registErrorEntity.getMessage())) {
-						TLog.log("电话号码已存在");
+						errorInformation = context
+								.getResources()
+								.getString(
+										R.string.cbn_regist_error_phonenumber_already_used);
 					} else if (LoginConstants.REGIST_ERROE_USERNAME_ALREADY
 							.equals(registErrorEntity.getMessage())) {
-						TLog.log("用户名已存在");
+						errorInformation = context
+								.getResources()
+								.getString(
+										R.string.cbn_regist_error_username_already_used);
 					}
+					onRegistListener.onRegistError(errorInformation);
+				} else {
+					JSONObject jsonObject;
+					try {
+						jsonObject = new JSONObject(jsonString);
+						onRegistListener.onRegistSuccess(jsonObject
+								.getString("id"));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
-				onRegistListener.onRegistSuccess();
 
 			}
 
 			@Override
 			public void onFailure(Request arg0, IOException arg1) {
 				TLog.log(arg0.toString());
-				onRegistListener.onRegistError();
+				onRegistListener.onRegistError(arg1.getMessage());
 
 			}
 		});
@@ -87,7 +116,7 @@ public class LoginModleImpl implements LoginModle {
 
 	@Override
 	public void userRegistConfirm(String id, String confirmationToken,
-			final OnRegistListener onRegistListener) {
+			final OnRegistConfirmListener onRegistConfirmListener) {
 		RequestBody body = RequestBody.create(JSON, "");
 		Request request = new Request.Builder()
 				.url(LoginConstants.OAUTH2_URL + "users/" + id
@@ -97,13 +126,13 @@ public class LoginModleImpl implements LoginModle {
 			@Override
 			public void onResponse(Response response) throws IOException {
 				TLog.log(response.body().string());
-				onRegistListener.onRegistSuccess();
+				onRegistConfirmListener.onRegistConfirmSuccess();
 			}
 
 			@Override
 			public void onFailure(Request arg0, IOException arg1) {
 				TLog.log(arg0.toString());
-				onRegistListener.onRegistError();
+				onRegistConfirmListener.onRegistConfirmError(arg1.getMessage());
 
 			}
 		});
@@ -120,9 +149,14 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
-					onLoginListener.onLoginSuccess();
+					LoginEnity loginEnity = GsonTools.changeGsonToBean(json,
+							LoginEnity.class);
+					onLoginListener.onLoginSuccess(loginEnity.getAccess_token());
+				} else {
+					onLoginListener.onLoginError();
 				}
 
 			}
@@ -145,8 +179,27 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
+					JSONObject jsonObj;
+					try {
+						jsonObj = new JSONObject(json);
+						SharePrefUtil.saveString(context,
+								SharePrefUtil.KEY.USER_NAME,
+								jsonObj.getString("username"));
+						SharePrefUtil.saveString(context,
+								SharePrefUtil.KEY.USER_ID,
+								jsonObj.getString("id"));
+						SharePrefUtil.saveString(context,
+								SharePrefUtil.KEY.USER_PHONENUMBER,
+								jsonObj.getString("phone_number"));
+						SharePrefUtil.saveString(context,
+								SharePrefUtil.KEY.USER_EMAIL,
+								jsonObj.getString("email"));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
 					loginTokenValidListener.onLoginTokenValidSuccess();
 				}
 
@@ -171,7 +224,8 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
 					refreshTokenListener.onRefreshTokenSuccess();
 				}
@@ -205,7 +259,8 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
 					onFixPassWordListener.onFixPassWordSuccess();
 				}
@@ -238,9 +293,20 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
-					onForgotPassWordListener.onForgotPassWordSuccess();
+					try {
+						JSONObject jsonObject = new JSONObject(json);
+						onForgotPassWordListener
+								.onForgotPassWordSuccess(jsonObject
+										.getString("id"));
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					onForgotPassWordListener.onForgotPassWordError();
 				}
 
 			}
@@ -273,7 +339,8 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
 					onForgotResetPassWordListener
 							.onForgotResetPassWordSuccess();
@@ -308,7 +375,8 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
 					onChangeContactListener.onChangeContactSuccess();
 				}
@@ -343,7 +411,8 @@ public class LoginModleImpl implements LoginModle {
 
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
+				String json = response.body().string();
+				TLog.log(json);
 				if (response.isSuccessful()) {
 					onChangeContactValidListener.onChangeContactValidSuccess();
 				}

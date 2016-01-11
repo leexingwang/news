@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/layout_title_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/imageView_username"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/biz_merchant_order_detail_list_menu_call_icon" />
+
+        <EditText
+            android:id="@+id/edit_Regist_phonenumber"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/imageView_username"
+            android:background="@drawable/cbn_login_edit_shape_write"
+            android:gravity="center|left"
+            android:hint="输入手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/imageView_username"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/biz_pc_account_username_icon" />
+
+        <EditText
+            android:id="@+id/edit_Regist_username"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/imageView_username"
+            android:background="@drawable/cbn_login_edit_shape_write"
+            android:gravity="center|left"
+            android:hint="用户名"
+            android:maxLength="11"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/imageView_username"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/biz_pc_account_pwd_icon" />
+
+        <EditText
+            android:id="@+id/edit_Regist_password"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/imageView_username"
+            android:background="@drawable/cbn_login_edit_shape_write"
+            android:gravity="center|left"
+            android:hint="密码"
+            android:inputType="numberPassword"
+            android:maxLength="11"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="20dp"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/imageView_username"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/biz_pc_account_pwd_icon" />
+
+        <EditText
+            android:id="@+id/edit_Regist_password_angin"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@id/imageView_username"
+            android:background="@drawable/cbn_login_edit_shape_write"
+            android:gravity="center|left"
+            android:hint="确认密码"
+            android:inputType="numberPassword"
+            android:maxLength="11"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textview_Regist_submit"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_marginTop="20dip"
+        android:background="@drawable/cbn_login_shape_blue"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="注册"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

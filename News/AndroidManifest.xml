@@ -104,6 +104,22 @@
             android:name="com.example.qianlong.view.activity.CBNLoginActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.example.qianlong.view.activity.CBNLoginRegistActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.view.activity.CBNLoginRegistSubmitActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.view.activity.CBNLoginForgotPasswordActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.qianlong.view.activity.CBNLoginForgotPasswordSubmitActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

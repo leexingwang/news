@@ -8,7 +8,7 @@ public interface LoginModle {
 
 	// 注册码提交
 	public void userRegistConfirm(String id, String confirmationToken,
-			OnRegistListener onRegistListener);
+			OnRegistConfirmListener onRegistConfirmListener);
 
 	// 用户登录
 	public void userLogin(String userName, String passWord,
@@ -45,13 +45,19 @@ public interface LoginModle {
 			OnChangeContactValidListener onChangeContactValidListener);
 
 	public interface OnRegistListener {
-		public void onRegistSuccess();
+		public void onRegistSuccess(String id);
 
-		public void onRegistError();
+		public void onRegistError(String errorInfo);
+	}
+
+	public interface OnRegistConfirmListener {
+		public void onRegistConfirmSuccess();
+
+		public void onRegistConfirmError(String errorInfo);
 	}
 
 	public interface OnLoginListener {
-		public void onLoginSuccess();
+		public void onLoginSuccess(String accessToken);
 
 		public void onLoginError();
 	}
@@ -75,7 +81,7 @@ public interface LoginModle {
 	}
 
 	public interface OnForgotPassWordListener {
-		public void onForgotPassWordSuccess();
+		public void onForgotPassWordSuccess(String id);
 
 		public void onForgotPassWordError();
 	}

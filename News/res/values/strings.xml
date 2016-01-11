@@ -21,4 +21,9 @@
     <string name="cbn_settings_push">推送</string>
     <string name="cbn_settings_about_us">关于我们</string>
 
+    <!-- login modle -->
+    <string name="cbn_regist_error_oldsystem">老用户</string>
+    <string name="cbn_regist_error_username_already_used">用户名已经存在</string>
+    <string name="cbn_regist_error_phonenumber_already_used">电话号码已经被注册了</string>
+
 </resources>

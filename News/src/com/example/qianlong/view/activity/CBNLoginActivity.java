@@ -1,6 +1,8 @@
 package com.example.qianlong.view.activity;
 
 import com.example.qianlong.R;
+import com.example.qianlong.base.BaseActivity;
+import com.example.qianlong.constants.LoginConstants;
 import com.example.qianlong.modle.LoginModle.OnChangeContactListener;
 import com.example.qianlong.modle.LoginModle.OnChangeContactValidListener;
 import com.example.qianlong.modle.LoginModle.OnFixPassWordListener;
@@ -11,20 +13,22 @@ import com.example.qianlong.modle.LoginModle.OnLoginTokenValidListener;
 import com.example.qianlong.modle.LoginModle.OnRefreshTokenListener;
 import com.example.qianlong.modle.LoginModle.OnRegistListener;
 import com.example.qianlong.modle.modleimpl.LoginModleImpl;
+import com.example.qianlong.utils.SharePrefUtil;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CBNLoginActivity extends Activity implements OnClickListener,
-		OnRegistListener, OnLoginListener, OnLoginTokenValidListener,
-		OnRefreshTokenListener, OnFixPassWordListener,
-		OnForgotPassWordListener, OnForgotResetPassWordListener,
-		OnChangeContactListener, OnChangeContactValidListener {
+public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
+		OnLoginTokenValidListener {
 
 	private EditText editTextUsername;
 	private EditText editTextPassword;
@@ -34,24 +38,34 @@ public class CBNLoginActivity extends Activity implements OnClickListener,
 	private ImageView imageViewByQQ;
 	private ImageView imageViewBySina;
 	private String userName;
-	private String password;
+	private String passWord;
 	private LoginModleImpl loginModleImpl;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.cbn_login);
-		initView();
-		initData();
-	}
+	private Handler handler;
 
-	private void initData() {
-		userName = editTextUsername.getText().toString();
-		password = editTextPassword.getText().toString();
-		loginModleImpl = new LoginModleImpl();
+	@Override
+	protected void initData() {
+
+		loginModleImpl = new LoginModleImpl(this);
+		handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				if (msg.what == LoginConstants.LOGIN_SUCCESS) {
+					SharePrefUtil.saveString(ct, SharePrefUtil.KEY.USER_NAME,
+							userName);
+					SharePrefUtil.saveString(ct,
+							SharePrefUtil.KEY.USER_PASSWORD, passWord);
+					showToast("登陆成功！");
+				} else {
+					showToast("用户名或密码错误！");
+				}
+				super.handleMessage(msg);
+			}
+		};
 		// loginModleImpl.userRegist("13148151103", "lixing", "123456", this);
 		// loginModleImpl.userRegistConfirm("40000030", "123456", this);
-		//loginModleImpl.userLogin("13148151103", "123456", this);
+		// loginModleImpl.userLogin("13148151103", "123456", this);
 		// loginModleImpl
 		// .userLoginAccessTokenValid(
 		// "NjJlNDNlOTIyMTFjZjRmZWU1YmZlNzJmNWY0NmU2MWM1NmIxNmU0MDA1ZGE1ZjFkMjU0N2ZiZmUwMWIxMGEwOQ",
@@ -75,9 +89,16 @@ public class CBNLoginActivity extends Activity implements OnClickListener,
 
 	}
 
-	private void initView() {
-		editTextPassword = (EditText) findViewById(R.id.editPassword);
+	@Override
+	protected void initView() {
+		setContentView(R.layout.cbn_login);
+		initTitleBar();
 		editTextUsername = (EditText) findViewById(R.id.editUserName);
+		editTextPassword = (EditText) findViewById(R.id.editPassword);
+		editTextUsername.setText(SharePrefUtil.getString(ct,
+				SharePrefUtil.KEY.USER_PHONENUMBER, ""));
+		editTextPassword.setText(SharePrefUtil.getString(ct,
+				SharePrefUtil.KEY.USER_PASSWORD, ""));
 		textViewLogin = (TextView) findViewById(R.id.textview_login);
 		textViewForget = (TextView) findViewById(R.id.textview_forget);
 		textViewRegist = (TextView) findViewById(R.id.textview_regist);
@@ -91,16 +112,30 @@ public class CBNLoginActivity extends Activity implements OnClickListener,
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onLoginSuccess(String accessToken) {
+		loginModleImpl.userLoginAccessTokenValid(accessToken, this);
+	}
+
+	@Override
+	public void onLoginError() {
+		Message message = Message.obtain();
+		message.what = LoginConstants.LOGIN_ERROR;
+		handler.sendMessage(message);
+	}
+
+	@Override
+	protected void processClick(View v) {
 		switch (v.getId()) {
 		case R.id.textview_login:
-
+			userName = editTextUsername.getText().toString();
+			passWord = editTextPassword.getText().toString();
+			loginModleImpl.userLogin(userName, passWord, this);
 			break;
 		case R.id.textview_forget:
-
+			startActivity(new Intent(this, CBNLoginForgotPasswordActivity.class));
 			break;
 		case R.id.textview_regist:
-
+			startActivity(new Intent(this, CBNLoginRegistActivity.class));
 			break;
 		case R.id.imageView_login_by_qq:
 
@@ -111,113 +146,17 @@ public class CBNLoginActivity extends Activity implements OnClickListener,
 		default:
 			break;
 		}
-
-	}
-
-	@Override
-	public void onRegistSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onRegistError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onLoginSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onLoginError() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void onLoginTokenValidSuccess() {
-		// TODO Auto-generated method stub
-
+		Message message = Message.obtain();
+		message.what = LoginConstants.LOGIN_SUCCESS;
+		handler.sendMessage(message);
 	}
 
 	@Override
 	public void onLoginTokenValidError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onForgotResetPassWordSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onForgotResetPassWordError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onForgotPassWordSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onForgotPassWordError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onFixPassWordSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onFixPassWordError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onRefreshTokenSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onRefreshTokenError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onChangeContactSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onChangeContactError() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onChangeContactValidSuccess() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onChangeContactValidError() {
 		// TODO Auto-generated method stub
 
 	}

@@ -54,7 +54,7 @@ public class UserEntity {
 		return this.roles;
 	}
 
-	public class Roles {
+	public static class Roles {
 
 	}
 }

@@ -46,4 +46,17 @@ public class LoginConstants {
 			+ CLIENT_ID + "&client_secret=" + CLIENT_SECRET
 			+ "&grant_type=refresh_token&refresh_token=";
 
+	public final static String USER_ID = "id";
+	public final static String PHONE_NUMBER = "phone_number";
+	public final static String USER_NAME = "username";
+	public final static String PASSWORD = "plain_password";
+
+	public final static int LOGIN_SUCCESS = 1;
+
+	public final static int LOGIN_ERROR = 2;
+
+	public final static int LOGIN_REGIST_SUCCESS = 3;
+
+	public final static int LOGIN_REGIST_ERROR = 4;
+
 }
