@@ -4,14 +4,14 @@
     android:layout_height="match_parent" >
 
     <include
-        android:id="@+id/action_bar"
+        android:id="@+id/title_bar"
         android:layout_alignParentTop="true"
-        layout="@layout/cbn_settings_action_bar" />
+        layout="@layout/layout_title_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/action_bar"
+        android:layout_below="@id/title_bar"
         android:fadeScrollbars="false"
         android:scrollbars="none" >
 
@@ -24,7 +24,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical" >
-                <!-- 头部 -->
+
+                <!-- 头部 -->
 
                 <RelativeLayout
                     android:id="@+id/cbn_live_gb_rl_img"

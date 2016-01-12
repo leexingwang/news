@@ -34,6 +34,7 @@
             android:background="@drawable/cbn_login_edit_shape_write"
             android:gravity="center|left"
             android:hint="验证码"
+            android:inputType="number"
             android:maxLength="11"
             android:paddingLeft="5dip"
             android:paddingRight="5dip"

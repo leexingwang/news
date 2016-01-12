@@ -9,6 +9,7 @@ import com.base.common.ui.pullrefreshview.PullToRefreshBase;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.example.qianlong.R;
+import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.bean.LiveBean;
 import com.example.qianlong.modle.LiveTextModle.OnLiveListener;
 import com.example.qianlong.modle.modleimpl.LiveTextModleImpl;
@@ -24,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 /**
@@ -31,8 +33,8 @@ import android.widget.ListView;
  * @author lixingwang
  * 
  */
-public class CBNLiveTextActivity extends Activity implements OnLiveListener,
-		OnToggleChanged, OnClickListener {
+public class CBNLiveTextActivity extends BaseActivity implements
+		OnLiveListener, OnToggleChanged, OnClickListener {
 
 	private List<LiveBean> lives = new ArrayList<LiveBean>();
 	private PullToRefreshListView listView;
@@ -41,13 +43,11 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 	private ToggleButton toggleButton;
 	private int pageNumber = 1;
 	private int newsType = 0;
-	private Button leftButton;
-	private Button rightButton;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void initView() {
 		setContentView(R.layout.cbn_live7_24);
+		initTitleBar();
 		init();
 		listView = (PullToRefreshListView) findViewById(R.id.listview_live);
 		// 上拉加载不可用
@@ -88,6 +88,11 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 				});
 	}
 
+	@Override
+	protected void initData() {
+
+	}
+
 	private void init() {
 		live7_24ModelImpl = new LiveTextModleImpl();
 		toggleButton = (ToggleButton) findViewById(R.id.toggle_live);
@@ -95,11 +100,9 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 		initToggle();
 		live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType + "",
 				CBNLiveTextActivity.this, LiveTextModleImpl.LIVE_LOAD_REFRESH);
-		rightButton = (Button) findViewById(R.id.right_Button);
-		leftButton = (Button) findViewById(R.id.leftButton);
-		rightButton.setOnClickListener(this);
-		leftButton.setOnClickListener(this);
-		rightButton
+		rightImgBtn.setOnClickListener(this);
+		rightImgBtn.setVisibility(View.VISIBLE);
+		rightImgBtn
 				.setBackgroundResource(R.drawable.base_action_bar_action_refresh);
 	}
 
@@ -159,18 +162,14 @@ public class CBNLiveTextActivity extends Activity implements OnLiveListener,
 	}
 
 	@Override
-	public void onClick(View view) {
+	protected void processClick(View view) {
 		switch (view.getId()) {
-		case R.id.right_Button:
+		case R.id.imgbtn_right:
 			pageNumber = 1;
 			live7_24ModelImpl.getLiveInfo("stringlist", "20", "1", newsType
 					+ "", CBNLiveTextActivity.this,
 					LiveTextModleImpl.LIVE_LOAD_REFRESH);
 			break;
-		case R.id.leftButton:
-			finish();
-			break;
-
 		default:
 			break;
 		}

@@ -51,6 +51,8 @@ public class CBNLoginRegistActivity extends BaseActivity implements
 			@Override
 			public void handleMessage(Message msg) {
 				if (msg.what == LoginConstants.LOGIN_REGIST_SUCCESS) {
+					showToast(getResources().getString(
+							R.string.cbn_verification_code_send_success));
 					String id = (String) msg.obj;
 					Intent intent = new Intent();
 					intent.putExtra(LoginConstants.USER_ID, id);
@@ -79,28 +81,39 @@ public class CBNLoginRegistActivity extends BaseActivity implements
 			plain_password = editText_Regist_password.getText().toString();
 			plain_password_angin = editText_Regist_password_angin.getText()
 					.toString();
-			if(StringUtils.isBlank(phone_number)){
-				showToast("输入号码不能为空");
+			if (StringUtils.isBlank(phone_number)) {
+				showToast(getResources().getString(
+						R.string.cbn_phonenumber_isblank));
 				return;
 			}
-			if(StringUtils.isBlank(username)){
-				showToast("用户名不能为空");
+			if (StringUtils.isBlank(username)) {
+				showToast(getResources().getString(
+						R.string.cbn_username_isblank));
 				return;
 			}
-			if(StringUtils.isBlank(plain_password)){
-				showToast("输入密码不能为空");
+			if (StringUtils.isBlank(plain_password)) {
+				showToast(getResources().getString(
+						R.string.cbn_password_isblank));
 				return;
 			}
-			if(StringUtils.isBlank(plain_password_angin)){
-				showToast("输入密码不能为空");
+			if (StringUtils.isBlank(plain_password_angin)) {
+				showToast(getResources().getString(
+						R.string.cbn_password_isblank));
 				return;
 			}
-			if(!StringUtils.isEquals(plain_password, plain_password_angin)){
-				showToast("兩次密碼輸入不一致");
+			if (!StringUtils.isEquals(plain_password, plain_password_angin)) {
+				showToast(getResources().getString(
+						R.string.cbn_password_angin_diff));
 				return;
 			}
-			if(!StringUtils.isPhoneNumberValid(phone_number)){
-				showToast("输入的号码不合法");
+			if (!StringUtils.isPhoneNumberValid(phone_number)) {
+				showToast(getResources().getString(
+						R.string.cbn_phonenumber_error));
+				return;
+			}
+			if (StringUtils.length(username.subSequence(0, username.length())) < 3) {
+				showToast(getResources().getString(
+						R.string.cbn_username_so_short));
 				return;
 			}
 			loginModleImpl.userRegist(phone_number, username, plain_password,

@@ -3,6 +3,7 @@ package com.example.qianlong.view.activity;
 import com.base.common.ui.ToggleButton;
 import com.base.common.ui.ToggleButton.OnToggleChanged;
 import com.example.qianlong.R;
+import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.utils.SharePrefUtil;
 
 import android.app.Activity;
@@ -14,18 +15,40 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class CBNSettingsActivity extends Activity implements OnClickListener {
-	private Button buttBack;
+public class CBNSettingsActivity extends BaseActivity implements
+		OnClickListener {
 	private ImageButton imageButtonAboutUs;
 	private ImageButton imageButtonPush;
 	private ToggleButton toggleButtonGuankan;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void initView() {
 		setContentView(R.layout.cbn_settings_activity);
-		((TextView)findViewById(R.id.tvTitle)).setText(getResources().getString(R.string.cbn_settings_));
-		buttBack = (Button) findViewById(R.id.leftButton);
+		initTitleBar();
+		initAllView();
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void processClick(View view) {
+		switch (view.getId()) {
+		case R.id.imgbtn_about_us:
+			startActivity(new Intent(this, CBNSettingsAboutUsActivity.class));
+			break;
+		case R.id.imgbtn_push:
+			startActivity(new Intent(this, CBNSettingsPushActivity.class));
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void initAllView() {
 		imageButtonAboutUs = (ImageButton) findViewById(R.id.imgbtn_about_us);
 		imageButtonPush = (ImageButton) findViewById(R.id.imgbtn_push);
 		toggleButtonGuankan = (ToggleButton) findViewById(R.id.togglebut_guankan);
@@ -46,25 +69,7 @@ public class CBNSettingsActivity extends Activity implements OnClickListener {
 		} else {
 			toggleButtonGuankan.setToggleOff();
 		}
-		buttBack.setOnClickListener(this);
 		imageButtonAboutUs.setOnClickListener(this);
 		imageButtonPush.setOnClickListener(this);
-	}
-
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.leftButton:
-			finish();
-			break;
-		case R.id.imgbtn_about_us:
-			startActivity(new Intent(this, CBNSettingsAboutUsActivity.class));
-			break;
-		case R.id.imgbtn_push:
-			startActivity(new Intent(this, CBNSettingsPushActivity.class));
-			break;
-		default:
-			break;
-		}
 	}
 }

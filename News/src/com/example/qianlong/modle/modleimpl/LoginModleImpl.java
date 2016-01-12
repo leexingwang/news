@@ -119,8 +119,14 @@ public class LoginModleImpl implements LoginModle {
 		client.newCall(request).enqueue(new Callback() {
 			@Override
 			public void onResponse(Response response) throws IOException {
-				TLog.log(response.body().string());
-				onRegistConfirmListener.onRegistConfirmSuccess();
+				String jsonString = response.body().string();
+				TLog.log(jsonString);
+				if (response.isSuccessful()) {
+					onRegistConfirmListener.onRegistConfirmSuccess();
+				} else {
+					onRegistConfirmListener.onRegistConfirmError(jsonString);
+				}
+
 			}
 
 			@Override

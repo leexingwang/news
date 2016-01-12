@@ -6,13 +6,14 @@
     android:background="#ffffff" >
 
     <include
-        android:id="@+id/topLayout"
-        layout="@layout/cbn_settings_action_bar" />
+        android:id="@+id/title_bar"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_title_bar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/topLayout"
+        android:layout_below="@+id/title_bar"
         android:orientation="vertical" >
 
         <View

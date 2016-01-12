@@ -14,35 +14,29 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.example.qianlong.R;
+import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.utils.NetWorkUtils;
 import com.example.qianlong.utils.ScreenUtils;
 import com.example.qianlong.utils.SharePrefUtil;
-import com.lidroid.xutils.BitmapUtils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnErrorListener;
 import android.media.MediaPlayer.OnPreparedListener;
-import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 @SuppressLint("NewApi")
-public class CBNLiveBroadCastActivity extends Activity implements
-		OnClickListener, OnPreparedListener, OnCompletionListener,
-		OnErrorListener {
+public class CBNLiveBroadCastActivity extends BaseActivity implements
+		OnPreparedListener, OnCompletionListener, OnErrorListener {
 
-	private Button leftButton;
 	private TextView textView_nowContent;
 	private TextView textView_nextContent;
 	private ImageView imageView_LiveBroadCastPause;
@@ -60,21 +54,42 @@ public class CBNLiveBroadCastActivity extends Activity implements
 	private static String BroadCastURL = "http://fmradio.smgtech.net:1935/live/977/playlist.m3u8";
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void initView() {
 		setContentView(R.layout.cbn_live_broadcast_layout);
+		initTitleBar();
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		initView();
+		initViews();
 		initBroadCast();
 	}
 
-	private void initView() {
-		leftButton = (Button) findViewById(R.id.leftButton);
-		leftButton.setOnClickListener(this);
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	protected void processClick(View view) {
+		// TODO Auto-generated method stub
+		switch (view.getId()) {
+		case R.id.cbn_live_gb_pause:
+			pauseStatus();
+			break;
+		case R.id.cbn_live_gb_play:
+			if (playAvailabl()) {
+				playStatus();
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void initViews() {
 		textView_nowContent = (TextView) findViewById(R.id.text_live_broadcast_now_content);
 		textView_nextContent = (TextView) findViewById(R.id.text_live_broadcast_next_content);
 		imageView_LiveBroadCastPause = (ImageView) findViewById(R.id.cbn_live_gb_pause);
@@ -97,25 +112,6 @@ public class CBNLiveBroadCastActivity extends Activity implements
 		// mediaplayer播放完第一次后又重新播放方法
 		mediaPlayer.setOnCompletionListener(this);
 		mediaPlayer.setOnErrorListener(this);
-	}
-
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-		case R.id.leftButton:
-			finish();
-			break;
-		case R.id.cbn_live_gb_pause:
-			pauseStatus();
-			break;
-		case R.id.cbn_live_gb_play:
-			if (playAvailabl()) {
-				playStatus();
-			}
-			break;
-		default:
-			break;
-		}
 	}
 
 	private void playStatus() {

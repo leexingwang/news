@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -101,6 +102,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
+		closeSofe();
 		switch (v.getId()) {
 		case R.id.imgbtn_left:
 			this.finish();
@@ -189,6 +191,17 @@ public abstract class BaseActivity extends FragmentActivity implements
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		super.onActivityResult(arg0, arg1, arg2);
+	}
+
+	/**
+	 * πÿ±’»Ìº¸≈Ã
+	 */
+	public void closeSofe() {
+		View view = getWindow().peekDecorView();
+		if (view != null) {
+			InputMethodManager inputmanger = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+			inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+		}
 	}
 
 }

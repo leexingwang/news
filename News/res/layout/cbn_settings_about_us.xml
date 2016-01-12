@@ -5,7 +5,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
-    <include layout="@layout/cbn_settings_action_bar" />
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/layout_title_bar" />
 
     <ImageView
         android:layout_width="wrap_content"

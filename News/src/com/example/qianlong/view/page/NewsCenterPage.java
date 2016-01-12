@@ -73,8 +73,6 @@ public class NewsCenterPage extends BasePage {
 		for (NewsCategory cate : categories.data) {
 			newsCenterMenuList.add(cate.title);
 		}
-		
-		
 		NewsCategory newsCategory = categorieList.get(0);
 		SharePrefUtil.saveString(ct, KEY.CATE_ALL_JSON,
 				GsonTools.createGsonString(newsCategory.children));
@@ -125,8 +123,8 @@ public class NewsCenterPage extends BasePage {
 					@Override
 					public void onSuccess(ResponseInfo<String> info) {
 						LogUtils.d("response_json---" + info.result);
-						 SharePrefUtil.saveString(ct,
-						 QLApi.NEWS_CENTER_CATEGORIES, info.result);
+						SharePrefUtil.saveString(ct,
+								QLApi.NEWS_CENTER_CATEGORIES, info.result);
 						processData(info.result);
 
 					}

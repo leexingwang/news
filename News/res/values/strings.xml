@@ -25,5 +25,19 @@
     <string name="cbn_regist_error_oldsystem">老用户</string>
     <string name="cbn_regist_error_username_already_used">用户名已经存在</string>
     <string name="cbn_regist_error_phonenumber_already_used">电话号码已经被注册了</string>
+    <string name="cbn_password_isblank">输入的密码为空！</string>
+    <string name="cbn_password_so_short">输入的密码太短！</string>
+    <string name="cbn_password_fixed_success">密码修改成功，请登录！</string>
+    <string name="cbn_password_fixed_error">密码修改失败！</string>
+    <string name="cbn_phonenumber_error">输入的电话号码有误！</string>
+    <string name="cbn_phonenumber_isblank">输入的号码为空！</string>
+    <string name="cbn_username_so_short">输入用户名太短！</string>
+    <string name="cbn_username_isblank">输入用户名为空！</string>
+    <string name="cbn_verification_code_isblank">输入的验证码为空！</string>
+    <string name="cbn_verification_code_send_success">验证码发送成功！</string>
+    <string name="cbn_verification_code_send_error">手机号未注册！</string>
+    <string name="cbn_verification_code_error">验证码错误！</string>
+    <string name="cbn_phonenumber_or_username_isblank">输入号码或用户名为空！</string>
+    <string name="cbn_password_angin_diff">两次输入的密码不一致！</string>
 
 </resources>

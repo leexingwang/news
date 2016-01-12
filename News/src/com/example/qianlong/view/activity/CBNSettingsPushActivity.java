@@ -3,6 +3,7 @@ package com.example.qianlong.view.activity;
 import com.base.common.ui.ToggleButton;
 import com.base.common.ui.ToggleButton.OnToggleChanged;
 import com.example.qianlong.R;
+import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.utils.SharePrefUtil;
 
 import android.app.Activity;
@@ -12,20 +13,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class CBNSettingsPushActivity extends Activity implements OnClickListener {
-	private Button buttBack;
+public class CBNSettingsPushActivity extends BaseActivity implements
+		OnClickListener {
 	private ToggleButton toggleButtonHongguan;
 	private ToggleButton toggleButtonShangye;
 	private ToggleButton toggleButtonTouzi;
-	private ToggleButton toggleButtonYejian;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void initView() {
 		setContentView(R.layout.cbn_settings_push);
-		((TextView)findViewById(R.id.tvTitle)).setText(getResources().getString(R.string.cbn_settings_push));
-		buttBack = (Button) findViewById(R.id.leftButton);
-		buttBack.setOnClickListener(this);
+		initTitleBar();
 		toggleButtonHongguan = (ToggleButton) findViewById(R.id.togglebut_hongguan);
 		toggleButtonHongguan.setOnToggleChanged(new OnToggleChanged() {
 			@Override
@@ -52,17 +49,12 @@ public class CBNSettingsPushActivity extends Activity implements OnClickListener
 						SharePrefUtil.KEY.SETTINGS_PUSH_TOUZI, on);
 			}
 		});
-		toggleButtonYejian = (ToggleButton) findViewById(R.id.togglebut_yejian);
-		toggleButtonYejian.setOnToggleChanged(new OnToggleChanged() {
-
-			@Override
-			public void onToggle(boolean on) {
-				SharePrefUtil.saveBoolean(CBNSettingsPushActivity.this,
-						SharePrefUtil.KEY.SETTINGS_PUSH_YEJIAN, on);
-
-			}
-		});
 		initToggleButtons();
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -94,29 +86,20 @@ public class CBNSettingsPushActivity extends Activity implements OnClickListener
 		} else {
 			toggleButtonTouzi.setToggleOff();
 		}
-		if (isOpenYejian) {
-			toggleButtonYejian.setToggleOn();
-		} else {
-			toggleButtonYejian.setToggleOff();
-		}
 
 	}
 
 	@Override
-	public void onClick(View view) {
+	protected void processClick(View view) {
 		switch (view.getId()) {
-		case R.id.leftButton:
-			finish();
-			break;
 		case R.id.togglebut_hongguan:
 			break;
 		case R.id.togglebut_shangye:
 			break;
 		case R.id.togglebut_touzi:
 			break;
-		case R.id.togglebut_yejian:
-			break;
 		}
+
 	}
 
 }

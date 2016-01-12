@@ -22,6 +22,13 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 public class NewsPage extends BasePage {
 
 	private NewsCategory category;
+	private ArrayList<ItemNewsPage> pages = new ArrayList<ItemNewsPage>();
+	@ViewInject(R.id.indicator)
+	private TabPageIndicator indicator;
+	private NewsPagerAdapter adapter;
+	@ViewInject(R.id.pager)
+	private ViewPager pager;
+	private int curIndex = 0;
 
 	public NewsPage(Context ct, NewsCategory newsCategory) {
 		super(ct);
@@ -40,14 +47,6 @@ public class NewsPage extends BasePage {
 		initIndicator();
 
 	}
-
-	private ArrayList<ItemNewsPage> pages = new ArrayList<ItemNewsPage>();
-	@ViewInject(R.id.indicator)
-	private TabPageIndicator indicator;
-	private NewsPagerAdapter adapter;
-	@ViewInject(R.id.pager)
-	private ViewPager pager;
-	private int curIndex = 0;
 
 	private void initIndicator() {
 		pages.clear();

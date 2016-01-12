@@ -301,29 +301,15 @@ public class StringUtils {
 		}
 		return new String(source);
 	}
-	
-	  public static boolean isPhoneNumberValid(String phoneNumber)
-	  {
-	     boolean isValid = false;
 
-	     String expression = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
-
-	     String expression2 ="^\\(?(\\d{2})\\)?[- ]?(\\d{4})[- ]?(\\d{4})$";
-
-	     CharSequence inputStr = phoneNumber;
-
-	     Pattern pattern = Pattern.compile(expression);
-
-	     Matcher matcher = pattern.matcher(inputStr);
-
-	     Pattern pattern2 =Pattern.compile(expression2);
-
-	     Matcher matcher2= pattern2.matcher(inputStr);
-	     if(matcher.matches()||matcher2.matches())
-	     {
-	     isValid = true;
-	     }
-	     return isValid; 
-	   }
+	public static boolean isPhoneNumberValid(String phoneNumber) {
+		Pattern pattern = Pattern.compile("1[0-9]{10}");
+		Matcher matcher = pattern.matcher(phoneNumber);
+		if (matcher.matches()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

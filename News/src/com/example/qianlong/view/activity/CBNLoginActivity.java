@@ -44,9 +44,10 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 
 	private Handler handler;
 
+	private boolean relogin = false;
+
 	@Override
 	protected void initData() {
-
 		loginModleImpl = new LoginModleImpl(this);
 		handler = new Handler() {
 			@Override
@@ -57,6 +58,7 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 							userName);
 					SharePrefUtil.saveString(ct,
 							SharePrefUtil.KEY.USER_PASSWORD, passWord);
+					finish();
 					showToast("登陆成功！");
 				} else {
 					showToast("用户名或密码错误！");
@@ -68,6 +70,17 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 	}
 
 	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		relogin = intent.getBooleanExtra("relogin", false);
+		if (relogin) {
+			editTextPassword.setText("");
+			SharePrefUtil.getString(this, SharePrefUtil.KEY.USER_PASSWORD, "");
+		}
+		super.onNewIntent(intent);
+	}
+
+	@Override
 	protected void initView() {
 		setContentView(R.layout.cbn_login);
 		initTitleBar();
@@ -75,8 +88,10 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 		editTextPassword = (EditText) findViewById(R.id.editPassword);
 		editTextUsername.setText(SharePrefUtil.getString(ct,
 				SharePrefUtil.KEY.USER_PHONENUMBER, ""));
-		editTextPassword.setText(SharePrefUtil.getString(ct,
-				SharePrefUtil.KEY.USER_PASSWORD, ""));
+		if (!relogin) {
+			editTextPassword.setText(SharePrefUtil.getString(ct,
+					SharePrefUtil.KEY.USER_PASSWORD, ""));
+		}
 		textViewLogin = (TextView) findViewById(R.id.textview_login);
 		textViewForget = (TextView) findViewById(R.id.textview_forget);
 		textViewRegist = (TextView) findViewById(R.id.textview_regist);

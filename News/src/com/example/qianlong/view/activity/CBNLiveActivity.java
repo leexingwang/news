@@ -1,25 +1,19 @@
 package com.example.qianlong.view.activity;
 
 import com.example.qianlong.R;
+import com.example.qianlong.base.BaseActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class CBNLiveActivity extends Activity {
+public class CBNLiveActivity extends BaseActivity {
 	private WebView webView;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.cbn_pop_live);
-		init();
-
-	}
 
 	@SuppressLint("SetJavaScriptEnabled")
 	private void init() {
@@ -46,11 +40,30 @@ public class CBNLiveActivity extends Activity {
 		super.onResume();
 		webView.reload();
 	}
-	
+
 	@Override
 	protected void onStop() {
 		super.onStop();
 		webView.destroy();
+	}
+
+	@Override
+	protected void initView() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.cbn_pop_live);
+		initTitleBar();
+	}
+
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		init();
+	}
+
+	@Override
+	protected void processClick(View v) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
