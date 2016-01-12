@@ -607,9 +607,9 @@ center live window
         public static final int cbn_live_gb_pause=0x7f0a0015;
         public static final int cbn_live_gb_play=0x7f0a0016;
         public static final int cbn_live_gb_rl_img=0x7f0a0013;
-        public static final int cbn_person_ll_photo=0x7f0a008a;
+        public static final int cbn_person_ll_photo=0x7f0a0089;
         public static final int center_music_window_close=0x7f0a000c;
-        public static final int circleimage_profile_image=0x7f0a008c;
+        public static final int circleimage_profile_image=0x7f0a008b;
         public static final int dots_ll=0x7f0a0077;
         public static final int editPassword=0x7f0a0021;
         public static final int editUserName=0x7f0a001f;
@@ -623,9 +623,9 @@ center live window
         public static final int edit_Regist_regist_identifying_code=0x7f0a0035;
         public static final int edit_Regist_username=0x7f0a0031;
         public static final int edittext_comment=0x7f0a000d;
-        public static final int home_login_name=0x7f0a008d;
+        public static final int home_login_name=0x7f0a008c;
         public static final int icon_new=0x7f0a005a;
-        public static final int image=0x7f0a008e;
+        public static final int image=0x7f0a008d;
         public static final int imageView_login_by_qq=0x7f0a0028;
         public static final int imageView_login_by_sina=0x7f0a0027;
         public static final int imageView_password=0x7f0a0020;
@@ -642,7 +642,7 @@ center live window
         public static final int imgbtn_push=0x7f0a003f;
         public static final int imgbtn_right=0x7f0a007d;
         public static final int imgbtn_text=0x7f0a007c;
-        public static final int imgbut_settings=0x7f0a008b;
+        public static final int imgbut_settings=0x7f0a008a;
         public static final int indicator=0x7f0a0068;
         public static final int iv_edit_cate=0x7f0a0069;
         public static final int iv_img=0x7f0a0071;
@@ -665,23 +665,22 @@ center live window
         public static final int my_category_text=0x7f0a004b;
         public static final int my_category_text_ok=0x7f0a004d;
         public static final int my_category_tip_text=0x7f0a004c;
-        public static final int news_center_fl=0x7f0a007f;
         public static final int news_detail_wv=0x7f0a0006;
         public static final int none=0x7f0a0000;
         public static final int otherGridView=0x7f0a0052;
         public static final int pager=0x7f0a006a;
         public static final int pb_loading=0x7f0a006f;
         public static final int progress_dialog_content=0x7f0a0064;
-        public static final int pull_to_load_footer_content=0x7f0a0080;
-        public static final int pull_to_load_footer_hint_textview=0x7f0a0082;
-        public static final int pull_to_load_footer_progressbar=0x7f0a0081;
-        public static final int pull_to_refresh_header_arrow=0x7f0a0088;
-        public static final int pull_to_refresh_header_content=0x7f0a0083;
-        public static final int pull_to_refresh_header_hint_textview=0x7f0a0085;
-        public static final int pull_to_refresh_header_progressbar=0x7f0a0089;
-        public static final int pull_to_refresh_header_text=0x7f0a0084;
-        public static final int pull_to_refresh_header_time=0x7f0a0087;
-        public static final int pull_to_refresh_last_update_time_text=0x7f0a0086;
+        public static final int pull_to_load_footer_content=0x7f0a007f;
+        public static final int pull_to_load_footer_hint_textview=0x7f0a0081;
+        public static final int pull_to_load_footer_progressbar=0x7f0a0080;
+        public static final int pull_to_refresh_header_arrow=0x7f0a0087;
+        public static final int pull_to_refresh_header_content=0x7f0a0082;
+        public static final int pull_to_refresh_header_hint_textview=0x7f0a0084;
+        public static final int pull_to_refresh_header_progressbar=0x7f0a0088;
+        public static final int pull_to_refresh_header_text=0x7f0a0083;
+        public static final int pull_to_refresh_header_time=0x7f0a0086;
+        public static final int pull_to_refresh_last_update_time_text=0x7f0a0085;
         public static final int rb_news_center=0x7f0a0061;
         public static final int rb_popupwindow=0x7f0a0062;
         public static final int rb_setting=0x7f0a0063;
@@ -785,30 +784,29 @@ center live window
     }
     public static final class string {
         public static final int app_name=0x7f070016;
-        public static final int cbn_password_angin_diff=0x7f070037;
-        public static final int cbn_password_fixed_error=0x7f07002d;
-        public static final int cbn_password_fixed_success=0x7f07002c;
-        public static final int cbn_password_isblank=0x7f07002a;
-        public static final int cbn_password_so_short=0x7f07002b;
-        public static final int cbn_phonenumber_error=0x7f07002e;
-        public static final int cbn_phonenumber_isblank=0x7f07002f;
-        public static final int cbn_phonenumber_or_username_isblank=0x7f070036;
+        public static final int cbn_password_angin_diff=0x7f070036;
+        public static final int cbn_password_fixed_error=0x7f07002c;
+        public static final int cbn_password_fixed_success=0x7f07002b;
+        public static final int cbn_password_isblank=0x7f070029;
+        public static final int cbn_password_so_short=0x7f07002a;
+        public static final int cbn_phonenumber_error=0x7f07002d;
+        public static final int cbn_phonenumber_isblank=0x7f07002e;
+        public static final int cbn_phonenumber_or_username_isblank=0x7f070035;
+        public static final int cbn_regist_error_phonenumber_already_used=0x7f070028;
         /**  login modle 
          */
-        public static final int cbn_regist_error_oldsystem=0x7f070027;
-        public static final int cbn_regist_error_phonenumber_already_used=0x7f070029;
-        public static final int cbn_regist_error_username_already_used=0x7f070028;
+        public static final int cbn_regist_error_username_already_used=0x7f070027;
         /**  Settings 
          */
         public static final int cbn_settings_=0x7f070024;
         public static final int cbn_settings_about_us=0x7f070026;
         public static final int cbn_settings_push=0x7f070025;
-        public static final int cbn_username_isblank=0x7f070031;
-        public static final int cbn_username_so_short=0x7f070030;
-        public static final int cbn_verification_code_error=0x7f070035;
-        public static final int cbn_verification_code_isblank=0x7f070032;
-        public static final int cbn_verification_code_send_error=0x7f070034;
-        public static final int cbn_verification_code_send_success=0x7f070033;
+        public static final int cbn_username_isblank=0x7f070030;
+        public static final int cbn_username_so_short=0x7f07002f;
+        public static final int cbn_verification_code_error=0x7f070034;
+        public static final int cbn_verification_code_isblank=0x7f070031;
+        public static final int cbn_verification_code_send_error=0x7f070033;
+        public static final int cbn_verification_code_send_success=0x7f070032;
         public static final int drawer_btn_rss=0x7f07001d;
         /**  加载中提示 
          */

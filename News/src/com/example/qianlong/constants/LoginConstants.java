@@ -21,9 +21,11 @@ public class LoginConstants {
 	 * fos_user.password.short 密码太短(不能小于3个字符) fos_user.oldsystem.already_used
 	 * 原始系统已经存在该用户
 	 */
-	public static String REGIST_ERROE_USERNAME_ALREADY = "fos_user.oldsystem.username_already_used";
+
+	public static String REGIST_ERROE_USERNAME_ALREADY = "fos_user.username.already_used";
+	public static String REGIST_ERROE_OLD_USERNAME_ALREADY = "fos_user.oldsystem.username_already_used";
 	public static String REGIST_ERROE_PHONE_ALREADY = "bst.phonenumber.already_used";
-	public static String REGIST_ERROE_OLD_ALREADY = "fos_user.oldsystem.mobile_already_used";
+	public static String REGIST_ERROE_OLD_PHONE_ALREADY = "fos_user.oldsystem.mobile_already_used";
 
 	/**
 	 * login

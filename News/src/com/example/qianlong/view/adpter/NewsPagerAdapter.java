@@ -12,9 +12,8 @@ import android.view.View;
 
 public class NewsPagerAdapter extends PagerAdapter {
 	private ArrayList<ItemNewsPage> pages;
-	private NewsCategory category;
 
-	public NewsPagerAdapter(Context ct, ArrayList<ItemNewsPage> pages,NewsCategory category) {
+	public NewsPagerAdapter(Context ct, ArrayList<ItemNewsPage> pages) {
 		this.pages = pages;
 	}
 
@@ -23,14 +22,13 @@ public class NewsPagerAdapter extends PagerAdapter {
 		// TODO Auto-generated method stub
 		if (position >= pages.size())
 			return;
-		((ViewPager) container).removeView(pages.get(position)
-				.getContentView());
+		((ViewPager) container)
+				.removeView(pages.get(position).getContentView());
 	}
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		int size = category.children.size();
-		return category.children.get(position % size).title;
+		return "123";
 	}
 
 	@Override
@@ -42,7 +40,7 @@ public class NewsPagerAdapter extends PagerAdapter {
 
 	@Override
 	public int getCount() {
-		return category.children.size();
+		return pages.size();
 	}
 
 	@Override

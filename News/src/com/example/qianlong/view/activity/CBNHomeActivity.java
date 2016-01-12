@@ -8,7 +8,7 @@ import com.example.qianlong.R;
 import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.view.adpter.HomePagerAdapter;
-import com.example.qianlong.view.page.NewsCenterPage;
+import com.example.qianlong.view.page.NewsPage;
 import com.example.qianlong.view.page.SettingPage;
 import com.example.qianlong.view.popupwindow.LivePopupWindow;
 import com.lidroid.xutils.util.LogUtils;
@@ -38,7 +38,7 @@ public class CBNHomeActivity extends BaseActivity {
 
 	@Override
 	protected void initData() {
-		pages.add(new NewsCenterPage(ct));
+		pages.add(new NewsPage(ct));
 		pages.add(new SettingPage(ct));
 		adapter = new HomePagerAdapter(ct, pages);
 		viewPager.setAdapter(adapter);
@@ -87,7 +87,7 @@ public class CBNHomeActivity extends BaseActivity {
 
 				switch (checkedId) {
 				case R.id.rb_news_center:
-					NewsCenterPage page = (NewsCenterPage) pages.get(0);
+					NewsPage page = (NewsPage) pages.get(0);
 					page.onResume();
 					viewPager.setCurrentItem(0, false);
 					break;

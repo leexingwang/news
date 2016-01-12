@@ -66,12 +66,18 @@ public class LoginModleImpl implements LoginModle {
 					RegistErrorEntity registErrorEntity = registErrorEntitys
 							.get(0);
 					String errorInformation = "";
-					if (LoginConstants.REGIST_ERROE_OLD_ALREADY
-							.equals(registErrorEntity.getMessage())) {
-						errorInformation = context.getResources().getString(
-								R.string.cbn_regist_error_oldsystem);
+					if (LoginConstants.REGIST_ERROE_USERNAME_ALREADY
+							.equals(registErrorEntity.getMessage())
+							|| LoginConstants.REGIST_ERROE_OLD_USERNAME_ALREADY
+									.equals(registErrorEntity.getMessage())) {
+						errorInformation = context
+								.getResources()
+								.getString(
+										R.string.cbn_regist_error_username_already_used);
 					} else if (LoginConstants.REGIST_ERROE_PHONE_ALREADY
-							.equals(registErrorEntity.getMessage())) {
+							.equals(registErrorEntity.getMessage())
+							|| LoginConstants.REGIST_ERROE_OLD_PHONE_ALREADY
+									.equals(registErrorEntity.getMessage())) {
 						errorInformation = context
 								.getResources()
 								.getString(
@@ -91,12 +97,10 @@ public class LoginModleImpl implements LoginModle {
 						onRegistListener.onRegistSuccess(jsonObject
 								.getString("id"));
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 				}
-
 			}
 
 			@Override
