@@ -2,6 +2,7 @@ package com.example.qianlong.view.page;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,9 +21,11 @@ public class SettingPage extends BasePage {
 
 	private ImageButton imageButSettings;
 	private CircleImageView circleImageViewProfile;
+	private Handler handler;
 
-	public SettingPage(Context context) {
+	public SettingPage(Context context, Handler handler) {
 		super(context);
+		this.handler = handler;
 	}
 
 	@Override

@@ -51,11 +51,14 @@ public abstract class BasePage implements OnClickListener {
 		rightImgBtn = (ImageButton) view.findViewById(R.id.imgbtn_right);
 		isbackImgBtn = (ImageButton) view.findViewById(R.id.imgbtn_channel);
 		leftImgBtn.setImageResource(R.drawable.img_menu);
+		rightImgBtn.setImageResource(R.drawable.cbn_search_icon);
 		titleTv = (TextView) view.findViewById(R.id.txt_title);
 		leftBtn.setVisibility(View.GONE);
 		rightBtn.setVisibility(View.GONE);
 		if (leftImgBtn != null)
 			leftImgBtn.setOnClickListener(this);
+		if (leftImgBtn != null)
+			rightImgBtn.setOnClickListener(this);
 		isbackImgBtn.setOnClickListener(this);
 
 	}
@@ -112,14 +115,12 @@ public abstract class BasePage implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.imgbtn_left:
-			break;
 		case R.id.imgbtn_channel:
 			ct.startActivity(new Intent(ct, ChannelActivity.class));
 			break;
 		default:
 			break;
 		}
-
+		processClick(v);
 	}
 }

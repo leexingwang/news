@@ -2,6 +2,7 @@ package com.example.qianlong.view.adpter;
 
 import java.util.ArrayList;
 
+import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.NewsCenterCategories.NewsCategory;
 import com.example.qianlong.view.page.ItemNewsPage;
 
@@ -11,9 +12,9 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 public class NewsPagerAdapter extends PagerAdapter {
-	private ArrayList<ItemNewsPage> pages;
+	private ArrayList<BasePage> pages;
 
-	public NewsPagerAdapter(Context ct, ArrayList<ItemNewsPage> pages) {
+	public NewsPagerAdapter(Context ct, ArrayList<BasePage> pages) {
 		this.pages = pages;
 	}
 

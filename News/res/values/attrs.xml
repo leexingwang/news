@@ -4,7 +4,7 @@
          Declare custom theme attributes that allow changing which styles are
          used for button bars depending on the API level.
          ?android:attr/buttonBarStyle is new as of API 11 so this is
-         necessary to support previous API levels.
+         necessary to support previous API levels.
     -->
     <declare-styleable name="ButtonBarContainerTheme">
         <attr name="buttonBarStyle" format="reference" />
@@ -15,6 +15,10 @@
         <attr name="civ_border_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+    <!--  -->
+    <declare-styleable name="ConvenientBanner">
+        <attr name="canLoop" format="boolean" />
     </declare-styleable>
 
 </resources>

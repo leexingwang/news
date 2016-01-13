@@ -3,6 +3,7 @@ package com.example.qianlong.view.page;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -15,14 +16,18 @@ import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.utils.QLApi;
 import com.example.qianlong.utils.SharePrefUtil;
+import com.example.qianlong.view.activity.CBNBannerActivity;
+import com.example.qianlong.view.activity.CBNLiveTextActivity;
 import com.example.qianlong.view.adpter.NewsPagerAdapter;
 
 public class NewsPage extends BasePage {
 
-	private ArrayList<ItemNewsPage> pages = new ArrayList<ItemNewsPage>();
+	private ArrayList<BasePage> itemNewsPages = new ArrayList<BasePage>();
+
+	private ArrayList<BasePage> basePages = new ArrayList<BasePage>();
 	private TabPageIndicator indicator;
-	private NewsPagerAdapter adapter;
-	private ViewPager pager;
+	private NewsPagerAdapter newsPagerAdapter;
+	private ViewPager pagerItemNews;
 	private int curIndex = 0;
 
 	public NewsPage(Context context) {
@@ -38,7 +43,7 @@ public class NewsPage extends BasePage {
 		View view = inflater.inflate(R.layout.news_center_frame, null);
 		initTitleBar(view);
 		indicator = (TabPageIndicator) view.findViewById(R.id.indicator);
-		pager = (ViewPager) view.findViewById(R.id.pager);
+		pagerItemNews = (ViewPager) view.findViewById(R.id.pager);
 		return view;
 	}
 
@@ -53,19 +58,26 @@ public class NewsPage extends BasePage {
 	}
 
 	private void initIndicator() {
-		pages.clear();
-		for (int i = 0; i <= 9; i++) {
-			pages.add(new ItemNewsPage(ct, ""));
+		itemNewsPages.clear();
+		for (int i = 0; i <=2; i++) {
+			itemNewsPages.add(new ItemNewsPage(ct, ""));
 		}
-		adapter = new NewsPagerAdapter(ct, pages);
-		pager.removeAllViews();
-		pager.setAdapter(adapter);
+		itemNewsPages.add(new HomePage(ct));
+		newsPagerAdapter = new NewsPagerAdapter(ct, itemNewsPages);
+		pagerItemNews.removeAllViews();
+		pagerItemNews.setAdapter(newsPagerAdapter);
 
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int arg0) {
-				ItemNewsPage page = pages.get(arg0);
+				BasePage page;
+				if (arg0 != 3) {
+					page = (ItemNewsPage) itemNewsPages.get(arg0);
+				} else {
+					page = (HomePage) itemNewsPages.get(arg0);
+				}
+
 				if (!page.isLoadSuccess) {
 					page.initData();
 				}
@@ -85,8 +97,8 @@ public class NewsPage extends BasePage {
 
 			}
 		});
-		pages.get(0).initData();
-		indicator.setViewPager(pager);
+		itemNewsPages.get(0).initData();
+		indicator.setViewPager(pagerItemNews);
 		indicator.setCurrentItem(curIndex);
 		isLoadSuccess = true;
 	}
@@ -95,8 +107,17 @@ public class NewsPage extends BasePage {
 	}
 
 	@Override
-	protected void processClick(View v) {
-
+	protected void processClick(View view) {
+		switch (view.getId()) {
+		case R.id.imgbtn_left:
+			ct.startActivity(new Intent(ct, CBNLiveTextActivity.class));
+			break;
+		case R.id.imgbtn_right:
+			ct.startActivity(new Intent(ct, CBNBannerActivity.class));
+			break;
+		default:
+			break;
+		}
 	}
 
 }
