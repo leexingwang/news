@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
@@ -20,7 +19,8 @@ import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.example.qianlong.view.activity.CBNLiveTextActivity;
 import com.example.qianlong.view.adpter.NewsPagerAdapter;
 
-public class NewsPage extends BasePage {
+public class NewsPage extends BasePage implements
+		ViewPager.OnPageChangeListener {
 
 	private ArrayList<BasePage> itemNewsPages = new ArrayList<BasePage>();
 
@@ -59,44 +59,14 @@ public class NewsPage extends BasePage {
 
 	private void initIndicator() {
 		itemNewsPages.clear();
-		for (int i = 0; i <=2; i++) {
+		for (int i = 0; i <= 2; i++) {
 			itemNewsPages.add(new ItemNewsPage(ct, ""));
 		}
-		itemNewsPages.add(new HomePage(ct));
+		itemNewsPages.add(0, new HomePage(ct));
 		newsPagerAdapter = new NewsPagerAdapter(ct, itemNewsPages);
 		pagerItemNews.removeAllViews();
 		pagerItemNews.setAdapter(newsPagerAdapter);
-
-		indicator.setOnPageChangeListener(new OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int arg0) {
-				BasePage page;
-				if (arg0 != 3) {
-					page = (ItemNewsPage) itemNewsPages.get(arg0);
-				} else {
-					page = (HomePage) itemNewsPages.get(arg0);
-				}
-
-				if (!page.isLoadSuccess) {
-					page.initData();
-				}
-				curIndex = arg0;
-
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		indicator.setOnPageChangeListener(this);
 		itemNewsPages.get(0).initData();
 		indicator.setViewPager(pagerItemNews);
 		indicator.setCurrentItem(curIndex);
@@ -118,6 +88,31 @@ public class NewsPage extends BasePage {
 		default:
 			break;
 		}
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		BasePage page;
+		if (arg0 != 0) {
+			page = (ItemNewsPage) itemNewsPages.get(arg0);
+		} else {
+			page = (HomePage) itemNewsPages.get(arg0);
+		}
+
+		if (!page.isLoadSuccess) {
+			page.initData();
+		}
+		curIndex = arg0;
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+
 	}
 
 }

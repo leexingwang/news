@@ -5,17 +5,13 @@ import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.base.common.ui.CircleImageView;
 import com.example.qianlong.R;
-import com.example.qianlong.R.layout;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.view.activity.CBNLoginActivity;
 import com.example.qianlong.view.activity.CBNSettingsActivity;
-import com.lidroid.xutils.ViewUtils;
 
 public class SettingPage extends BasePage {
 

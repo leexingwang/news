@@ -1,5 +1,6 @@
 package com.example.qianlong.view.page;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,9 +25,11 @@ import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
+import com.example.qianlong.bean.LiveBean;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.example.qianlong.view.activity.CBNBannerActivity.NetworkImageHolderView;
+import com.example.qianlong.view.adpter.TimelineAdapter;
 import com.squareup.picasso.Picasso;
 
 public class HomePage extends BasePage implements
@@ -43,6 +46,7 @@ public class HomePage extends BasePage implements
 			"http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg" };
 	private View topNewsView;
 	private PullToRefreshListView ptrLv;
+	View view;
 
 	public HomePage(Context context) {
 		super(context);
@@ -51,42 +55,42 @@ public class HomePage extends BasePage implements
 	@SuppressWarnings("unchecked")
 	@Override
 	protected View initView(LayoutInflater inflater) {
-		// TODO Auto-generated method stub
-//		View view = inflater.inflate(R.layout.frag_item_news, null);
-//		ptrLv = (PullToRefreshListView) view.findViewById(R.id.lv_item_news);
+		view = inflater.inflate(R.layout.frag_item_news, null);
+		ptrLv = (PullToRefreshListView) view.findViewById(R.id.lv_item_news);
 		View topNewsView = inflater.inflate(R.layout.banner, null);
 		convenientBanner = (ConvenientBanner<String>) topNewsView
 				.findViewById(R.id.convenientBanner);
-//		ptrLv.setPullLoadEnabled(false);
-//		// 滚动到底自动加载可用
-//		ptrLv.setScrollLoadEnabled(true);
-//		// 得到实际的ListView 设置点击
-//		ptrLv.getRefreshableView().setOnItemClickListener(
-//				new OnItemClickListener() {
-//
-//					@Override
-//					public void onItemClick(AdapterView<?> parent, View view,
-//							int position, long id) {
-//
-//					}
-//				});
-//		setLastUpdateTime();
-//		// 设置下拉刷新的listener
-//		ptrLv.setOnRefreshListener(new OnRefreshListener<ListView>() {
-//
-//			@Override
-//			public void onPullDownToRefresh(
-//					PullToRefreshBase<ListView> refreshView) {
-//			}
-//
-//			@Override
-//			public void onPullUpToRefresh(
-//					PullToRefreshBase<ListView> refreshView) {
-//
-//			}
-//		});
-//		ptrLv.getRefreshableView().addHeaderView(topNewsView);
-		return topNewsView;
+		ptrLv.setPullLoadEnabled(true);
+		// 滚动到底自动加载可用
+		ptrLv.setScrollLoadEnabled(true);
+		// 得到实际的ListView 设置点击
+		ptrLv.getRefreshableView().setOnItemClickListener(
+				new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+
+					}
+				});
+		setLastUpdateTime();
+		// 设置下拉刷新的listener
+		ptrLv.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				onLoaded();
+			}
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				onLoaded();
+			}
+		});
+		ptrLv.getRefreshableView().addHeaderView(topNewsView);
+		return view;
 	}
 
 	private void setLastUpdateTime() {
@@ -112,6 +116,28 @@ public class HomePage extends BasePage implements
 				.setPageIndicatorAlign(PageIndicatorAlign.ALIGN_PARENT_RIGHT)
 				.setPageTransformer(new DefaultTransformer())
 				.setOnItemClickListener(this);
+		List<LiveBean> lives = new ArrayList<LiveBean>();
+		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
+				"2016-01-14T12:46:00", 1));
+		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
+				"2016-01-14T12:46:00", 1));
+		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
+				"2016-01-14T12:46:00", 1));
+		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
+				"2016-01-14T12:46:00", 1));
+		TimelineAdapter adapter = new TimelineAdapter(ct, lives);
+		ptrLv.getRefreshableView().setAdapter(adapter);
+		if (!convenientBanner.isTurning()) {
+			convenientBanner.startTurning(3000);
+		}
+		onLoaded();
+
+	}
+
+	private void onLoaded() {
+		dismissLoadingView();
+		ptrLv.onPullDownRefreshComplete();
+		ptrLv.onPullUpRefreshComplete();
 	}
 
 	@Override

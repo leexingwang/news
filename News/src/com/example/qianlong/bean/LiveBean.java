@@ -15,6 +15,23 @@ public class LiveBean {
 
 	private int LiveType;
 
+	public LiveBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiveBean(String adminName, String liveFrom, int liveID,
+			String liveContent, String livePic, String liveDate, int liveType) {
+		super();
+		AdminName = adminName;
+		LiveFrom = liveFrom;
+		LiveID = liveID;
+		LiveContent = liveContent;
+		LivePic = livePic;
+		LiveDate = liveDate;
+		LiveType = liveType;
+	}
+
 	public void setAdminName(String AdminName) {
 		this.AdminName = AdminName;
 	}

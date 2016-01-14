@@ -3,9 +3,6 @@ package com.example.qianlong.view.adpter;
 import java.util.List;
 
 import com.example.qianlong.R;
-import com.example.qianlong.R.color;
-import com.example.qianlong.R.id;
-import com.example.qianlong.R.layout;
 import com.example.qianlong.base.QLBaseAdapter;
 import com.example.qianlong.bean.NewsListBean.News;
 import com.example.qianlong.constants.Constants;
@@ -49,10 +46,12 @@ public class NewsAdapter extends QLBaseAdapter<News, ListView> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		if(news.isRead){
-			holder.title.setTextColor(context.getResources().getColor(R.color.news_item_has_read_textcolor));
-		}else{
-			holder.title.setTextColor(context.getResources().getColor(R.color.news_item_no_read_textcolor));
+		if (news.isRead) {
+			holder.title.setTextColor(context.getResources().getColor(
+					R.color.news_item_has_read_textcolor));
+		} else {
+			holder.title.setTextColor(context.getResources().getColor(
+					R.color.news_item_no_read_textcolor));
 		}
 		holder.title.setText(news.title);
 		holder.pub_date.setText(news.pubdate);
@@ -60,10 +59,10 @@ public class NewsAdapter extends QLBaseAdapter<News, ListView> {
 			holder.comment_count.setVisibility(View.VISIBLE);
 			if (news.commentcount > 0) {
 				holder.comment_count.setText(news.commentcount + "");
-			}else{
+			} else {
 				holder.comment_count.setText("");
 			}
-			
+
 		} else {
 			holder.comment_count.setVisibility(View.INVISIBLE);
 		}
@@ -76,10 +75,10 @@ public class NewsAdapter extends QLBaseAdapter<News, ListView> {
 				switch (read_model) {
 				case 1:
 					int type = CommonUtil.isNetworkAvailable(context);
-					if(type==1){
+					if (type == 1) {
 						holder.iv.setVisibility(View.VISIBLE);
 						bitmapUtil.display(holder.iv, news.listimage);
-					}else{
+					} else {
 						holder.iv.setVisibility(View.GONE);
 					}
 					break;
@@ -94,8 +93,7 @@ public class NewsAdapter extends QLBaseAdapter<News, ListView> {
 				default:
 					break;
 				}
-				
-				
+
 			}
 		} else {
 			holder.iv.setVisibility(View.GONE);

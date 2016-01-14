@@ -1,5 +1,7 @@
 package com.base.common.ui.banner;
 
+import com.lidroid.xutils.util.LogUtils;
+
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -40,17 +42,40 @@ public class CBLoopViewPager extends ViewPager {
 	}
 
 	private float oldX = 0, newX = 0;
+	private int abc;
+	private float mLastMotionX;
+	private float mLastMotionY;
 	private static final float sens = 5;
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		if (isCanScroll) {
 			if (onItemClickListener != null) {
+				final float x = ev.getX();
+				final float y = ev.getY();
 				switch (ev.getAction()) {
 				case MotionEvent.ACTION_DOWN:
+					getParent().requestDisallowInterceptTouchEvent(true);
 					oldX = ev.getX();
+					abc = 1;
+					mLastMotionX = x;
+					mLastMotionY = y;
 					break;
+				case MotionEvent.ACTION_MOVE:
+					if (abc == 1) {
+						if (Math.abs(x - mLastMotionX) < Math.abs(y
+								- mLastMotionY)) {
+							abc = 0;
+							getParent().requestDisallowInterceptTouchEvent(
+									false);
+							LogUtils.d("in listview");
+						} else {
+							getParent()
+									.requestDisallowInterceptTouchEvent(true);
+						}
 
+					}
+					break;
 				case MotionEvent.ACTION_UP:
 					newX = ev.getX();
 					if (Math.abs(oldX - newX) < sens) {
@@ -59,6 +84,8 @@ public class CBLoopViewPager extends ViewPager {
 					oldX = 0;
 					newX = 0;
 					break;
+				case MotionEvent.ACTION_CANCEL:
+					getParent().requestDisallowInterceptTouchEvent(false);
 				}
 			}
 			return super.onTouchEvent(ev);

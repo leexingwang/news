@@ -18,14 +18,10 @@ import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.view.adpter.TimelineAdapter;
 import com.lidroid.xutils.exception.HttpException;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 /**
