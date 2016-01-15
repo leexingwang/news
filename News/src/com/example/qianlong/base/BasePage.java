@@ -1,5 +1,7 @@
 package com.example.qianlong.base;
 
+import java.util.ArrayList;
+
 import com.example.qianlong.R;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomToast;
@@ -11,6 +13,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.topnewgrid.ChannelActivity;
+import com.topnewgrid.bean.ChannelItem;
 
 import android.content.Context;
 import android.content.Intent;
@@ -34,8 +37,29 @@ public abstract class BasePage implements OnClickListener {
 	protected TextView titleTv;
 	protected LinearLayout loadfailView;
 	public boolean isLoadSuccess = false;
+	protected String channelItemName;
+
+	public BasePage() {
+	}
 
 	public BasePage(Context context) {
+		ct = context;
+		contentView = initView((LayoutInflater) ct
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+		loadingView = contentView.findViewById(R.id.loading_view);
+		loadfailView = (LinearLayout) contentView
+				.findViewById(R.id.ll_load_fail);
+	}
+
+	public String getChannelItemName() {
+		return channelItemName;
+	}
+
+	public void setChannelItemName(String channelItemName) {
+		this.channelItemName = channelItemName;
+	}
+
+	public <T> BasePage(Context context, ArrayList<T> t) {
 		ct = context;
 		contentView = initView((LayoutInflater) ct
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE));

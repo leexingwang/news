@@ -101,4 +101,10 @@ public class CBNNewsDetailActivity extends BaseActivity {
 		Toast.makeText(ct, "·ÖÏí", 0).show();
 	}
 
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

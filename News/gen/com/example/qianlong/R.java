@@ -9,7 +9,9 @@ package com.example.qianlong;
 
 public final class R {
     public static final class anim {
-        public static final int update_loading_progressbar_anim=0x7f040000;
+        public static final int fade_form_down_to_up=0x7f040000;
+        public static final int fade_form_up_to_down=0x7f040001;
+        public static final int update_loading_progressbar_anim=0x7f040002;
     }
     public static final class attr {
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"

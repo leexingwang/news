@@ -141,4 +141,10 @@ public class CBNLoginRegistActivity extends BaseActivity implements
 		handler.sendMessage(message);
 	}
 
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

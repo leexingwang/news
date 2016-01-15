@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/title_bar"
-        layout="@layout/channel_title_bar" />
+        layout="@layout/layout_title_bar" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -114,8 +114,8 @@
                     android:gravity="center"
                     android:minHeight="56.0dip"
                     android:minWidth="72.0dip"
-                    android:textColor="@color/channel_subscribe_item_text_color"
                     android:text="追问"
+                    android:textColor="@color/channel_subscribe_item_text_color"
                     android:textSize="14.0sp" />
 
                 <TextView
@@ -128,8 +128,8 @@
                     android:gravity="center"
                     android:minHeight="56.0dip"
                     android:minWidth="72.0dip"
-                    android:textColor="@color/channel_subscribe_item_text_color"
                     android:text="大作"
+                    android:textColor="@color/channel_subscribe_item_text_color"
                     android:textSize="14.0sp" />
 
                 <TextView
@@ -142,8 +142,8 @@
                     android:gravity="center"
                     android:minHeight="56.0dip"
                     android:minWidth="72.0dip"
-                    android:textColor="@color/channel_subscribe_item_text_color"
                     android:text="自选股"
+                    android:textColor="@color/channel_subscribe_item_text_color"
                     android:textSize="14.0sp" />
             </LinearLayout>
         </LinearLayout>

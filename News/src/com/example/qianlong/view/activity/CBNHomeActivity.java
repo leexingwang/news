@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import com.base.common.ui.CustomViewPager;
 import com.base.common.ui.LazyViewPager.OnPageChangeListener;
 import com.example.qianlong.R;
+import com.example.qianlong.application.AppApplication;
 import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.base.BasePage;
+import com.example.qianlong.constants.Constants;
 import com.example.qianlong.utils.TLog;
 import com.example.qianlong.view.adpter.HomePagerAdapter;
 import com.example.qianlong.view.page.NewsPage;
 import com.example.qianlong.view.page.SettingPage;
 import com.example.qianlong.view.popupwindow.LivePopupWindow;
+import com.topnewgrid.bean.ChannelItem;
+import com.topnewgrid.bean.ChannelManage;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -30,6 +35,10 @@ public class CBNHomeActivity extends BaseActivity implements
 	private LivePopupWindow mMoreWindow;
 	private RadioButton radioButton;
 	private Handler handler;
+	private NewsPage newsPage;
+	/** 用户栏目列表 */
+	private ArrayList<ChannelItem> userChannelList = new ArrayList<ChannelItem>();
+	private final static int UPDATA_CHANNEL = 1;
 
 	@Override
 	protected void initView() {
@@ -42,7 +51,10 @@ public class CBNHomeActivity extends BaseActivity implements
 	@Override
 	protected void initData() {
 		initHandler();
-		pages.add(new NewsPage(ct));
+		userChannelList = (ArrayList<ChannelItem>) ChannelManage.getManage(
+				AppApplication.getApp().getSQLHelper()).getUserChannel();
+		newsPage = new NewsPage(ct, userChannelList);
+		pages.add(newsPage);
 		pages.add(new SettingPage(ct, handler));
 		adapter = new HomePagerAdapter(ct, pages);
 		viewPager.setAdapter(adapter);
@@ -62,8 +74,22 @@ public class CBNHomeActivity extends BaseActivity implements
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
+				switch (msg.what) {
+				case UPDATA_CHANNEL:
+					upData();
+					break;
+
+				default:
+					break;
+				}
 			}
+
 		};
+	}
+
+	private void upData() {
+		newsPage.updateUI((ArrayList<ChannelItem>) ChannelManage.getManage(
+				AppApplication.getApp().getSQLHelper()).getUserChannel());
 	}
 
 	@Override
@@ -77,6 +103,31 @@ public class CBNHomeActivity extends BaseActivity implements
 			break;
 		}
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent intent) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, intent);
+		if (requestCode == Constants.CHANGE_CHANNEL) {
+			new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					try {
+						Message message = Message.obtain();
+						message.what = UPDATA_CHANNEL;
+						handler.sendMessage(message);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			}).start();
+		}
 	}
 
 	private void showMoreWindow(View view) {
@@ -114,7 +165,6 @@ public class CBNHomeActivity extends BaseActivity implements
 	@Override
 	public void onPageSelected(int position) {
 		BasePage page = pages.get(position);
-		TLog.log(page + "---------------------------------" + position);
 		if (!page.isLoadSuccess) {
 			page.initData();
 		}
@@ -125,5 +175,9 @@ public class CBNHomeActivity extends BaseActivity implements
 	public void onPageScrollStateChanged(int state) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void finishChild() {
 	}
 }

@@ -118,4 +118,10 @@ public class CBNLoginForgotPasswordSubmitActivity extends BaseActivity
 		handler.sendMessage(message);
 	}
 
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

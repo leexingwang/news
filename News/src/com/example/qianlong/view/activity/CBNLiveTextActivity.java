@@ -170,4 +170,10 @@ public class CBNLiveTextActivity extends BaseActivity implements
 			break;
 		}
 	}
+
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
 }

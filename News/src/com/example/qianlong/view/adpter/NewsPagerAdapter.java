@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.NewsCenterCategories.NewsCategory;
+import com.example.qianlong.view.page.HomePage;
 import com.example.qianlong.view.page.ItemNewsPage;
 
 import android.content.Context;
@@ -29,7 +30,13 @@ public class NewsPagerAdapter extends PagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return "123";
+		String name="";
+		if(pages.get(position) instanceof HomePage){
+			name=((HomePage)pages.get(position)).getChannelItemName();
+		}else{
+			name=((ItemNewsPage)pages.get(position)).getChannelItemName();
+		}
+		return name;
 	}
 
 	@Override

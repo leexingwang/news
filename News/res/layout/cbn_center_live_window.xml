@@ -80,7 +80,7 @@
         android:id="@+id/center_music_window_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#dd969696"
+        android:background="#f60147A7"
         android:padding="8dp"
         android:src="@drawable/tabbar_compose_background_icon_close" />
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.example.qianlong.R;
 import com.example.qianlong.application.AppApplication;
+import com.example.qianlong.base.BaseActivity;
+import com.example.qianlong.constants.Constants;
 import com.topnewgrid.adapter.ChannelDragAdapter;
 import com.topnewgrid.adapter.ChannelOtherAdapter;
 import com.topnewgrid.bean.ChannelItem;
@@ -51,7 +53,7 @@ import android.widget.Toast;
  * 
  * @version V1.0
  */
-public class ChannelActivity extends FragmentActivity implements
+public class ChannelActivity extends BaseActivity implements
 		OnItemClickListener, OnClickListener {
 	/** 用户栏目的GRIDVIEW */
 	private ChannelDragGrid userGridView;
@@ -72,18 +74,21 @@ public class ChannelActivity extends FragmentActivity implements
 	/** 是否在编辑状态 */
 	boolean isEdit = false;
 
-	private TextView isback;
-
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void initView() {
 		setContentView(R.layout.channel_subscribe_activity);
-		initView();
-		initData();
+		initTitleBar();
+		userGridView = (ChannelDragGrid) findViewById(R.id.userGridView);
+		otherGridView = (ChannelOtherGridView) findViewById(R.id.otherGridView);
+		userTextView = (TextView) findViewById(R.id.my_category_text_ok);
+		// 设置GRIDVIEW的ITEM的点击监听
+		otherGridView.setOnItemClickListener(this);
+		userGridView.setOnItemClickListener(this);
+		userTextView.setOnClickListener(this);
 	}
 
-	/** 初始化数据 */
-	private void initData() {
+	@Override
+	protected void initData() {
 		userChannelList = ((ArrayList<ChannelItem>) ChannelManage.getManage(
 				AppApplication.getApp().getSQLHelper()).getUserChannel());
 		otherChannelList = ((ArrayList<ChannelItem>) ChannelManage.getManage(
@@ -94,17 +99,44 @@ public class ChannelActivity extends FragmentActivity implements
 		otherGridView.setAdapter(this.otherAdapter);
 	}
 
-	/** 初始化布局 */
-	private void initView() {
-		userGridView = (ChannelDragGrid) findViewById(R.id.userGridView);
-		otherGridView = (ChannelOtherGridView) findViewById(R.id.otherGridView);
-		userTextView = (TextView) findViewById(R.id.my_category_text_ok);
-		isback = (TextView) findViewById(R.id.back);
-		// 设置GRIDVIEW的ITEM的点击监听
-		otherGridView.setOnItemClickListener(this);
-		userGridView.setOnItemClickListener(this);
-		userTextView.setOnClickListener(this);
-		isback.setOnClickListener(this);
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		saveChannel();
+		this.setResult(Constants.CHANGE_CHANNEL);
+		((Activity) ct).overridePendingTransition(android.R.anim.fade_in,
+				R.anim.fade_form_down_to_up);
+	}
+
+	@Override
+	protected void processClick(View v) {
+		switch (v.getId()) {
+		case R.id.my_category_text_ok:
+			if (isEdit) {
+				isEdit = false;
+				userAdapter = new ChannelDragAdapter(this, userChannelList,
+						isEdit);
+				userAdapter.notifyDataSetChanged();
+				userGridView.setAdapter(userAdapter);
+				userGridView.invalidateViews();
+				userTextView.setText(getResources().getString(
+						R.string.subscribe_my_category_edit));
+
+			} else {
+				isEdit = true;
+				userAdapter = new ChannelDragAdapter(this, userChannelList,
+						isEdit);
+				userAdapter.notifyDataSetChanged();
+				userGridView.setAdapter(userAdapter);
+				userGridView.invalidateViews();
+				userTextView.setText(getResources().getString(
+						R.string.subscribe_my_category_ok));
+			}
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	@Override
@@ -195,43 +227,6 @@ public class ChannelActivity extends FragmentActivity implements
 		default:
 			break;
 		}
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.my_category_text_ok:
-			if (isEdit) {
-				isEdit = false;
-				userAdapter = new ChannelDragAdapter(this, userChannelList,
-						isEdit);
-				userAdapter.notifyDataSetChanged();
-				userGridView.setAdapter(userAdapter);
-				userGridView.invalidateViews();
-				userTextView.setText(getResources().getString(
-						R.string.subscribe_my_category_edit));
-
-			} else {
-				isEdit = true;
-				userAdapter = new ChannelDragAdapter(this, userChannelList,
-						isEdit);
-				userAdapter.notifyDataSetChanged();
-				userGridView.setAdapter(userAdapter);
-				userGridView.invalidateViews();
-				userTextView.setText(getResources().getString(
-						R.string.subscribe_my_category_ok));
-
-			}
-
-			break;
-		case R.id.back:
-			saveChannel();
-			finish();
-			break;
-		default:
-			break;
-		}
-
 	}
 
 	/**
@@ -351,8 +346,16 @@ public class ChannelActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onBackPressed() {
+	public void finishBefore() {
 		saveChannel();
-		super.onBackPressed();
+		this.setResult(Constants.CHANGE_CHANNEL);
 	}
+
+	@Override
+	protected void finishChild() {
+		((Activity) ct).overridePendingTransition(android.R.anim.fade_in,
+				R.anim.fade_form_down_to_up);
+
+	}
+
 }

@@ -102,4 +102,10 @@ public class CBNSettingsPushActivity extends BaseActivity implements
 
 	}
 
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

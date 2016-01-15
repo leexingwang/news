@@ -8,7 +8,6 @@ import java.util.Map;
 import com.topnewgrid.bean.ChannelItem;
 import com.topnewgrid.db.ChannelSQLHelper;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -54,7 +53,8 @@ public class ChannelDao implements ChannelDaoInface {
 		int count = 0;
 		try {
 			database = helper.getWritableDatabase();
-			count = database.delete(ChannelSQLHelper.TABLE_CHANNEL, whereClause, whereArgs);
+			count = database.delete(ChannelSQLHelper.TABLE_CHANNEL,
+					whereClause, whereArgs);
 			flag = (count > 0 ? true : false);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -75,7 +75,8 @@ public class ChannelDao implements ChannelDaoInface {
 		int count = 0;
 		try {
 			database = helper.getWritableDatabase();
-			count = database.update(ChannelSQLHelper.TABLE_CHANNEL, values, whereClause, whereArgs);
+			count = database.update(ChannelSQLHelper.TABLE_CHANNEL, values,
+					whereClause, whereArgs);
 			flag = (count > 0 ? true : false);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -96,8 +97,8 @@ public class ChannelDao implements ChannelDaoInface {
 		Map<String, String> map = new HashMap<String, String>();
 		try {
 			database = helper.getReadableDatabase();
-			cursor = database.query(true, ChannelSQLHelper.TABLE_CHANNEL, null, selection,
-					selectionArgs, null, null, null, null);
+			cursor = database.query(true, ChannelSQLHelper.TABLE_CHANNEL, null,
+					selection, selectionArgs, null, null, null, null);
 			int cols_len = cursor.getColumnCount();
 			while (cursor.moveToNext()) {
 				for (int i = 0; i < cols_len; i++) {
@@ -121,14 +122,16 @@ public class ChannelDao implements ChannelDaoInface {
 	}
 
 	@Override
-	public List<Map<String, String>> listCache(String selection,String[] selectionArgs) {
+	public List<Map<String, String>> listCache(String selection,
+			String[] selectionArgs) {
 		// TODO Auto-generated method stub
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		SQLiteDatabase database = null;
 		Cursor cursor = null;
 		try {
 			database = helper.getReadableDatabase();
-			cursor = database.query(false, ChannelSQLHelper.TABLE_CHANNEL, null, selection,selectionArgs, null, null, null, null);
+			cursor = database.query(false, ChannelSQLHelper.TABLE_CHANNEL,
+					null, selection, selectionArgs, null, null, null, null);
 			int cols_len = cursor.getColumnCount();
 			while (cursor.moveToNext()) {
 				Map<String, String> map = new HashMap<String, String>();

@@ -31,6 +31,7 @@ import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.example.qianlong.view.activity.CBNBannerActivity.NetworkImageHolderView;
 import com.example.qianlong.view.adpter.TimelineAdapter;
 import com.squareup.picasso.Picasso;
+import com.topnewgrid.bean.ChannelItem;
 
 public class HomePage extends BasePage implements
 		com.base.common.ui.banner.OnItemClickListener {
@@ -44,12 +45,14 @@ public class HomePage extends BasePage implements
 			"http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg",
 			"http://f.hiphotos.baidu.com/image/h%3D200/sign=1478eb74d5a20cf45990f9df460b4b0c/d058ccbf6c81800a5422e5fdb43533fa838b4779.jpg",
 			"http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg" };
-	private View topNewsView;
 	private PullToRefreshListView ptrLv;
+	private ChannelItem channelItem;
 	View view;
 
-	public HomePage(Context context) {
+	public HomePage(Context context, ChannelItem channelItem) {
 		super(context);
+		this.channelItem = channelItem;
+		channelItemName = channelItem.getName();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -117,14 +120,10 @@ public class HomePage extends BasePage implements
 				.setPageTransformer(new DefaultTransformer())
 				.setOnItemClickListener(this);
 		List<LiveBean> lives = new ArrayList<LiveBean>();
-		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
-				"2016-01-14T12:46:00", 1));
-		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
-				"2016-01-14T12:46:00", 1));
-		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
-				"2016-01-14T12:46:00", 1));
-		lives.add(new LiveBean("123", "233444", 1, "1234", "123",
-				"2016-01-14T12:46:00", 1));
+		for (int i = 0; i < 50; i++) {
+			lives.add(new LiveBean("123", "233444", 1, "1234" + i, "123",
+					"2016-01-14T12:46:00", 1));
+		}
 		TimelineAdapter adapter = new TimelineAdapter(ct, lives);
 		ptrLv.getRefreshableView().setAdapter(adapter);
 		if (!convenientBanner.isTurning()) {
@@ -164,7 +163,7 @@ public class HomePage extends BasePage implements
 
 		@Override
 		public void UpdateUI(Context context, final int position, String data) {
-			Picasso.with(context).load(data).resize(500, 200).centerCrop()
+			Picasso.with(context).load(data).resize(700, 350).centerCrop()
 					.into(imageView);
 			textView.setText("qqqqqqq" + position);
 		}
@@ -173,8 +172,6 @@ public class HomePage extends BasePage implements
 
 	@Override
 	public void onItemClick(int position) {
-		// TODO Auto-generated method stub
-		Toast.makeText(ct, "点击了第" + (position + 1) + "图片", Toast.LENGTH_SHORT)
-				.show();
+		showToast("点击了第" + (position + 1) + "图片");
 	}
 }

@@ -66,4 +66,10 @@ public class CBNLiveActivity extends BaseActivity {
 
 	}
 
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

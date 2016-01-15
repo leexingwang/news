@@ -72,4 +72,10 @@ public class CBNSettingsActivity extends BaseActivity implements
 		imageButtonAboutUs.setOnClickListener(this);
 		imageButtonPush.setOnClickListener(this);
 	}
+
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
 }

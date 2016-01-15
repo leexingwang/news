@@ -30,4 +30,10 @@ public class CBNSettingsAboutUsActivity extends BaseActivity {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
 }

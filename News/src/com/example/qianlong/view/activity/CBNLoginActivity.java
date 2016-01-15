@@ -162,4 +162,10 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 
 	}
 
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

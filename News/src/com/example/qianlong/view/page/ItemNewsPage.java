@@ -23,6 +23,7 @@ import com.example.qianlong.bean.NewsListBean.News;
 import com.example.qianlong.bean.NewsListBean.TopNews;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.view.adpter.NewsAdapter;
+import com.topnewgrid.bean.ChannelItem;
 
 public class ItemNewsPage extends BasePage {
 	private PullToRefreshListView ptrLv;
@@ -30,7 +31,7 @@ public class ItemNewsPage extends BasePage {
 	private LinearLayout mViewPagerLay;
 	private LinearLayout dotLl;
 	private View topNewsView;
-	private String url;
+	private ChannelItem channelItem;
 	private String moreUrl;
 	private ArrayList<News> news = new ArrayList<NewsListBean.News>();
 	private ArrayList<TopNews> topNews;
@@ -42,9 +43,10 @@ public class ItemNewsPage extends BasePage {
 	private RollViewPager mViewPager;
 	public boolean isLoadSuccess;
 
-	public ItemNewsPage(Context context, String url) {
+	public ItemNewsPage(Context context, ChannelItem channelItem) {
 		super(context);
-		this.url = url;
+		this.channelItem = channelItem;
+		channelItemName = channelItem.getName();
 	}
 
 	@Override
@@ -76,13 +78,11 @@ public class ItemNewsPage extends BasePage {
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				getNewsList(url, true);
 			}
 
 			@Override
 			public void onPullUpToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				getNewsList(moreUrl, false);
 
 			}
 		});
@@ -91,26 +91,12 @@ public class ItemNewsPage extends BasePage {
 
 	@Override
 	public void initData() {
-		// hasReadIds = SharePrefUtil.getString(ct, Constants.READ_NEWS_IDS,
-		// "");
-		// String[] ids = hasReadIds.split(",");
-		// for (String id : ids) {
-		// readSet.add(id);
-		// }
-		// if (!TextUtils.isEmpty(url)) {
-		// String result = SharePrefUtil.getString(ct, url, "");
-		// if (!TextUtils.isEmpty(result)) {
-		// processDataFromCache(true, result);
-		// }
-		// getNewsList(url, true);
-		// }
 
 	}
 
 	private void getNewsList(final String loadUrl, final boolean isRefresh) {
 	}
 
-	@SuppressWarnings("unused")
 	private void getNewsCommentCount(String countcommenturl,
 			final ArrayList<News> newsList, final boolean isRefresh) {
 	}

@@ -1,13 +1,11 @@
 package com.example.qianlong.constants;
 
 public class Constants {
-	public final static String APP_ICON_URL="http://zhbj.qianlong.com/logo.png";
+	public final static String APP_ICON_URL = "http://zhbj.qianlong.com/logo.png";
 	// 修改首页应用 code;
 	public final static int REQUEST_CHANGE_APP = 100;
 
 	public final static long LAUNCHER_INTERVAL = 24 * 60 * 60 * 1000;
-	
-	
 
 	// QL DB;
 	public final static String QL_DB = "ql.db";
@@ -35,9 +33,11 @@ public class Constants {
 	public final static String PUSH_MODEL = "push_model";
 	// 夜晚Push模式
 	public final static String NIGHT_PUSH_MODEL = "night_push_model";
-	
+
 	// 已阅读newsid
 	public final static String READ_NEWS_IDS = "has_read_news_ids";
 	public final static String READ_TOPIC_IDS = "has_read_topic_ids";
+
+	public static final int CHANGE_CHANNEL = 1000;
 
 }

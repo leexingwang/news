@@ -339,4 +339,10 @@ public class CBNLiveBroadCastActivity extends BaseActivity implements
 		pauseStatus();
 		return false;
 	}
+
+	@Override
+	protected void finishChild() {
+		// TODO Auto-generated method stub
+		
+	}
 }

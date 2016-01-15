@@ -7,6 +7,7 @@ import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomProgressDialog;
 import com.example.qianlong.utils.CustomToast;
 import com.example.qianlong.utils.DialogUtil;
+import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
@@ -105,7 +106,9 @@ public abstract class BaseActivity extends FragmentActivity implements
 		closeSofe();
 		switch (v.getId()) {
 		case R.id.imgbtn_left:
+			finishBefore();
 			this.finish();
+			finishChild();
 			break;
 		default:
 			break;
@@ -113,6 +116,13 @@ public abstract class BaseActivity extends FragmentActivity implements
 		processClick(v);
 
 	}
+
+	public void finishBefore() {
+		// TODO Auto-generated method stub
+
+	}
+
+	protected abstract void finishChild();
 
 	protected void showToast(String msg) {
 		showToast(msg, 0);
