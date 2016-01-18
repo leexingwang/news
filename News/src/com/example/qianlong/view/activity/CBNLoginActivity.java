@@ -3,27 +3,17 @@ package com.example.qianlong.view.activity;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.constants.LoginConstants;
-import com.example.qianlong.modle.LoginModle.OnChangeContactListener;
-import com.example.qianlong.modle.LoginModle.OnChangeContactValidListener;
-import com.example.qianlong.modle.LoginModle.OnFixPassWordListener;
-import com.example.qianlong.modle.LoginModle.OnForgotPassWordListener;
-import com.example.qianlong.modle.LoginModle.OnForgotResetPassWordListener;
 import com.example.qianlong.modle.LoginModle.OnLoginListener;
 import com.example.qianlong.modle.LoginModle.OnLoginTokenValidListener;
-import com.example.qianlong.modle.LoginModle.OnRefreshTokenListener;
-import com.example.qianlong.modle.LoginModle.OnRegistListener;
 import com.example.qianlong.modle.modleimpl.LoginModleImpl;
 import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.utils.StringUtils;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +36,7 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 
 	private boolean relogin = false;
 
+	@SuppressLint("HandlerLeak")
 	@Override
 	protected void initData() {
 		loginModleImpl = new LoginModleImpl(this);
@@ -165,7 +156,7 @@ public class CBNLoginActivity extends BaseActivity implements OnLoginListener,
 	@Override
 	protected void finishChild() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

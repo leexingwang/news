@@ -6,6 +6,7 @@ import com.base.common.ui.CustomViewPager;
 import com.base.common.ui.LazyViewPager.OnPageChangeListener;
 import com.example.qianlong.R;
 import com.example.qianlong.application.AppApplication;
+import com.example.qianlong.application.AppManager;
 import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.constants.Constants;
@@ -17,6 +18,8 @@ import com.example.qianlong.view.popupwindow.LivePopupWindow;
 import com.topnewgrid.bean.ChannelItem;
 import com.topnewgrid.bean.ChannelManage;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -38,7 +41,7 @@ public class CBNHomeActivity extends BaseActivity implements
 	private NewsPage newsPage;
 	/** 用户栏目列表 */
 	private ArrayList<ChannelItem> userChannelList = new ArrayList<ChannelItem>();
-	private final static int UPDATA_CHANNEL = 1;
+	private final int initPageNumber = 0;
 
 	@Override
 	protected void initView() {
@@ -60,8 +63,9 @@ public class CBNHomeActivity extends BaseActivity implements
 		viewPager.setAdapter(adapter);
 		viewPager.setScrollable(false);
 		viewPager.setOffscreenPageLimit(0); // 不进行预加载
-		pages.get(0).initData();
-		viewPager.setCurrentItem(0);
+		// 初始化新闻页
+		pages.get(initPageNumber).initData();
+		viewPager.setCurrentItem(initPageNumber);
 		mainRg.check(curCheckId);
 		radioButton.setOnClickListener(this);
 		mainRg.setOnCheckedChangeListener(this);
@@ -69,15 +73,13 @@ public class CBNHomeActivity extends BaseActivity implements
 
 	}
 
+	@SuppressLint("HandlerLeak")
 	private void initHandler() {
 		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {
 				super.handleMessage(msg);
 				switch (msg.what) {
-				case UPDATA_CHANNEL:
-					upData();
-					break;
 
 				default:
 					break;
@@ -87,9 +89,25 @@ public class CBNHomeActivity extends BaseActivity implements
 		};
 	}
 
-	private void upData() {
-		newsPage.updateUI((ArrayList<ChannelItem>) ChannelManage.getManage(
-				AppApplication.getApp().getSQLHelper()).getUserChannel());
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+		if (requestCode == Constants.CHANGE_CHANNEL) {
+			int clickChannelNum = 1000;
+			if (intent.getIntExtra(Constants.CHANGE_BACK_TYPE, 1000) == Constants.CHANGE_BACK_TYPE_CLICK) {
+				clickChannelNum = intent.getIntExtra(
+						Constants.CHANGE_CLICK_NUMBER, 1000);
+			}
+			upDataChannel(clickChannelNum);
+		}
+	}
+
+	private void upDataChannel(int clickChannelNum) {
+		newsPage.updateUI(
+				(ArrayList<ChannelItem>) ChannelManage.getManage(
+						AppApplication.getApp().getSQLHelper())
+						.getUserChannel(), clickChannelNum);
 	}
 
 	@Override
@@ -98,36 +116,10 @@ public class CBNHomeActivity extends BaseActivity implements
 		case R.id.rb_popupwindow:
 			showMoreWindow(viewPager);
 			break;
-
 		default:
 			break;
 		}
 
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent intent) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, intent);
-		if (requestCode == Constants.CHANGE_CHANNEL) {
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					try {
-						Message message = Message.obtain();
-						message.what = UPDATA_CHANNEL;
-						handler.sendMessage(message);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
-			}).start();
-		}
 	}
 
 	private void showMoreWindow(View view) {
@@ -175,6 +167,12 @@ public class CBNHomeActivity extends BaseActivity implements
 	public void onPageScrollStateChanged(int state) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		AppManager.getAppManager().AppExit(this);
 	}
 
 	@Override

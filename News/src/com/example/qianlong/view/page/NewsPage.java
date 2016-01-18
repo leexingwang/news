@@ -20,7 +20,7 @@ import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.example.qianlong.view.activity.CBNLiveTextActivity;
 import com.example.qianlong.view.adpter.NewsPagerAdapter;
-import com.topnewgrid.ChannelActivity;
+import com.topnewgrid.CBNChannelActivity;
 import com.topnewgrid.bean.ChannelItem;
 
 public class NewsPage extends BasePage implements
@@ -105,7 +105,7 @@ public class NewsPage extends BasePage implements
 			break;
 		case R.id.txt_title:
 			((Activity) ct).startActivityForResult(new Intent(ct,
-					ChannelActivity.class), Constants.CHANGE_CHANNEL);
+					CBNChannelActivity.class), Constants.CHANGE_CHANNEL);
 			((Activity) ct).overridePendingTransition(
 					R.anim.fade_form_up_to_down, android.R.anim.fade_out);
 			break;
@@ -116,17 +116,7 @@ public class NewsPage extends BasePage implements
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		BasePage page;
-		if (arg0 != 0) {
-			page = (ItemNewsPage) itemNewsPages.get(arg0);
-		} else {
-			page = (HomePage) itemNewsPages.get(arg0);
-		}
-		if (!page.isLoadSuccess) {
-			page.initData();
 
-		}
-		curIndex = arg0;
 	}
 
 	@Override
@@ -135,9 +125,22 @@ public class NewsPage extends BasePage implements
 	}
 
 	@Override
-	public void onPageSelected(int arg0) {
+	public void onPageSelected(int position) {
+		BasePage page;
+		if (position >= itemNewsPages.size()) {
+			return;
+		}
+		if (position != 0) {
+			page = (ItemNewsPage) itemNewsPages.get(position);
+		} else {
+			page = (HomePage) itemNewsPages.get(position);
+		}
+		if (!page.isLoadSuccess) {
+			page.initData();
+		}
+		curIndex = position;
 		titleTv.setVisibility(View.VISIBLE);
-		titleTv.setText(userChannelList.get(arg0).getName());
+		titleTv.setText(userChannelList.get(position).getName());
 	}
 
 	public NewsPagerAdapter getNewsPagerAdapter() {
@@ -164,17 +167,42 @@ public class NewsPage extends BasePage implements
 		this.pagerItemNews = pagerItemNews;
 	}
 
-	public void updateUI(ArrayList<ChannelItem> list) {
-//		itemNewsPages.clear();
-//		for (int i = 0; i < list.size(); i++) {
-//			if (i == 0)
-//				itemNewsPages.add(new HomePage(ct, list.get(i)));
-//			else {
-//				itemNewsPages.add(new ItemNewsPage(ct, list.get(i)));
-//			}
-//		}
-//		newsPagerAdapter = new NewsPagerAdapter(ct, itemNewsPages);
-//		pagerItemNews.removeAllViews();
-//		pagerItemNews.setAdapter(newsPagerAdapter);
+	/**
+	 * 频道更新后刷新页面
+	 * 
+	 * @param list
+	 * @param clickChannelNum
+	 */
+	public void updateUI(ArrayList<ChannelItem> list, int clickChannelNum) {
+		userChannelList.clear();
+		ArrayList<BasePage> itemNewsPagesNew = new ArrayList<BasePage>();
+		for (int i = 0; i < list.size(); i++) {
+			userChannelList.add(list.get(i));
+			if (i == 0)
+				itemNewsPagesNew.add(itemNewsPages.get(0));
+			else {
+				boolean isEx = false;
+				for (int j = 1; j < itemNewsPages.size(); j++) {
+					if (list.get(i)
+							.getName()
+							.equals(((ItemNewsPage) itemNewsPages.get(j))
+									.getChannelItem().name)) {
+						itemNewsPagesNew.add(itemNewsPages.get(j));
+						isEx = true;
+					}
+				}
+				if (!isEx)
+					itemNewsPagesNew.add(new ItemNewsPage(ct, list.get(i)));
+			}
+		}
+		itemNewsPages.clear();
+		itemNewsPages.addAll(itemNewsPagesNew);
+		newsPagerAdapter = new NewsPagerAdapter(ct, itemNewsPagesNew);
+		pagerItemNews.removeAllViews();
+		pagerItemNews.setAdapter(newsPagerAdapter);
+		indicator.notifyDataSetChanged();
+		if (clickChannelNum != 1000) {
+			indicator.setCurrentItem(clickChannelNum);
+		}
 	}
 }

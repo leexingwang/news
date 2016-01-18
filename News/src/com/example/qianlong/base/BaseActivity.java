@@ -14,7 +14,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.topnewgrid.ChannelActivity;
+import com.topnewgrid.CBNChannelActivity;
 
 import android.content.Context;
 import android.content.Intent;

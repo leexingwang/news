@@ -21,7 +21,6 @@ public class NewsPagerAdapter extends PagerAdapter {
 
 	@Override
 	public void destroyItem(View container, int position, Object object) {
-		// TODO Auto-generated method stub
 		if (position >= pages.size())
 			return;
 		((ViewPager) container)
@@ -30,18 +29,17 @@ public class NewsPagerAdapter extends PagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		String name="";
-		if(pages.get(position) instanceof HomePage){
-			name=((HomePage)pages.get(position)).getChannelItemName();
-		}else{
-			name=((ItemNewsPage)pages.get(position)).getChannelItemName();
+		String name = "";
+		if (pages.get(position) instanceof HomePage) {
+			name = ((HomePage) pages.get(position)).getChannelItemName();
+		} else {
+			name = ((ItemNewsPage) pages.get(position)).getChannelItemName();
 		}
 		return name;
 	}
 
 	@Override
 	public Object instantiateItem(View arg0, int arg1) {
-		// TODO Auto-generated method stub
 		((ViewPager) arg0).addView(pages.get(arg1).getContentView(), 0);
 		return pages.get(arg1).getContentView();
 	}

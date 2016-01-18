@@ -26,7 +26,6 @@ public class HomePagerAdapter extends PagerAdapter {
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
-		// TODO Auto-generated method stub
 		return arg1 == arg0;
 	}
 

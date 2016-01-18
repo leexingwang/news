@@ -5,14 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.base.common.ui.banner.CBViewHolderCreator;
@@ -26,15 +24,15 @@ import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.bean.LiveBean;
+import com.example.qianlong.constants.Constants;
 import com.example.qianlong.utils.CommonUtil;
-import com.example.qianlong.view.activity.CBNBannerActivity;
-import com.example.qianlong.view.activity.CBNBannerActivity.NetworkImageHolderView;
 import com.example.qianlong.view.adpter.TimelineAdapter;
 import com.squareup.picasso.Picasso;
 import com.topnewgrid.bean.ChannelItem;
 
 public class HomePage extends BasePage implements
-		com.base.common.ui.banner.OnItemClickListener {
+		com.base.common.ui.banner.OnItemClickListener,
+		OnRefreshListener<ListView>, OnItemClickListener {
 	private ConvenientBanner<String> convenientBanner;
 	private List<String> networkImages;
 	private String[] images = {
@@ -67,32 +65,11 @@ public class HomePage extends BasePage implements
 		// 滚动到底自动加载可用
 		ptrLv.setScrollLoadEnabled(true);
 		// 得到实际的ListView 设置点击
-		ptrLv.getRefreshableView().setOnItemClickListener(
-				new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-
-					}
-				});
-		setLastUpdateTime();
+		ptrLv.getRefreshableView().setOnItemClickListener(this);
 		// 设置下拉刷新的listener
-		ptrLv.setOnRefreshListener(new OnRefreshListener<ListView>() {
-
-			@Override
-			public void onPullDownToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				onLoaded();
-			}
-
-			@Override
-			public void onPullUpToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				onLoaded();
-			}
-		});
+		ptrLv.setOnRefreshListener(this);
 		ptrLv.getRefreshableView().addHeaderView(topNewsView);
+		setLastUpdateTime();
 		return view;
 	}
 
@@ -127,7 +104,7 @@ public class HomePage extends BasePage implements
 		TimelineAdapter adapter = new TimelineAdapter(ct, lives);
 		ptrLv.getRefreshableView().setAdapter(adapter);
 		if (!convenientBanner.isTurning()) {
-			convenientBanner.startTurning(3000);
+			convenientBanner.startTurning(Constants.LOOP_TIME);
 		}
 		onLoaded();
 
@@ -137,12 +114,50 @@ public class HomePage extends BasePage implements
 		dismissLoadingView();
 		ptrLv.onPullDownRefreshComplete();
 		ptrLv.onPullUpRefreshComplete();
+		isLoadSuccess = true;
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		if (!convenientBanner.isTurning()) {
+			convenientBanner.startTurning(Constants.LOOP_TIME);
+		}
+	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		if (convenientBanner.isTurning()) {
+			convenientBanner.stopTurning();
+		}
 	}
 
 	@Override
 	protected void processClick(View v) {
-		// TODO Auto-generated method stub
+	}
 
+	@Override
+	public void onItemClick(int position) {
+		showToast("点击了第" + (position + 1) + "图片");
+	}
+
+	@Override
+	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+		onLoaded();
+
+	}
+
+	@Override
+	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+		onLoaded();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 	}
 
 	public class NetworkImageHolderView implements Holder<String> {
@@ -163,15 +178,9 @@ public class HomePage extends BasePage implements
 
 		@Override
 		public void UpdateUI(Context context, final int position, String data) {
-			Picasso.with(context).load(data).resize(700, 350).centerCrop()
-					.into(imageView);
+			Picasso.with(context).load(data).into(imageView);
 			textView.setText("qqqqqqq" + position);
 		}
 
-	}
-
-	@Override
-	public void onItemClick(int position) {
-		showToast("点击了第" + (position + 1) + "图片");
 	}
 }

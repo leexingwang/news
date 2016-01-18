@@ -12,7 +12,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.topnewgrid.ChannelActivity;
+import com.topnewgrid.CBNChannelActivity;
 import com.topnewgrid.bean.ChannelItem;
 
 import android.content.Context;
@@ -109,6 +109,9 @@ public abstract class BasePage implements OnClickListener {
 
 	}
 
+	public void onStop() {
+	}
+
 	public void showToast(String msg) {
 		showToast(msg, 0);
 	}
@@ -140,7 +143,7 @@ public abstract class BasePage implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.imgbtn_channel:
-			ct.startActivity(new Intent(ct, ChannelActivity.class));
+			ct.startActivity(new Intent(ct, CBNChannelActivity.class));
 			break;
 		default:
 			break;

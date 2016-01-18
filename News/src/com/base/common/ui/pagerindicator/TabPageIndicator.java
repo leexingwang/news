@@ -190,9 +190,9 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
 
     @Override
     public void setViewPager(ViewPager view) {
-        if (mViewPager == view) {
-            return;
-        }
+		if (mViewPager == view) {
+			return;
+		}
         if (mViewPager != null) {
             mViewPager.setOnPageChangeListener(null);
         }

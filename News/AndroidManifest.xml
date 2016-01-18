@@ -73,7 +73,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.topnewgrid.ChannelActivity"
+            android:name="com.topnewgrid.CBNChannelActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

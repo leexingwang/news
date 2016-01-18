@@ -16,6 +16,7 @@ import com.topnewgrid.view.ChannelOtherGridView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -53,7 +54,7 @@ import android.widget.Toast;
  * 
  * @version V1.0
  */
-public class ChannelActivity extends BaseActivity implements
+public class CBNChannelActivity extends BaseActivity implements
 		OnItemClickListener, OnClickListener {
 	/** 用户栏目的GRIDVIEW */
 	private ChannelDragGrid userGridView;
@@ -101,9 +102,12 @@ public class ChannelActivity extends BaseActivity implements
 
 	@Override
 	public void onBackPressed() {
-		super.onBackPressed();
 		saveChannel();
-		this.setResult(Constants.CHANGE_CHANNEL);
+		Intent intent = getIntent();
+		intent.putExtra(Constants.CHANGE_BACK_TYPE,
+				Constants.CHANGE_BACK_TYPE_BACKKEY);
+		this.setResult(Constants.CHANGE_CHANNEL, intent);
+		super.onBackPressed();
 		((Activity) ct).overridePendingTransition(android.R.anim.fade_in,
 				R.anim.fade_form_down_to_up);
 	}
@@ -137,13 +141,6 @@ public class ChannelActivity extends BaseActivity implements
 			break;
 		}
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	/** GRIDVIEW对应的ITEM点击监听接口 */
@@ -192,6 +189,17 @@ public class ChannelActivity extends BaseActivity implements
 							.getAdapter()).getItem(position);// 获取点击的频道内容
 					Toast.makeText(this, channel.getName(), Toast.LENGTH_SHORT)
 							.show();
+					saveChannel();
+					Intent intent = getIntent();
+					intent.putExtra(Constants.CHANGE_CLICK_NUMBER, position);
+					intent.putExtra(Constants.CHANGE_BACK_TYPE,
+							Constants.CHANGE_BACK_TYPE_CLICK);
+					this.setResult(Constants.CHANGE_CHANNEL, intent);
+					finish();
+					((Activity) ct)
+							.overridePendingTransition(android.R.anim.fade_in,
+									R.anim.fade_form_down_to_up);
+
 				}
 			}
 			break;
@@ -348,7 +356,11 @@ public class ChannelActivity extends BaseActivity implements
 	@Override
 	public void finishBefore() {
 		saveChannel();
-		this.setResult(Constants.CHANGE_CHANNEL);
+		Intent intent = getIntent();
+		intent.putExtra(Constants.CHANGE_BACK_TYPE,
+				Constants.CHANGE_BACK_TYPE_BACKKEY);
+		this.setResult(Constants.CHANGE_CHANNEL, intent);
+
 	}
 
 	@Override

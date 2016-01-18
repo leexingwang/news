@@ -16,7 +16,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -36,7 +35,7 @@ import android.widget.PopupWindow;
 public class LivePopupWindow extends PopupWindow implements OnClickListener {
 
 	private String TAG = LivePopupWindow.class.getSimpleName();
-	Activity mContext;
+	private Activity mContext;
 	private int mWidth;
 	private int mHeight;
 	private int statusBarHeight;
@@ -198,7 +197,6 @@ public class LivePopupWindow extends PopupWindow implements OnClickListener {
 						@Override
 						public void onAnimationStart(Animator animation) {
 							// TODO Auto-generated method stub
-
 						}
 
 						@Override

@@ -4,9 +4,6 @@ import com.example.qianlong.R;
 import com.example.qianlong.base.BaseActivity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -69,7 +66,7 @@ public class CBNLiveActivity extends BaseActivity {
 	@Override
 	protected void finishChild() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
