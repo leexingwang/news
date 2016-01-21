@@ -1,5 +1,6 @@
 package com.example.qianlong.application;
 
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 
@@ -18,6 +19,8 @@ public class AppApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		mAppApplication = this;
+		OkHttpUtils.getInstance().setConnectTimeout(100000,
+				TimeUnit.MILLISECONDS);
 		OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
 	}
 

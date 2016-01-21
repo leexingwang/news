@@ -29,7 +29,7 @@ public class CustomToast extends Toast {
 		setView(view);
 		textView = (TextView) view.findViewById(R.id.textView);
 		textView.setText(text);
-		setGravity(Gravity.BOTTOM, 0, 100);
+		setGravity(Gravity.BOTTOM, 0, 150);
 		setDuration(time);
 	}
 

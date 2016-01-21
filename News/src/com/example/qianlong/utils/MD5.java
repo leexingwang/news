@@ -2,13 +2,13 @@ package com.example.qianlong.utils;
 
 import java.security.MessageDigest;
 
-/*************************************************
+/**
  * md5 类实现了RSA Data Security, Inc.在提交给IETF 的RFC1321中的MD5 message-digest 算法。
- *************************************************/
+ */
 
 public class MD5 {
 
-	public final static String MD5(String s) {
+	public final static String getMD5(String s) {
 		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 				'a', 'b', 'c', 'd', 'e', 'f' };
 		try {

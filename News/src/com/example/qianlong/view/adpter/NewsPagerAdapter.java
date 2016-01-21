@@ -3,7 +3,6 @@ package com.example.qianlong.view.adpter;
 import java.util.ArrayList;
 
 import com.example.qianlong.base.BasePage;
-import com.example.qianlong.bean.NewsCenterCategories.NewsCategory;
 import com.example.qianlong.view.page.HomePage;
 import com.example.qianlong.view.page.ItemNewsPage;
 

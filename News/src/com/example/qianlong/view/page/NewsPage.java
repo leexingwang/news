@@ -15,7 +15,6 @@ import com.base.common.ui.pagerindicator.TabPageIndicator;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.constants.Constants;
-import com.example.qianlong.utils.QLApi;
 import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.example.qianlong.view.activity.CBNLiveTextActivity;
@@ -62,8 +61,7 @@ public class NewsPage extends BasePage implements
 
 	@Override
 	public void initData() {
-		String result = SharePrefUtil.getString(ct,
-				QLApi.NEWS_CENTER_CATEGORIES, "");
+		String result = SharePrefUtil.getString(ct, "AAA", "");
 		if (!TextUtils.isEmpty(result)) {
 			processData(result);
 		}

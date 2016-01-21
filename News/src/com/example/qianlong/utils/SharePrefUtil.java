@@ -14,17 +14,7 @@ public class SharePrefUtil {
 
 	public interface KEY {
 
-		String FUNCTION_ALL_JSON = "all_function_json";// 所有的Funcation Json
-		String FUNCTION_SELECTED_ID = "selcted_function_ids";// 选中的function ids
-
-		String CATE_ALL_JSON = "all_cate_json";// 所有的新闻目录 Json
-		String CATE_SELECTED_JSON = "selcted_cate_json";// 选中的新闻目录ids
-		String CATE_EXTEND_ID = "extend_cate_ids";// 推荐的新闻 目录ids
-
-		String VOTE_SELECTED_ID = "selcted_vote_ids";// 选中的function ids
-
 		// settings_push
-
 		String SETTINGS_PUSH_HONGGUAN = "settings_push_hongguan";
 		String SETTINGS_PUSH_SHANGYE = "settings_push_shangye";
 		String SETTINGS_PUSH_TOUZI = "settings_push_touzi";

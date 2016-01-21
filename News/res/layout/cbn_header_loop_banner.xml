@@ -5,22 +5,25 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp" >
+        android:layout_height="250dp" >
 
         <ImageView
             android:id="@+id/imageView_head_loop_banner"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:background="@drawable/cbn_default" />
 
         <TextView
             android:id="@+id/textView_head_loop_content"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
+            android:background="#85000000"
+            android:gravity="center|left"
+            android:layout_margin="16dp"
             android:padding="16dp"
             android:text="123456"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </FrameLayout>
 

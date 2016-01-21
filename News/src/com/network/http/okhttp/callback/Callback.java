@@ -3,67 +3,63 @@ package com.network.http.okhttp.callback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public abstract class Callback<T>
-{
-    /**
-     * UI Thread
-     *
-     * @param request
-     */
-    public void onBefore(Request request)
-    {
-    }
+public abstract class Callback<T> {
 
-    /**
-     * UI Thread
-     *
-     * @param
-     */
-    public void onAfter()
-    {
-    }
+	public static final int SUCCESS = 1;
+	public static final int FAIL = 2;
 
-    /**
-     * UI Thread
-     *
-     * @param progress
-     */
-    public void inProgress(float progress)
-    {
+	/**
+	 * UI Thread
+	 * 
+	 * @param request
+	 */
+	public void onBefore(Request request) {
+	}
 
-    }
-    /**
-     * Thread Pool Thread
-     *
-     * @param response
-     */
-    public abstract T parseNetworkResponse(Response response) throws Exception;
+	/**
+	 * UI Thread
+	 * 
+	 * @param
+	 */
+	public void onAfter(int isSuccess) {
+	}
 
-    public abstract void onError(Request request, Exception e);
+	/**
+	 * UI Thread
+	 * 
+	 * @param progress
+	 */
+	public void inProgress(float progress) {
 
-    public abstract void onResponse(T response);
+	}
 
+	/**
+	 * Thread Pool Thread
+	 * 
+	 * @param response
+	 */
+	public abstract T parseNetworkResponse(Response response) throws Exception;
 
-    public static Callback CALLBACK_DEFAULT = new Callback()
-    {
+	public abstract void onError(Request request, Exception e);
 
-        @Override
-        public Object parseNetworkResponse(Response response) throws Exception
-        {
-            return null;
-        }
+	public abstract void onResponse(T response);
 
-        @Override
-        public void onError(Request request, Exception e)
-        {
+	public static Callback CALLBACK_DEFAULT = new Callback() {
 
-        }
+		@Override
+		public Object parseNetworkResponse(Response response) throws Exception {
+			return null;
+		}
 
-        @Override
-        public void onResponse(Object response)
-        {
+		@Override
+		public void onError(Request request, Exception e) {
 
-        }
-    };
+		}
+
+		@Override
+		public void onResponse(Object response) {
+
+		}
+	};
 
 }

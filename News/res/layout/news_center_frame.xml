@@ -15,7 +15,7 @@
         android:layout_height="50dp"
         android:background="@drawable/news_tab_bg"
         android:orientation="horizontal"
-        android:visibility="visible" >
+        android:visibility="gone" >
 
         <com.base.common.ui.pagerindicator.TabPageIndicator
             android:id="@+id/indicator"

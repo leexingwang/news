@@ -1,7 +1,6 @@
 package com.example.qianlong.view.page;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import android.content.Context;
@@ -9,19 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.base.common.ui.RollViewPager;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase;
 import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
-import com.example.qianlong.bean.NewsListBean;
-import com.example.qianlong.bean.NewsListBean.News;
-import com.example.qianlong.bean.NewsListBean.TopNews;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.view.adpter.NewsAdapter;
 import com.topnewgrid.bean.ChannelItem;

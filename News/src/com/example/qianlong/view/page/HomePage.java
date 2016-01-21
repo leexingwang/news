@@ -23,29 +23,43 @@ import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
+import com.example.qianlong.bean.Live;
 import com.example.qianlong.bean.LiveBean;
+import com.example.qianlong.bean.News;
+import com.example.qianlong.bean.NewsEntity;
 import com.example.qianlong.constants.Constants;
+import com.example.qianlong.modle.GetLiveTextModle;
+import com.example.qianlong.modle.GetLiveTextModle.OnLiveListener;
+import com.example.qianlong.modle.GetNewsByNidModle.OnGetNewsByNidListener;
+import com.example.qianlong.modle.GetNewsListByChannelModle.OnNewsListByChannelListener;
+import com.example.qianlong.modle.modleimpl.GetLiveTextModleImpl;
+import com.example.qianlong.modle.modleimpl.GetNewsByNidImpl;
+import com.example.qianlong.modle.modleimpl.GetNewsListByChannelImpl;
+import com.example.qianlong.utils.ACache;
 import com.example.qianlong.utils.CommonUtil;
+import com.example.qianlong.utils.TLog;
+import com.example.qianlong.view.adpter.HomeNewsItemAdapter;
 import com.example.qianlong.view.adpter.TimelineAdapter;
+import com.lidroid.xutils.exception.HttpException;
 import com.squareup.picasso.Picasso;
 import com.topnewgrid.bean.ChannelItem;
 
 public class HomePage extends BasePage implements
 		com.base.common.ui.banner.OnItemClickListener,
-		OnRefreshListener<ListView>, OnItemClickListener {
-	private ConvenientBanner<String> convenientBanner;
-	private List<String> networkImages;
-	private String[] images = {
-			"http://img2.imgtn.bdimg.com/it/u=3093785514,1341050958&fm=21&gp=0.jpg",
-			"http://img2.3lian.com/2014/f2/37/d/40.jpg",
-			"http://d.3987.com/sqmy_131219/001.jpg",
-			"http://img2.3lian.com/2014/f2/37/d/39.jpg",
-			"http://www.8kmm.com/UploadFiles/2012/8/201208140920132659.jpg",
-			"http://f.hiphotos.baidu.com/image/h%3D200/sign=1478eb74d5a20cf45990f9df460b4b0c/d058ccbf6c81800a5422e5fdb43533fa838b4779.jpg",
-			"http://f.hiphotos.baidu.com/image/pic/item/09fa513d269759ee50f1971ab6fb43166c22dfba.jpg" };
+		OnRefreshListener<ListView>, OnItemClickListener,
+		OnNewsListByChannelListener, OnGetNewsByNidListener, OnLiveListener {
+	private final static int FOCUS_PIC = 3478;
+	private final static int RECOMMEND_NEWS = 3479;
+	private ConvenientBanner<News> convenientBanner;
 	private PullToRefreshListView ptrLv;
 	private ChannelItem channelItem;
-	View view;
+	private GetNewsListByChannelImpl newsListByChannelImpl;
+	private GetNewsByNidImpl newsByNidImpl;
+	private GetLiveTextModleImpl getLiveTextModleImpl;
+	private List<News> homesNews;
+	private View view;
+	private List<News> focus_news;
+	private HomeNewsItemAdapter homeNewsItemAdapter;
 
 	public HomePage(Context context, ChannelItem channelItem) {
 		super(context);
@@ -59,7 +73,7 @@ public class HomePage extends BasePage implements
 		view = inflater.inflate(R.layout.frag_item_news, null);
 		ptrLv = (PullToRefreshListView) view.findViewById(R.id.lv_item_news);
 		View topNewsView = inflater.inflate(R.layout.banner, null);
-		convenientBanner = (ConvenientBanner<String>) topNewsView
+		convenientBanner = (ConvenientBanner<News>) topNewsView
 				.findViewById(R.id.convenientBanner);
 		ptrLv.setPullLoadEnabled(true);
 		// 滚动到底自动加载可用
@@ -69,26 +83,72 @@ public class HomePage extends BasePage implements
 		// 设置下拉刷新的listener
 		ptrLv.setOnRefreshListener(this);
 		ptrLv.getRefreshableView().addHeaderView(topNewsView);
-		setLastUpdateTime();
+		newsListByChannelImpl = new GetNewsListByChannelImpl();
+		newsByNidImpl = new GetNewsByNidImpl();
+		getLiveTextModleImpl = new GetLiveTextModleImpl();
 		return view;
-	}
-
-	private void setLastUpdateTime() {
-		String text = CommonUtil.getStringDate();
-		ptrLv.setLastUpdatedLabel(text);
 	}
 
 	@Override
 	public void initData() {
-		// 网络加载例子
-		networkImages = Arrays.asList(images);
+		focus_news = new ArrayList<News>();
+		homesNews = new ArrayList<News>();
+		onLoaded();
+		getFocusACacheInfo();
+		getNewsACacheInfo();
+		initBanner();
+		setLastUpdateTime();
+		homeNewsItemAdapter = new HomeNewsItemAdapter(ct, homesNews);
+		ptrLv.getRefreshableView().setAdapter(homeNewsItemAdapter);
+		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, 20, 1,
+				RECOMMEND_NEWS, this);
+		newsListByChannelImpl.getNewsListByChannel(FOCUS_PIC, 20, 1, FOCUS_PIC,
+				this);
+		isLoadSuccess = true;
+
+	}
+
+	private void getFocusACacheInfo() {
+		try {
+			String json = ACache.get().getAsString(
+					Constants.GetNewsListByChannel_URL + FOCUS_PIC + 20 + 1
+							+ FOCUS_PIC);
+			List<News> news = newsListByChannelImpl.parseNews(json);
+			if (news.size() > 0) {
+				focus_news = news;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void getNewsACacheInfo() {
+		try {
+			String json = ACache.get().getAsString(
+					Constants.GetNewsListByChannel_URL + RECOMMEND_NEWS + 20
+							+ 1 + RECOMMEND_NEWS);
+			List<News> news = newsListByChannelImpl.parseNews(json);
+			if (news.size() > 0) {
+				homesNews = news;
+				homesNews.addAll(news);
+				homesNews.addAll(news);
+				homesNews.addAll(news);
+				homesNews.addAll(news);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void initBanner() {
 		convenientBanner
 				.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
 					@Override
 					public NetworkImageHolderView createHolder() {
 						return new NetworkImageHolderView();
 					}
-				}, networkImages)
+				}, focus_news)
 				// 设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
 				.setPageIndicator(
 						new int[] { R.drawable.ic_page_indicator,
@@ -96,18 +156,9 @@ public class HomePage extends BasePage implements
 				.setPageIndicatorAlign(PageIndicatorAlign.ALIGN_PARENT_RIGHT)
 				.setPageTransformer(new DefaultTransformer())
 				.setOnItemClickListener(this);
-		List<LiveBean> lives = new ArrayList<LiveBean>();
-		for (int i = 0; i < 50; i++) {
-			lives.add(new LiveBean("123", "233444", 1, "1234" + i, "123",
-					"2016-01-14T12:46:00", 1));
-		}
-		TimelineAdapter adapter = new TimelineAdapter(ct, lives);
-		ptrLv.getRefreshableView().setAdapter(adapter);
 		if (!convenientBanner.isTurning()) {
 			convenientBanner.startTurning(Constants.LOOP_TIME);
 		}
-		onLoaded();
-
 	}
 
 	private void onLoaded() {
@@ -119,7 +170,6 @@ public class HomePage extends BasePage implements
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		if (!convenientBanner.isTurning()) {
 			convenientBanner.startTurning(Constants.LOOP_TIME);
@@ -128,7 +178,6 @@ public class HomePage extends BasePage implements
 
 	@Override
 	public void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 		if (convenientBanner.isTurning()) {
 			convenientBanner.stopTurning();
@@ -146,13 +195,18 @@ public class HomePage extends BasePage implements
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+		newsListByChannelImpl.getNewsListByChannel(FOCUS_PIC, 20, 1, FOCUS_PIC,
+				this);
+		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, 20, 1,
+				RECOMMEND_NEWS, this);
 		onLoaded();
-
+		TLog.log("onPullDownToRefresh");
 	}
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 		onLoaded();
+		TLog.log("onPullUpToRefresh");
 	}
 
 	@Override
@@ -160,7 +214,12 @@ public class HomePage extends BasePage implements
 			long id) {
 	}
 
-	public class NetworkImageHolderView implements Holder<String> {
+	private void setLastUpdateTime() {
+		String text = CommonUtil.getStringDate();
+		ptrLv.setLastUpdatedLabel(text);
+	}
+
+	public class NetworkImageHolderView implements Holder<News> {
 		private ImageView imageView;
 		private TextView textView;
 
@@ -177,10 +236,55 @@ public class HomePage extends BasePage implements
 		}
 
 		@Override
-		public void UpdateUI(Context context, final int position, String data) {
-			Picasso.with(context).load(data).into(imageView);
-			textView.setText("qqqqqqq" + position);
+		public void UpdateUI(Context context, final int position, News news) {
+			if (news == null) {
+				return;
+			}
+			Picasso.with(context)
+					.load(Constants.IMGURL + Constants.IMGURL_ORIGIN
+							+ news.getNewsThumbs())
+					.error(R.drawable.cbn_default).into(imageView);
+			textView.setText(news.getNewsTitle());
 		}
+	}
+
+	@Override
+	public void onSuccess(List<News> news, int loadType) {
+		if (loadType == FOCUS_PIC) {
+			focus_news = news;
+			initBanner();
+		} else if (loadType == RECOMMEND_NEWS) {
+			homesNews = news;
+			homeNewsItemAdapter.notifyDataSetChanged();
+			ptrLv.getRefreshableView().setAdapter(homeNewsItemAdapter);
+		}
+	}
+
+	@Override
+	public void onError(int loadType) {
 
 	}
+
+	@SuppressWarnings("hiding")
+	@Override
+	public <NewsEntity> void onGetNewsSuccess(NewsEntity newsEntity,
+			int loadType) {
+
+	}
+
+	@Override
+	public void onGetNewsError(int loadType) {
+
+	}
+
+	@Override
+	public void onLiveSuccess(List<Live> lives, int loadType) {
+
+	}
+
+	@Override
+	public void onLiveError(int loadType) {
+
+	}
+
 }

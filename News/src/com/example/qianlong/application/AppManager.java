@@ -91,6 +91,7 @@ public class AppManager {
 	 * 
 	 * @param context
 	 */
+	@SuppressWarnings("deprecation")
 	public void AppExit(Context context) {
 		try {
 			finishAllActivity();

@@ -14,20 +14,20 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import android.content.Context;
+import android.util.JsonReader;
 
+import com.alibaba.fastjson.JSON;
 import com.example.qianlong.R;
-import com.example.qianlong.bean.LoginEnity;
-import com.example.qianlong.bean.RegistEntity;
-import com.example.qianlong.bean.RegistErrorEntity;
+import com.example.qianlong.bean.LoginEntity;
+import com.example.qianlong.bean.LoginRegistEntity;
+import com.example.qianlong.bean.LoginRegistErrorEntity;
 import com.example.qianlong.constants.LoginConstants;
 import com.example.qianlong.modle.LoginModle;
-import com.example.qianlong.utils.GsonTools;
 import com.example.qianlong.utils.SharePrefUtil;
 import com.example.qianlong.utils.TLog;
-import com.google.gson.Gson;
 
 public class LoginModleImpl implements LoginModle {
-	public static final MediaType JSON = MediaType
+	public static final MediaType JSON_TYPE = MediaType
 			.parse("application/json; charset=utf-8");
 	OkHttpClient client = new OkHttpClient();
 	private Context context;
@@ -39,7 +39,7 @@ public class LoginModleImpl implements LoginModle {
 	@Override
 	public void userRegist(String phone_number, String username,
 			String plain_password, OnRegistListener onRegistListener) {
-		String json = new Gson().toJson(new RegistEntity(phone_number,
+		String json = JSON.toJSONString(new LoginRegistEntity(phone_number,
 				username, plain_password));
 		postRegist(LoginConstants.OAUTH2_URL + "users", json, onRegistListener);
 
@@ -47,7 +47,7 @@ public class LoginModleImpl implements LoginModle {
 
 	private void postRegist(String url, String json,
 			final OnRegistListener onRegistListener) {
-		RequestBody body = RequestBody.create(JSON, json);
+		RequestBody body = RequestBody.create(JSON_TYPE, json);
 		Request request = new Request.Builder().url(url).post(body).build();
 		client.newCall(request).enqueue(new Callback() {
 
@@ -56,14 +56,14 @@ public class LoginModleImpl implements LoginModle {
 				String jsonString = response.body().string();
 				TLog.log(jsonString);
 				if (!response.isSuccessful()) {
-					List<RegistErrorEntity> registErrorEntitys = null;
+					List<LoginRegistErrorEntity> registErrorEntitys = null;
 					try {
-						registErrorEntitys = GsonTools.fromJsonArray(
-								jsonString, RegistErrorEntity.class);
+						registErrorEntitys = JSON.parseArray(jsonString,
+								LoginRegistErrorEntity.class);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					RegistErrorEntity registErrorEntity = registErrorEntitys
+					LoginRegistErrorEntity registErrorEntity = registErrorEntitys
 							.get(0);
 					String errorInformation = "";
 					if (LoginConstants.REGIST_ERROE_USERNAME_ALREADY
@@ -115,7 +115,7 @@ public class LoginModleImpl implements LoginModle {
 	@Override
 	public void userRegistConfirm(String id, String confirmationToken,
 			final OnRegistConfirmListener onRegistConfirmListener) {
-		RequestBody body = RequestBody.create(JSON, "");
+		RequestBody body = RequestBody.create(JSON_TYPE, "");
 		Request request = new Request.Builder()
 				.url(LoginConstants.OAUTH2_URL + "users/" + id
 						+ LoginConstants.CONFIRM + confirmationToken).put(body)
@@ -156,8 +156,8 @@ public class LoginModleImpl implements LoginModle {
 				String json = response.body().string();
 				TLog.log(json);
 				if (response.isSuccessful()) {
-					LoginEnity loginEnity = GsonTools.changeGsonToBean(json,
-							LoginEnity.class);
+					LoginEntity loginEnity = JSON.parseObject(json,
+							LoginEntity.class);
 					onLoginListener.onLoginSuccess(loginEnity.getAccess_token());
 				} else {
 					onLoginListener.onLoginError();
@@ -256,7 +256,7 @@ public class LoginModleImpl implements LoginModle {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		RequestBody body = RequestBody.create(JSON, json.toString());
+		RequestBody body = RequestBody.create(JSON_TYPE, json.toString());
 		Request request = new Request.Builder().url(loginFixPassWord)
 				.patch(body).build();
 		client.newCall(request).enqueue(new Callback() {
@@ -290,7 +290,7 @@ public class LoginModleImpl implements LoginModle {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+		RequestBody body = RequestBody.create(JSON_TYPE, jsonObj.toString());
 		Request request = new Request.Builder().url(loginFixPassWord)
 				.post(body).build();
 		client.newCall(request).enqueue(new Callback() {
@@ -336,7 +336,7 @@ public class LoginModleImpl implements LoginModle {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+		RequestBody body = RequestBody.create(JSON_TYPE, jsonObj.toString());
 		Request request = new Request.Builder().url(loginForgotResetPassWord)
 				.patch(body).build();
 		client.newCall(request).enqueue(new Callback() {
@@ -374,7 +374,7 @@ public class LoginModleImpl implements LoginModle {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+		RequestBody body = RequestBody.create(JSON_TYPE, jsonObj.toString());
 		Request request = new Request.Builder().url(loginChangeContact)
 				.patch(body).build();
 		client.newCall(request).enqueue(new Callback() {
@@ -410,7 +410,7 @@ public class LoginModleImpl implements LoginModle {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		RequestBody body = RequestBody.create(JSON, jsonObj.toString());
+		RequestBody body = RequestBody.create(JSON_TYPE, jsonObj.toString());
 		Request request = new Request.Builder().url(loginChangeContact)
 				.patch(body).build();
 		client.newCall(request).enqueue(new Callback() {

@@ -3,8 +3,10 @@ package com.example.qianlong.base;
 import java.util.ArrayList;
 
 import com.example.qianlong.R;
+import com.example.qianlong.utils.ACache;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomToast;
+import com.example.qianlong.utils.StringUtils;
 import com.example.qianlong.view.activity.CBNHomeActivity;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -119,6 +121,22 @@ public abstract class BasePage implements OnClickListener {
 	public void showToast(String msg, int time) {
 		CustomToast customToast = new CustomToast(ct, msg, time);
 		customToast.show();
+	}
+
+	/**
+	 * 设置缓存数据（key,value）
+	 */
+	public void setCacheStr(String key, String value) {
+		if (!StringUtils.isEmpty(value)) {
+			ACache.get(ct).put(key, value);
+		}
+	}
+
+	/**
+	 * 获取缓存数据更具key
+	 */
+	public String getCacheStr(String key) {
+		return ACache.get(ct).getAsString(key);
 	}
 
 	protected void loadData(HttpRequest.HttpMethod method, String url,

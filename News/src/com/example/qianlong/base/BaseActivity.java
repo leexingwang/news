@@ -3,10 +3,12 @@ package com.example.qianlong.base;
 import com.example.qianlong.R;
 import com.example.qianlong.application.AppApplication;
 import com.example.qianlong.application.AppManager;
+import com.example.qianlong.utils.ACache;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.CustomProgressDialog;
 import com.example.qianlong.utils.CustomToast;
 import com.example.qianlong.utils.DialogUtil;
+import com.example.qianlong.utils.StringUtils;
 import com.example.qianlong.view.activity.CBNBannerActivity;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -120,6 +122,22 @@ public abstract class BaseActivity extends FragmentActivity implements
 	public void finishBefore() {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * 设置缓存数据（key,value）
+	 */
+	public void setCacheStr(String key, String value) {
+		if (!StringUtils.isEmpty(value)) {
+			ACache.get(this).put(key, value);
+		}
+	}
+
+	/**
+	 * 获取缓存数据更具key
+	 */
+	public String getCacheStr(String key) {
+		return ACache.get(this).getAsString(key);
 	}
 
 	protected abstract void finishChild();
