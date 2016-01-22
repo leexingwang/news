@@ -10,7 +10,6 @@ import com.example.qianlong.application.AppManager;
 import com.example.qianlong.base.BaseActivity;
 import com.example.qianlong.base.BasePage;
 import com.example.qianlong.constants.Constants;
-import com.example.qianlong.utils.TLog;
 import com.example.qianlong.view.adpter.HomePagerAdapter;
 import com.example.qianlong.view.page.NewsPage;
 import com.example.qianlong.view.page.SettingPage;
@@ -19,26 +18,27 @@ import com.topnewgrid.bean.ChannelItem;
 import com.topnewgrid.bean.ChannelManage;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 public class CBNHomeActivity extends BaseActivity implements
-		OnCheckedChangeListener, OnPageChangeListener {
+		OnPageChangeListener {
 	private HomePagerAdapter adapter;
 	private ArrayList<BasePage> pages = new ArrayList<BasePage>();
 	private CustomViewPager viewPager;
-	private RadioGroup mainRg;
-	private int curCheckId = R.id.rb_news_center;
 	private LivePopupWindow mMoreWindow;
-	private RadioButton radioButton;
 	private Handler handler;
 	private NewsPage newsPage;
+	private LinearLayout mTabZiXun;
+	private LinearLayout mTabZhiBo;
+	private LinearLayout mTabWode;
+	private ImageButton mImgZiXun;
+	private ImageButton mImgZhiBo;
+	private ImageButton mImgWode;
 	/** 用户栏目列表 */
 	private ArrayList<ChannelItem> userChannelList = new ArrayList<ChannelItem>();
 	private final int initPageNumber = 0;
@@ -47,8 +47,17 @@ public class CBNHomeActivity extends BaseActivity implements
 	protected void initView() {
 		setContentView(R.layout.content_frame);
 		viewPager = (CustomViewPager) findViewById(R.id.viewpager);
-		mainRg = (RadioGroup) findViewById(R.id.main_radio);
-		radioButton = (RadioButton) findViewById(R.id.rb_popupwindow);
+		mTabZiXun = (LinearLayout) findViewById(R.id.id_tab_zixun);
+		mTabZhiBo = (LinearLayout) findViewById(R.id.id_tab_zhibo);
+		mTabWode = (LinearLayout) findViewById(R.id.id_tab_wode);
+		mImgZiXun = (ImageButton) findViewById(R.id.id_tab_zixun_img);
+		mImgZhiBo = (ImageButton) findViewById(R.id.id_tab_zhibo_img);
+		mImgWode = (ImageButton) findViewById(R.id.id_tab_wode_img);
+		mTabZiXun.setOnClickListener(this);
+		mTabZhiBo.setOnClickListener(this);
+		mTabWode.setOnClickListener(this);
+		viewPager.setOnPageChangeListener(this);
+		setSelect(0);
 	}
 
 	@Override
@@ -66,10 +75,6 @@ public class CBNHomeActivity extends BaseActivity implements
 		// 初始化新闻页
 		pages.get(initPageNumber).initData();
 		viewPager.setCurrentItem(initPageNumber);
-		mainRg.check(curCheckId);
-		radioButton.setOnClickListener(this);
-		mainRg.setOnCheckedChangeListener(this);
-		viewPager.setOnPageChangeListener(this);
 
 	}
 
@@ -113,13 +118,44 @@ public class CBNHomeActivity extends BaseActivity implements
 	@Override
 	protected void processClick(View v) {
 		switch (v.getId()) {
-		case R.id.rb_popupwindow:
+		case R.id.id_tab_zixun:
+			viewPager.setCurrentItem(0, false);
+			setSelect(0);
+			break;
+		case R.id.id_tab_zhibo:
 			showMoreWindow(viewPager);
+			break;
+		case R.id.id_tab_wode:
+			viewPager.setCurrentItem(1, false);
+			setSelect(1);
 			break;
 		default:
 			break;
 		}
 
+	}
+
+	private void setSelect(int i) {
+		// 把图片设置为亮的
+		resetImgs();
+		switch (i) {
+		case 0:
+			mImgZiXun.setImageResource(R.drawable.tabbar_home_highlighted);
+			break;
+		case 1:
+			mImgWode.setImageResource(R.drawable.tabbar_profile_highlighted);
+			break;
+		default:
+			break;
+		}
+	}
+
+	/**
+	 * 切换图片至暗色
+	 */
+	private void resetImgs() {
+		mImgZiXun.setImageResource(R.drawable.tabbar_home);
+		mImgWode.setImageResource(R.drawable.tabbar_profile);
 	}
 
 	private void showMoreWindow(View view) {
@@ -128,24 +164,6 @@ public class CBNHomeActivity extends BaseActivity implements
 			mMoreWindow.init();
 		}
 		mMoreWindow.showMoreWindow(view, 100);
-	}
-
-	@Override
-	public void onCheckedChanged(RadioGroup group, int checkedId) {
-		TLog.log(checkedId + "");
-		switch (checkedId) {
-		case R.id.rb_news_center:
-			NewsPage page = (NewsPage) pages.get(0);
-			page.onResume();
-			viewPager.setCurrentItem(0, false);
-			break;
-		case R.id.rb_setting:
-			viewPager.setCurrentItem(1, false);
-			break;
-		default:
-			break;
-		}
-		curCheckId = checkedId;
 	}
 
 	@Override
@@ -178,4 +196,5 @@ public class CBNHomeActivity extends BaseActivity implements
 	@Override
 	protected void finishChild() {
 	}
+
 }

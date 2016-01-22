@@ -97,6 +97,22 @@ public class Constants {
 	// 获取单个资讯流KEY
 	public static final String GetLive_KEY = "aiB6Fkiusod0GMTp";
 
+	/**
+	 * <p>
+	 * 所有从接口获取的图片地址如果是 相对地址（请用是否http://开头先判断是否是相对地址） 请根据需要自己选择目录
+	 * <p>
+	 * CMSS专用图地址（95x55） 路径为 /uppics/news/cmss/
+	 * <p>
+	 * 原始版大图 路径为 /uppics/news/origin/
+	 * <p>
+	 * 专用封面图（裁剪过的） 路径为 /uppics/news/thumb/
+	 * <p>
+	 * 文件名不变通过换目录可以得到自己需要尺寸的图
+	 * 
+	 * <p>
+	 * 如果不是相对地址，那么就直接使用该完整地址就行了（一般外部系统导入的图都是绝对地址），上面的各目录也是无效
+	 */
+
 	// 图片URL
 	public static final String IMGURL = "http://10.26.130.222";
 
@@ -111,5 +127,108 @@ public class Constants {
 
 	// 7*24小时直播常量
 	public static final String TEXT_LIVE = "LIVE";
+
+	/**
+	 * <p>
+	 * NewsType - 新闻类型
+	 * <p>
+	 * 类型 说明
+	 * <p>
+	 * int 新闻类型分为 实体新闻 和 跳连新闻 两大类，有一个字段 IsEntity 用来快速判断是否是实体新闻
+	 * 实体类型：实体类型+100=对应的跳链类型
+	 * <p>
+	 * 10=新闻；11=图集；12=视频；13=外链；14=专题；15=直播；16=通栏；17=报名；18=见面会；19=大事件
+	 * 跳链类型：跳链类型-100=对应的实体类型
+	 * <p>
+	 * 110=新闻跳链；111=图集跳链；112=视频跳链；113=外链跳链；114=专题跳链；115=直播跳链；116=通栏跳链；117=报名跳链；
+	 * 118=见面会跳链；119=大事件跳链
+	 * <p>
+	 * EntityPath 为实体新闻的 年/月 格式，用来拼接完整url用，如果是跳链则为实体新闻的年/月
+	 */
+
+	/**
+	 * 新闻；
+	 */
+	public static final int NewsType_XINWEN = 10;
+	/**
+	 * 图集；
+	 */
+	public static final int NewsType_TUJI = 11;
+	/**
+	 * 视频；
+	 */
+	public static final int NewsType_SHIPING = 12;
+	/**
+	 * 外链；
+	 */
+	public static final int NewsType_WAILIAN = 13;
+	/**
+	 * 专题；
+	 */
+	public static final int NewsType_ZHUANTI = 14;
+	/**
+	 * 直播；
+	 */
+	public static final int NewsType_ZHIBO = 15;
+	/**
+	 * 通栏；
+	 */
+	public static final int NewsType_TONGLAN = 16;
+	/**
+	 * 报名；
+	 */
+	public static final int NewsType_BAOMING = 17;
+	/**
+	 * 见面会；
+	 */
+	public static final int NewsType_JIANMIANHUI = 18;
+	/**
+	 * 大事件；
+	 */
+	public static final int NewsType_DASHIJIAN = 19;
+	/**
+	 * 新闻跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_XINWEN = 110;
+	/**
+	 * 图集跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_TUJI = 111;
+	/**
+	 * 视频跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_SHIPING = 112;
+	/**
+	 * 外链跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_WAILIAN = 113;
+	/**
+	 * 专题跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_ZHUANTI = 114;
+	/**
+	 * 直播跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_ZHIBO = 115;
+	/**
+	 * 通栏跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_TONGLAN = 116;
+	/**
+	 * 报名跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_BAOMING = 117;
+	/**
+	 * 见面会跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_JIANMIANHUI = 118;
+	/**
+	 * 大事件跳链；
+	 */
+	public static final int NewsType_TIAOLIAN_DASHIJIAN = 119;
+	/**
+	 * 广告；
+	 */
+	public static final int NewsType_AD = 1000;
 
 }

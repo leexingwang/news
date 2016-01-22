@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="30dp"
-            android:maxLines="4"
+            android:maxLines="5"
             android:minHeight="40dp"
             android:text="111111111"
             android:textSize="14sp" />

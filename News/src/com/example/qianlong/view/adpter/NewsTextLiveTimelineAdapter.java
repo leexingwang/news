@@ -7,6 +7,7 @@ import com.example.qianlong.bean.Live;
 import com.example.qianlong.utils.StringUtils;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,14 @@ public class NewsTextLiveTimelineAdapter extends BaseAdapter {
 	private Context context;
 	private List<Live> list;
 	private LayoutInflater inflater;
-	private String beforeDate;
+	private List<Boolean> isShowDate;
 
-	public NewsTextLiveTimelineAdapter(Context context, List<Live> list) {
+	public NewsTextLiveTimelineAdapter(Context context, List<Live> list,
+			List<Boolean> isShowDate) {
 		super();
 		this.context = context;
 		this.list = list;
+		this.isShowDate = isShowDate;
 	}
 
 	@Override
@@ -62,22 +65,12 @@ public class NewsTextLiveTimelineAdapter extends BaseAdapter {
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-		if (position == 0) {
+		if (!isShowDate.get(position).booleanValue()) {
+			viewHolder.year_month_day.setVisibility(View.GONE);
+		} else {
 			viewHolder.year_month_day.setVisibility(View.VISIBLE);
 			viewHolder.year_month_day.setText(live.getCreateDate().subSequence(
 					0, 10));
-			beforeDate = live.getCreateDate().subSequence(0, 10).toString();
-		} else {
-			if (StringUtils.isEquals(beforeDate, live.getCreateDate()
-					.subSequence(0, 10).toString())) {
-				viewHolder.year_month_day.setVisibility(View.GONE);
-			} else {
-				viewHolder.year_month_day.setVisibility(View.VISIBLE);
-				viewHolder.year_month_day.setText(live.getCreateDate()
-						.subSequence(0, 10));
-				beforeDate = live.getCreateDate().subSequence(0, 10).toString();
-			}
-
 		}
 		if (live.getIsImportant() == true) {
 			viewHolder.live_content.setTextColor(context.getResources()
@@ -86,7 +79,7 @@ public class NewsTextLiveTimelineAdapter extends BaseAdapter {
 			viewHolder.live_content.setTextColor(context.getResources()
 					.getColor(R.color.black));
 		}
-		viewHolder.live_content.setText(live.getLiveContent());
+		viewHolder.live_content.setText(Html.fromHtml(live.getLiveContent()));
 		viewHolder.live_time.setText(live.getCreateDate().subSequence(11,
 				live.getCreateDate().length()));
 		return convertView;

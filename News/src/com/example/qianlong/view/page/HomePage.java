@@ -60,6 +60,9 @@ public class HomePage extends BasePage implements
 	private View view;
 	private List<News> focus_news;
 	private HomeNewsItemAdapter homeNewsItemAdapter;
+	private View topNewsView;
+	private int pageSize;
+	private int page;
 
 	public HomePage(Context context, ChannelItem channelItem) {
 		super(context);
@@ -72,7 +75,7 @@ public class HomePage extends BasePage implements
 	protected View initView(LayoutInflater inflater) {
 		view = inflater.inflate(R.layout.frag_item_news, null);
 		ptrLv = (PullToRefreshListView) view.findViewById(R.id.lv_item_news);
-		View topNewsView = inflater.inflate(R.layout.banner, null);
+		topNewsView = inflater.inflate(R.layout.banner, null);
 		convenientBanner = (ConvenientBanner<News>) topNewsView
 				.findViewById(R.id.convenientBanner);
 		ptrLv.setPullLoadEnabled(true);
@@ -86,6 +89,8 @@ public class HomePage extends BasePage implements
 		newsListByChannelImpl = new GetNewsListByChannelImpl();
 		newsByNidImpl = new GetNewsByNidImpl();
 		getLiveTextModleImpl = new GetLiveTextModleImpl();
+		page = 1;
+		pageSize = 4;
 		return view;
 	}
 
@@ -100,45 +105,12 @@ public class HomePage extends BasePage implements
 		setLastUpdateTime();
 		homeNewsItemAdapter = new HomeNewsItemAdapter(ct, homesNews);
 		ptrLv.getRefreshableView().setAdapter(homeNewsItemAdapter);
-		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, 20, 1,
-				RECOMMEND_NEWS, this);
-		newsListByChannelImpl.getNewsListByChannel(FOCUS_PIC, 20, 1, FOCUS_PIC,
-				this);
+		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, pageSize,
+				page, RECOMMEND_NEWS, this);
+		newsListByChannelImpl.getNewsListByChannel(FOCUS_PIC, pageSize, page,
+				FOCUS_PIC, this);
 		isLoadSuccess = true;
 
-	}
-
-	private void getFocusACacheInfo() {
-		try {
-			String json = ACache.get().getAsString(
-					Constants.GetNewsListByChannel_URL + FOCUS_PIC + 20 + 1
-							+ FOCUS_PIC);
-			List<News> news = newsListByChannelImpl.parseNews(json);
-			if (news.size() > 0) {
-				focus_news = news;
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void getNewsACacheInfo() {
-		try {
-			String json = ACache.get().getAsString(
-					Constants.GetNewsListByChannel_URL + RECOMMEND_NEWS + 20
-							+ 1 + RECOMMEND_NEWS);
-			List<News> news = newsListByChannelImpl.parseNews(json);
-			if (news.size() > 0) {
-				homesNews = news;
-				homesNews.addAll(news);
-				homesNews.addAll(news);
-				homesNews.addAll(news);
-				homesNews.addAll(news);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void initBanner() {
@@ -195,10 +167,10 @@ public class HomePage extends BasePage implements
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		newsListByChannelImpl.getNewsListByChannel(FOCUS_PIC, 20, 1, FOCUS_PIC,
-				this);
-		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, 20, 1,
-				RECOMMEND_NEWS, this);
+		newsListByChannelImpl.getNewsListByChannel(FOCUS_PIC, pageSize, page,
+				FOCUS_PIC, this);
+		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, pageSize,
+				page, RECOMMEND_NEWS, this);
 		onLoaded();
 		TLog.log("onPullDownToRefresh");
 	}
@@ -255,8 +227,9 @@ public class HomePage extends BasePage implements
 			initBanner();
 		} else if (loadType == RECOMMEND_NEWS) {
 			homesNews = news;
-			homeNewsItemAdapter.notifyDataSetChanged();
+			homeNewsItemAdapter = new HomeNewsItemAdapter(ct, homesNews);
 			ptrLv.getRefreshableView().setAdapter(homeNewsItemAdapter);
+
 		}
 	}
 
@@ -285,6 +258,42 @@ public class HomePage extends BasePage implements
 	@Override
 	public void onLiveError(int loadType) {
 
+	}
+
+	private void getFocusACacheInfo() {
+		try {
+			String json = ACache.get().getAsString(
+					Constants.GetNewsListByChannel_URL + FOCUS_PIC + pageSize
+							+ page + FOCUS_PIC);
+			List<News> news = newsListByChannelImpl.parseNews(json);
+			if (news.size() > 0) {
+				focus_news = news;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 从缓存中读取数据
+	 */
+	private void getNewsACacheInfo() {
+		try {
+			String json = ACache.get().getAsString(
+					Constants.GetNewsListByChannel_URL + RECOMMEND_NEWS
+							+ pageSize + page + RECOMMEND_NEWS);
+			List<News> news = newsListByChannelImpl.parseNews(json);
+			if (news.size() > 0) {
+				homesNews = news;
+				homesNews.addAll(news);
+				homesNews.addAll(news);
+				homesNews.addAll(news);
+				homesNews.addAll(news);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

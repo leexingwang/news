@@ -3,9 +3,9 @@
 
     <string name="app_name">CBN News</string>
     <string name="tab_function">首页</string>
-    <string name="tab_news_center">新闻中心</string>
+    <string name="tab_news_center">咨询</string>
     <string name="tab_popup_live">直播</string>
-    <string name="tab_setting">设置</string>
+    <string name="tab_setting">我的</string>
     <string name="share_content">千龙智慧北京新闻平台非常的好</string>
     <string name="removeItem">删除</string>
     <string name="drawer_btn_rss">频道管理</string>

@@ -36,6 +36,7 @@ public class GetLiveTextModleImpl implements GetLiveTextModle {
 							throws Exception {
 						String json = response.body().string();
 						if (response.isSuccessful()) {
+							ACache.get().remove(cacheKey);
 							ACache.get().put(cacheKey, json);
 						}
 						lives = parseNews(json);

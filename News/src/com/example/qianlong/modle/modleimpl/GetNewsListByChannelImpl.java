@@ -40,6 +40,7 @@ public class GetNewsListByChannelImpl implements GetNewsListByChannelModle {
 							throws Exception {
 						String json = response.body().string();
 						if (response.isSuccessful()) {
+							ACache.get().remove(cacheKey);
 							ACache.get().put(cacheKey, json);
 						}
 						listNews = parseNews(json);

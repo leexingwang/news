@@ -55,6 +55,7 @@ public class NewsPage extends BasePage implements
 		initTitleBar(view);
 		indicator = (TabPageIndicator) view.findViewById(R.id.indicator);
 		pagerItemNews = (ViewPager) view.findViewById(R.id.pager);
+		pagerItemNews.setOffscreenPageLimit(2);
 		titleTv.setOnClickListener(this);
 		return view;
 	}

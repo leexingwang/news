@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp" >
+
+    <TextView
+        android:id="@+id/textview_NewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center|left"
+        android:text="TextView"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/imageview_NewsThumbs_ZhuanTi"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cbn_live_broadcast" />
+
+    <TextView
+        android:id="@+id/textview_NewsNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center|left"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp" >
+
+        <TextView
+            android:id="@+id/textview_NewsChannelName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:text="TextView"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textview_NewsUpdateTime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|right"
+            android:text="TextView"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

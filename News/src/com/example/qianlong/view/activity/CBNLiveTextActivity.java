@@ -17,8 +17,10 @@ import com.example.qianlong.modle.modleimpl.GetLiveTextModleImpl;
 import com.example.qianlong.utils.ACache;
 import com.example.qianlong.utils.CommonUtil;
 import com.example.qianlong.utils.SharePrefUtil;
+import com.example.qianlong.utils.StringUtils;
 import com.example.qianlong.view.adpter.NewsTextLiveTimelineAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,11 +34,13 @@ import android.widget.ListView;
  * @author lixingwang
  * 
  */
+@SuppressLint("UseValueOf")
 public class CBNLiveTextActivity extends BaseActivity implements
 		GetLiveTextModle.OnLiveListener, OnToggleChanged, OnClickListener,
 		OnRefreshListener<ListView>, OnItemClickListener {
 
 	private List<Live> lives = new ArrayList<Live>();
+	private List<Boolean> isShowDate = new ArrayList<Boolean>();
 	private PullToRefreshListView listView;
 	private NewsTextLiveTimelineAdapter adapter;
 	private GetLiveTextModleImpl live7_24ModelImpl;
@@ -56,25 +60,11 @@ public class CBNLiveTextActivity extends BaseActivity implements
 		// 滚动到底自动加载可用
 		listView.setScrollLoadEnabled(true);
 		listView.setDividerDrawable(null);
-		adapter = new NewsTextLiveTimelineAdapter(this, lives);
+		adapter = new NewsTextLiveTimelineAdapter(this, lives, isShowDate);
 		listView.getRefreshableView().setAdapter(adapter);
 		listView.setOnRefreshListener(this);
 		listView.getRefreshableView().setOnItemClickListener(this);
 
-	}
-
-	private void getAcacheInfo() {
-		try {
-			String json = ACache.get().getAsString(
-					Constants.GetLives_URL + 20 + 1
-							+ GetLiveTextModleImpl.LIVE_LOAD_REFRESH);
-			List<Live> lives = live7_24ModelImpl.parseNews(json);
-			if (lives.size() > 0) {
-				this.lives = lives;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -109,6 +99,42 @@ public class CBNLiveTextActivity extends BaseActivity implements
 		}
 	}
 
+	@SuppressLint("UseValueOf")
+	private void getAcacheInfo() {
+		try {
+			String json = ACache.get().getAsString(
+					Constants.GetLives_URL + 20 + 1
+							+ GetLiveTextModleImpl.LIVE_LOAD_REFRESH);
+			List<Live> lives = live7_24ModelImpl.parseNews(json);
+			if (lives.size() > 0) {
+				this.lives = lives;
+				getIsShowDate(lives);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 判断是否需要显示年月日
+	 * 
+	 * @param lives
+	 */
+	private void getIsShowDate(List<Live> lives) {
+		String date = "";
+		isShowDate.clear();
+		for (int i = 0; i < lives.size(); i++) {
+			Live live = lives.get(i);
+			if (!StringUtils.isEquals(date,
+					live.getCreateDate().subSequence(0, 10).toString())) {
+				date = live.getCreateDate().subSequence(0, 10).toString();
+				isShowDate.add(new Boolean(true));
+			} else {
+				isShowDate.add(new Boolean(false));
+			}
+		}
+	}
+
 	private void loadedCompleted() {
 		listView.onPullDownRefreshComplete();
 		listView.onPullUpRefreshComplete();
@@ -129,6 +155,7 @@ public class CBNLiveTextActivity extends BaseActivity implements
 			this.lives.addAll(lives);
 			pageNumber = 1;
 		}
+		getIsShowDate(this.lives);
 		adapter.notifyDataSetChanged();
 	}
 
