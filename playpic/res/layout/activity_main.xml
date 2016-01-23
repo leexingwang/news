@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:marquee="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:gravity="center_vertical"
     android:orientation="vertical" >
+
+    <com.example.playpic.MarqueeView
+        android:id="@+id/marqueeView100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        marquee:autoStart="true"
+        marquee:speed="10" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do."
+            tools:ignore="HardcodedText" />
+    </com.example.playpic.MarqueeView>
 
     <TextView
         android:id="@+id/tv_paomadeng"
@@ -18,5 +36,12 @@
         android:singleLine="true"
         android:textColor="@android:color/black" >
     </TextView>
+
+    <com.example.playpic.ScrollTextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:singleLine="true" />
 
 </LinearLayout>
