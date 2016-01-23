@@ -172,13 +172,11 @@ public class HomePage extends BasePage implements
 		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, pageSize,
 				page, RECOMMEND_NEWS, this);
 		onLoaded();
-		TLog.log("onPullDownToRefresh");
 	}
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 		onLoaded();
-		TLog.log("onPullUpToRefresh");
 	}
 
 	@Override
@@ -215,6 +213,7 @@ public class HomePage extends BasePage implements
 			Picasso.with(context)
 					.load(Constants.IMGURL + Constants.IMGURL_ORIGIN
 							+ news.getNewsThumbs())
+					.placeholder(R.drawable.cbn_default)
 					.error(R.drawable.cbn_default).into(imageView);
 			textView.setText(news.getNewsTitle());
 		}

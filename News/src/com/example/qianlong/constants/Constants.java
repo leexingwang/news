@@ -12,7 +12,7 @@ public class Constants {
 	public static final int CHANGE_BACK_TYPE_BACKKEY = 2;
 
 	// 循环焦点图时间
-	public static final int LOOP_TIME = 5000;
+	public static final int LOOP_TIME = 3000;
 	/**
 	 * 获取新闻常量
 	 */
