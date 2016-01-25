@@ -14,16 +14,26 @@ import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
+import com.example.qianlong.bean.News;
+import com.example.qianlong.constants.Constants;
+import com.example.qianlong.modle.GetNewsListByChannelModle.OnNewsListByChannelListener;
+import com.example.qianlong.modle.modleimpl.GetNewsListByChannelImpl;
+import com.example.qianlong.utils.ACache;
 import com.example.qianlong.utils.CommonUtil;
-import com.example.qianlong.view.adpter.NewsAdapter;
+import com.example.qianlong.view.adpter.NewsItemAdapter;
 import com.topnewgrid.bean.ChannelItem;
 
 public class ItemNewsPage extends BasePage implements
-		OnRefreshListener<ListView>, OnItemClickListener {
+		OnRefreshListener<ListView>, OnItemClickListener,
+		OnNewsListByChannelListener {
 	private PullToRefreshListView ptrLv;
 	private ChannelItem channelItem;
-	private List<String> strings = new ArrayList<String>();
-	private NewsAdapter adapter;
+	private int pageSize;
+	private int page;
+	private List<News> news;
+	private GetNewsListByChannelImpl newsListByChannelImpl;
+	private int NEWS_ID = 0;
+	private NewsItemAdapter itemAdapter;
 
 	public ItemNewsPage(Context context, ChannelItem channelItem) {
 		super(context);
@@ -43,19 +53,22 @@ public class ItemNewsPage extends BasePage implements
 		ptrLv.getRefreshableView().setOnItemClickListener(this);
 		// 设置下拉刷新的listener
 		ptrLv.setOnRefreshListener(this);
+		newsListByChannelImpl = new GetNewsListByChannelImpl();
 		setLastUpdateTime();
+		page = 1;
+		pageSize = 20;
 		return view;
 	}
 
 	@Override
 	public void initData() {
-		strings.clear();
-		for (int i = 0; i < 40; i++) {
-			strings.add(channelItem.name);
-		}
-		adapter = new NewsAdapter(ct, strings);
-		ptrLv.getRefreshableView().setAdapter(adapter);
-		isLoadSuccess = true;
+		news = new ArrayList<News>();
+		NEWS_ID = channelItem.getId();
+		getNewsACacheInfo();
+		itemAdapter = new NewsItemAdapter(ct, news);
+		ptrLv.getRefreshableView().setAdapter(itemAdapter);
+		newsListByChannelImpl.getNewsListByChannel(NEWS_ID, pageSize, page,
+				NEWS_ID, this);
 		onLoaded();
 	}
 
@@ -68,7 +81,6 @@ public class ItemNewsPage extends BasePage implements
 		dismissLoadingView();
 		ptrLv.onPullDownRefreshComplete();
 		ptrLv.onPullUpRefreshComplete();
-		isLoadSuccess = true;
 	}
 
 	private void setLastUpdateTime() {
@@ -92,21 +104,52 @@ public class ItemNewsPage extends BasePage implements
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		strings.add(0, "onPullDownToRefresh");
-		adapter.notifyDataSetChanged();
 		onLoaded();
 	}
 
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-		strings.add("onPullUpToRefresh");
-		adapter.notifyDataSetChanged();
 		onLoaded();
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
+
+	}
+
+	private synchronized void getNewsACacheInfo() {
+		try {
+			String json = ACache.get().getAsString(
+					Constants.GetNewsListByChannel_URL + NEWS_ID + pageSize
+							+ page + NEWS_ID);
+			List<News> news = newsListByChannelImpl.parseNews(json);
+			for (int i = 0; i < news.size(); i++) {
+				this.news.add(news.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void onSuccess(List<News> news, int loadType) {
+		// TODO Auto-generated method stub
+		if (loadType == NEWS_ID) {
+			this.news.clear();
+			for (int i = 0; i < news.size(); i++) {
+				this.news.add(news.get(i));
+			}
+			itemAdapter = new NewsItemAdapter(ct, this.news);
+			ptrLv.getRefreshableView().setAdapter(itemAdapter);
+			isLoadSuccess = true;
+			onLoaded();
+		}
+	}
+
+	@Override
+	public void onError(int loadType) {
+		// TODO Auto-generated method stub
 
 	}
 }

@@ -22,6 +22,7 @@ public class AppApplication extends Application {
 		OkHttpUtils.getInstance().setConnectTimeout(100000,
 				TimeUnit.MILLISECONDS);
 		OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
+
 	}
 
 	/** ªÒ»°Application */

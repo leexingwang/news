@@ -10,7 +10,6 @@ import com.topnewgrid.db.ChannelSQLHelper;
 import android.database.SQLException;
 import android.util.Log;
 
-
 public class ChannelManage {
 	public static ChannelManage channelManage;
 	/**
@@ -27,13 +26,14 @@ public class ChannelManage {
 	static {
 		defaultUserChannels = new ArrayList<ChannelItem>();
 		defaultOtherChannels = new ArrayList<ChannelItem>();
-		defaultUserChannels.add(new ChannelItem(1, "推荐", 1, 1));
-		defaultUserChannels.add(new ChannelItem(2, "热点", 2, 1));
-		defaultUserChannels.add(new ChannelItem(3, "娱乐", 3, 1));
-		defaultUserChannels.add(new ChannelItem(4, "时尚", 4, 1));
-		defaultUserChannels.add(new ChannelItem(5, "科技", 5, 1));
-		defaultUserChannels.add(new ChannelItem(6, "体育", 6, 1));
-		defaultUserChannels.add(new ChannelItem(7, "军事", 7, 1));
+		defaultUserChannels.add(new ChannelItem(1, "首页", 1, 1));
+		defaultUserChannels.add(new ChannelItem(3482, "频道A", 2, 1));
+		defaultUserChannels.add(new ChannelItem(3483, "频道B", 3, 1));
+		defaultUserChannels.add(new ChannelItem(3484, "频道C", 4, 1));
+		defaultUserChannels.add(new ChannelItem(4477, "频道D", 5, 1));
+		defaultUserChannels.add(new ChannelItem(4478, "大作", 6, 1));
+		defaultUserChannels.add(new ChannelItem(4479, "追问", 7, 1));
+		defaultUserChannels.add(new ChannelItem(4480, "直播", 8, 1));
 		defaultOtherChannels.add(new ChannelItem(8, "财经", 1, 0));
 		defaultOtherChannels.add(new ChannelItem(9, "汽车", 2, 0));
 		defaultOtherChannels.add(new ChannelItem(10, "房产", 3, 0));
@@ -56,10 +56,12 @@ public class ChannelManage {
 
 	/**
 	 * 初始化频道管理类
+	 * 
 	 * @param paramDBHelper
 	 * @throws SQLException
 	 */
-	public static ChannelManage getManage(ChannelSQLHelper dbHelper)throws SQLException {
+	public static ChannelManage getManage(ChannelSQLHelper dbHelper)
+			throws SQLException {
 		if (channelManage == null)
 			channelManage = new ChannelManage(dbHelper);
 		return channelManage;
@@ -71,12 +73,15 @@ public class ChannelManage {
 	public void deleteAllChannel() {
 		channelDao.clearFeedTable();
 	}
+
 	/**
 	 * 获取其他的频道
+	 * 
 	 * @return 数据库存在用户配置 ? 数据库内的用户选择频道 : 默认用户选择频道 ;
 	 */
 	public List<ChannelItem> getUserChannel() {
-		Object cacheList = channelDao.listCache(ChannelSQLHelper.SELECTED + "= ?",new String[] { "1" });
+		Object cacheList = channelDao.listCache(ChannelSQLHelper.SELECTED
+				+ "= ?", new String[] { "1" });
 		if (cacheList != null && !((List) cacheList).isEmpty()) {
 			userExist = true;
 			List<Map<String, String>> maplist = (List) cacheList;
@@ -84,10 +89,13 @@ public class ChannelManage {
 			List<ChannelItem> list = new ArrayList<ChannelItem>();
 			for (int i = 0; i < count; i++) {
 				ChannelItem navigate = new ChannelItem();
-				navigate.setId(Integer.valueOf(maplist.get(i).get(ChannelSQLHelper.ID)));
+				navigate.setId(Integer.valueOf(maplist.get(i).get(
+						ChannelSQLHelper.ID)));
 				navigate.setName(maplist.get(i).get(ChannelSQLHelper.NAME));
-				navigate.setOrderId(Integer.valueOf(maplist.get(i).get(ChannelSQLHelper.ORDERID)));
-				navigate.setSelected(Integer.valueOf(maplist.get(i).get(ChannelSQLHelper.SELECTED)));
+				navigate.setOrderId(Integer.valueOf(maplist.get(i).get(
+						ChannelSQLHelper.ORDERID)));
+				navigate.setSelected(Integer.valueOf(maplist.get(i).get(
+						ChannelSQLHelper.SELECTED)));
 				list.add(navigate);
 			}
 			return list;
@@ -95,36 +103,42 @@ public class ChannelManage {
 		initDefaultChannel();
 		return defaultUserChannels;
 	}
-	
+
 	/**
 	 * 获取其他的频道
+	 * 
 	 * @return 数据库存在用户配置 ? 数据库内的其它频道 : 默认其它频道 ;
 	 */
 	public List<ChannelItem> getOtherChannel() {
-		Object cacheList = channelDao.listCache(ChannelSQLHelper.SELECTED + "= ?" ,new String[] { "0" });
+		Object cacheList = channelDao.listCache(ChannelSQLHelper.SELECTED
+				+ "= ?", new String[] { "0" });
 		List<ChannelItem> list = new ArrayList<ChannelItem>();
-		if (cacheList != null && !((List) cacheList).isEmpty()){
+		if (cacheList != null && !((List) cacheList).isEmpty()) {
 			List<Map<String, String>> maplist = (List) cacheList;
 			int count = maplist.size();
 			for (int i = 0; i < count; i++) {
-				ChannelItem navigate= new ChannelItem();
-				navigate.setId(Integer.valueOf(maplist.get(i).get(ChannelSQLHelper.ID)));
+				ChannelItem navigate = new ChannelItem();
+				navigate.setId(Integer.valueOf(maplist.get(i).get(
+						ChannelSQLHelper.ID)));
 				navigate.setName(maplist.get(i).get(ChannelSQLHelper.NAME));
-				navigate.setOrderId(Integer.valueOf(maplist.get(i).get(ChannelSQLHelper.ORDERID)));
-				navigate.setSelected(Integer.valueOf(maplist.get(i).get(ChannelSQLHelper.SELECTED)));
+				navigate.setOrderId(Integer.valueOf(maplist.get(i).get(
+						ChannelSQLHelper.ORDERID)));
+				navigate.setSelected(Integer.valueOf(maplist.get(i).get(
+						ChannelSQLHelper.SELECTED)));
 				list.add(navigate);
 			}
 			return list;
 		}
-		if(userExist){
+		if (userExist) {
 			return list;
 		}
 		cacheList = defaultOtherChannels;
 		return (List<ChannelItem>) cacheList;
 	}
-	
+
 	/**
 	 * 保存用户频道到数据库
+	 * 
 	 * @param userList
 	 */
 	public void saveUserChannel(List<ChannelItem> userList) {
@@ -135,9 +149,10 @@ public class ChannelManage {
 			channelDao.addCache(channelItem);
 		}
 	}
-	
+
 	/**
 	 * 保存其他频道到数据库
+	 * 
 	 * @param otherList
 	 */
 	public void saveOtherChannel(List<ChannelItem> otherList) {
@@ -148,11 +163,11 @@ public class ChannelManage {
 			channelDao.addCache(channelItem);
 		}
 	}
-	
+
 	/**
 	 * 初始化数据库内的频道数据
 	 */
-	private void initDefaultChannel(){
+	private void initDefaultChannel() {
 		Log.d("deleteAll", "deleteAll");
 		deleteAllChannel();
 		saveUserChannel(defaultUserChannels);

@@ -18,7 +18,7 @@ import com.network.http.okhttp.OkHttpUtils;
 import com.network.http.okhttp.callback.Callback;
 
 public class GetNewsListByChannelImpl implements GetNewsListByChannelModle {
-	private List<News> listNews = new ArrayList<News>();
+	private List<News> listNews;
 	private String cacheKey;
 
 	@Override
@@ -38,6 +38,7 @@ public class GetNewsListByChannelImpl implements GetNewsListByChannelModle {
 					@Override
 					public List<News> parseNetworkResponse(Response response)
 							throws Exception {
+						listNews = new ArrayList<News>();
 						String json = response.body().string();
 						if (response.isSuccessful()) {
 							ACache.get().remove(cacheKey);
@@ -71,7 +72,7 @@ public class GetNewsListByChannelImpl implements GetNewsListByChannelModle {
 
 	public synchronized List<News> parseNews(String json) throws Exception {
 		List<News> listNews = new ArrayList<News>();
-		listNews = JSON.parseArray(json, News.class);
+		listNews.addAll(JSON.parseArray(json, News.class));
 		return listNews;
 	}
 }

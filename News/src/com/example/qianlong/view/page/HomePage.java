@@ -1,7 +1,6 @@
 package com.example.qianlong.view.page;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import android.content.Context;
@@ -23,43 +22,31 @@ import com.base.common.ui.pullrefreshview.PullToRefreshListView;
 import com.base.common.ui.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.example.qianlong.R;
 import com.example.qianlong.base.BasePage;
-import com.example.qianlong.bean.Live;
-import com.example.qianlong.bean.LiveBean;
 import com.example.qianlong.bean.News;
-import com.example.qianlong.bean.NewsEntity;
 import com.example.qianlong.constants.Constants;
-import com.example.qianlong.modle.GetLiveTextModle;
-import com.example.qianlong.modle.GetLiveTextModle.OnLiveListener;
-import com.example.qianlong.modle.GetNewsByNidModle.OnGetNewsByNidListener;
 import com.example.qianlong.modle.GetNewsListByChannelModle.OnNewsListByChannelListener;
-import com.example.qianlong.modle.modleimpl.GetLiveTextModleImpl;
-import com.example.qianlong.modle.modleimpl.GetNewsByNidImpl;
 import com.example.qianlong.modle.modleimpl.GetNewsListByChannelImpl;
 import com.example.qianlong.utils.ACache;
 import com.example.qianlong.utils.CommonUtil;
-import com.example.qianlong.utils.TLog;
-import com.example.qianlong.view.adpter.HomeNewsItemAdapter;
-import com.example.qianlong.view.adpter.TimelineAdapter;
-import com.lidroid.xutils.exception.HttpException;
+import com.example.qianlong.view.adpter.NewsItemAdapter;
 import com.squareup.picasso.Picasso;
 import com.topnewgrid.bean.ChannelItem;
 
 public class HomePage extends BasePage implements
 		com.base.common.ui.banner.OnItemClickListener,
 		OnRefreshListener<ListView>, OnItemClickListener,
-		OnNewsListByChannelListener, OnGetNewsByNidListener, OnLiveListener {
+		OnNewsListByChannelListener {
 	private final static int FOCUS_PIC = 3478;
 	private final static int RECOMMEND_NEWS = 3479;
+	private final static int TOP_NEWS = 3480;
 	private ConvenientBanner<News> convenientBanner;
 	private PullToRefreshListView ptrLv;
 	private ChannelItem channelItem;
 	private GetNewsListByChannelImpl newsListByChannelImpl;
-	private GetNewsByNidImpl newsByNidImpl;
-	private GetLiveTextModleImpl getLiveTextModleImpl;
 	private List<News> homesNews;
 	private View view;
 	private List<News> focus_news;
-	private HomeNewsItemAdapter homeNewsItemAdapter;
+	private NewsItemAdapter homeNewsItemAdapter;
 	private View topNewsView;
 	private int pageSize;
 	private int page;
@@ -87,8 +74,6 @@ public class HomePage extends BasePage implements
 		ptrLv.setOnRefreshListener(this);
 		ptrLv.getRefreshableView().addHeaderView(topNewsView);
 		newsListByChannelImpl = new GetNewsListByChannelImpl();
-		newsByNidImpl = new GetNewsByNidImpl();
-		getLiveTextModleImpl = new GetLiveTextModleImpl();
 		page = 1;
 		pageSize = 4;
 		return view;
@@ -103,7 +88,7 @@ public class HomePage extends BasePage implements
 		getNewsACacheInfo();
 		initBanner();
 		setLastUpdateTime();
-		homeNewsItemAdapter = new HomeNewsItemAdapter(ct, homesNews);
+		homeNewsItemAdapter = new NewsItemAdapter(ct, homesNews);
 		ptrLv.getRefreshableView().setAdapter(homeNewsItemAdapter);
 		newsListByChannelImpl.getNewsListByChannel(RECOMMEND_NEWS, pageSize,
 				page, RECOMMEND_NEWS, this);
@@ -225,37 +210,21 @@ public class HomePage extends BasePage implements
 			focus_news = news;
 			initBanner();
 		} else if (loadType == RECOMMEND_NEWS) {
-			homesNews = news;
-			homeNewsItemAdapter = new HomeNewsItemAdapter(ct, homesNews);
+			homesNews.clear();
+			homesNews = new ArrayList<News>(news.subList(0, 4));
+			newsListByChannelImpl.getNewsListByChannel(TOP_NEWS, 20, page,
+					TOP_NEWS, this);
+		} else if (loadType == TOP_NEWS) {
+			for (int i = 0; i < news.size(); i++) {
+				homesNews.add(news.get(i));
+			}
+			homeNewsItemAdapter = new NewsItemAdapter(ct, homesNews);
 			ptrLv.getRefreshableView().setAdapter(homeNewsItemAdapter);
-
 		}
 	}
 
 	@Override
 	public void onError(int loadType) {
-
-	}
-
-	@SuppressWarnings("hiding")
-	@Override
-	public <NewsEntity> void onGetNewsSuccess(NewsEntity newsEntity,
-			int loadType) {
-
-	}
-
-	@Override
-	public void onGetNewsError(int loadType) {
-
-	}
-
-	@Override
-	public void onLiveSuccess(List<Live> lives, int loadType) {
-
-	}
-
-	@Override
-	public void onLiveError(int loadType) {
 
 	}
 
@@ -277,19 +246,24 @@ public class HomePage extends BasePage implements
 	/**
 	 * 从缓存中读取数据
 	 */
-	private void getNewsACacheInfo() {
+	private synchronized void getNewsACacheInfo() {
 		try {
 			String json = ACache.get().getAsString(
 					Constants.GetNewsListByChannel_URL + RECOMMEND_NEWS
 							+ pageSize + page + RECOMMEND_NEWS);
 			List<News> news = newsListByChannelImpl.parseNews(json);
-			if (news.size() > 0) {
-				homesNews = news;
-				homesNews.addAll(news);
-				homesNews.addAll(news);
-				homesNews.addAll(news);
-				homesNews.addAll(news);
+			String topjson = ACache.get().getAsString(
+					Constants.GetNewsListByChannel_URL + TOP_NEWS + 20 + page
+							+ TOP_NEWS);
+			List<News> topNews = newsListByChannelImpl.parseNews(topjson);
+
+			for (int i = 0; i < news.size(); i++) {
+				homesNews.add(news.get(i));
 			}
+			for (int i = 0; i < topNews.size(); i++) {
+				homesNews.add(topNews.get(i));
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
